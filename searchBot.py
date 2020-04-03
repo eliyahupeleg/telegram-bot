@@ -1,24 +1,19 @@
-import logging
+import configparser
 
-from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove, ext)
-from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters,
-                          ConversationHandler)
+from telegram.ext import (Updater, MessageHandler, Filters)
 
 
 def start(update, context):
-    update.message.reply_text('ההודעה שלך היא: ' + update.message.text)
+    update.message.reply_text('#' + update.message.text.replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(".", "_").replace(",", ""))
 
 
 def main():
-    # Create the Updater and pass it your bot's token.
-    # Make sure to set use_context=True to use the new context based callbacks
-    # Post version 12 this will no longer be necessary
-    updater = Updater("999605455:AAFd0pxZ5IAsjYSUowwPpfaiOSowUjqYDOA", use_context=True)
+    updater = Updater("999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU", use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
-    # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
+    # Add message handler.
     conv_handler = MessageHandler(Filters.text, start)
 
     dp.add_handler(conv_handler)
@@ -26,11 +21,8 @@ def main():
     # Start the Bot
     updater.start_polling()
 
-    # Run the bot until you press Ctrl-C or the process receives SIGINT,
-    # SIGTERM or SIGABRT. This should be used most of the time, since
-    # start_polling() is non-blocking and will stop the bot gracefully.
     updater.idle()
 
 
 if __name__ == '__main__':
-    main()
+    read()
