@@ -1,13 +1,12 @@
 import logging
 
-from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove)
+from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove, ext)
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters,
                           ConversationHandler)
 
 
 def start(update, context):
-
-    update.message.reply_text('אנא הזן את שם הזמר *או* את שם השיר')
+    update.message.reply_text('ההודעה שלך היא: ' + update.message.text)
 
 
 def main():
@@ -20,14 +19,7 @@ def main():
     dp = updater.dispatcher
 
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
-    conv_handler = ConversationHandler(
-        entry_points=[CommandHandler('start', start)],
-
-        states={
-        },
-
-        fallbacks=[CommandHandler('cancel', main)]
-    )
+    conv_handler = MessageHandler(Filters.text, start)
 
     dp.add_handler(conv_handler)
 
