@@ -6,13 +6,8 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters,
 
 
 def start(update, context):
-    reply_keyboard = [['Boy', 'Girl', 'Other']]
 
-    update.message.reply_text(
-        'Hi! My name is Professor Bot. I will hold a conversation with you. '
-        'Send /cancel to stop talking to me.\n\n'
-        'Are you a boy or a girl?',
-        reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+    update.message.reply_text('אנא הזן את שם הזמר *או* את שם השיר')
 
 
 def main():
@@ -27,12 +22,14 @@ def main():
     # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
+
+        states={
+        },
+
+        fallbacks=[CommandHandler('cancel', main)]
     )
 
     dp.add_handler(conv_handler)
-
-    # log all errors
-    dp.add_error_handler(error)
 
     # Start the Bot
     updater.start_polling()
