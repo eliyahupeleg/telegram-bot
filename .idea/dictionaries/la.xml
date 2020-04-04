@@ -2,6 +2,8 @@
   <dictionary name="la">
     <words>
       <w>conv</w>
+      <w>fpath</w>
+      <w>htmlsave</w>
     </words>
   </dictionary>
 </component>

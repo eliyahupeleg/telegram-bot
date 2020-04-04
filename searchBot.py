@@ -1,10 +1,22 @@
-import configparser
+import glob
 
 from telegram.ext import (Updater, MessageHandler, Filters)
 
 
+def search_songs(data):
+    files = []
+    data = data.title()
+    for fpath in glob.glob("/home/la/Downloads/HtmlsaveToTxt/songs/*"):
+        if data in fpath:
+            files.append(fpath)
+    print(files)
+
+
 def start(update, context):
-    update.message.reply_text('#' + update.message.text.replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(".", "_").replace(",", ""))
+    update.message.reply_text(
+        '#' + update.message.text.replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(".", "_")
+        .replace(",", ""))
+    search_songs(update.message.text)
 
 
 def main():
@@ -25,4 +37,4 @@ def main():
 
 
 if __name__ == '__main__':
-    read()
+    main()
