@@ -1,32 +1,73 @@
 import glob
+import hashlib
 
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler)
+
+saved = {}
+
+
+def h1(w):
+    return hashlib.md5(w).hexdigest()[:9]
+
+
+def by_hash(user_hash, update):
+    print("user hash " + str(user_hash))
+    files = saved[user_hash]
+    print("len files:   " + str(len(files)))
+    '''for i in glob.glob("/home/la/Downloads/HtmlsaveToTxt/uploaded/*"):
+        print(h1(i.encode()))
+        if saved == h1(i.encode()):
+            files.append(i)'''
+
+    build_message(files, update)
 
 
 def build_message(files, update):
-    if len(files) == 0:
+    print("building")
+    print(update.message.chat_id)
+    if len(files) == 0 and update.message.chat_id != -1001206432389:
         update.message.reply_text("פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!")
+        return
 
     keyboard = []
+
+    if update.message.chat_id == -1001206432389:
+        if "אקורדים" in update.message.text:
+            user_hash = h1(update.message.from_user.username.encode())
+            print(str(user_hash) + "---------------------------------------------")
+            saved[user_hash] = files
+            print("saved")
+            replay_markup = InlineKeyboardMarkup([[InlineKeyboardButton(
+
+                text="לחץ פה",
+
+                url="https://t.me/Tab4usBot?start={}".format(str(user_hash)))]])
+
+            update.message.reply_text('אקורדים ל "{}"'.format(update.message.text.replace("אקורדים ", "")),
+                                      reply_markup=replay_markup)
+
+        return
+
     if len(files) > 1:
         for i in files:
             keyboard.append(i[35:-4])
         keyboard.append("חזור")
-        update.message.reply_text("בחר...",
+        update.message.reply_text("בחר..",
                                   reply_markup=ReplyKeyboardMarkup([[i] for i in keyboard]),
                                   one_time_keyboard=True,
                                   selective=True)
         return
 
-    fname = "/home/la/Downloads/HtmlsaveToTxt/message-intro.txt"
+    fname = "/home/elikopeleg/message-intro.txt"
     with open(fname, "r") as f:
         introB = f.read()
 
-    fname = "/home/la/Downloads/HtmlsaveToTxt/message-end.txt"
+    fname = "/home/elikopeleg/message-end.txt"
     with open(fname, "r") as f:
         endB = f.read()
 
+    print("open and end")
     fpath = files[0]
     with open(fpath, "r") as f:
 
@@ -57,27 +98,35 @@ def build_message(files, update):
             counter += 1
 
 
-def search_songs(update):
-    data = update.message.text
+def search_songs(update, context):
+    print(update.message.chat_id)
+    data = update.message.text.replace("אקורדים ", "")
     if data == "חזור":
         update.message.reply_text("חוזר..",
-                                  reply_markup=ReplyKeyboardRemove())
+                                  reply_markup=ReplyKeyboardRemove(selective=True))
         return
+
     files = []
     data = data.title()
-    for fpath in glob.glob("/home/la/Downloads/HtmlsaveToTxt/songs/*"):
+    for fpath in glob.glob("/home/elikopeleg/uploaded/uploaded/*"):
         if data == fpath[35:-4]:
             files = [fpath]
             build_message(files, update)
             return
         if data in fpath:
             files.append(fpath)
-    print("files: \n", files)
     build_message(files, update)
 
 
 def start(update, context):
-    update.message.reply_text("היי, ברוכים הבאים לרובוט האקורדים של ‏@tab4us - ISRACHORD.\nשילחו את השם המלא של השיר כדי לקבל אותו, או את של הלהקה לפתיחת רשימת השירים שלהם..\nלדיווח:\n@ADtmr")
+    print(update.message.chat_id)
+    if len(update.message.text[7:]) != 9:
+        update.message.reply_text(
+            "היי, ברוכים הבאים לרובוט האקורדים של ‏@tab4us - ISRACHORD.\nשילחו את השם המלא של השיר כדי לקבל אותו, או את של הלהקה לפתיחת רשימת השירים שלהם..\nלדיווח:\n@ADtmr")
+        return
+    print("_______" + update.message.text[7:] + "___________")
+    print(len(update.message.text[7:]))
+    by_hash(update.message.text[7:], update)
 
 
 def main():
@@ -87,11 +136,12 @@ def main():
     dp = updater.dispatcher
 
     # Add message handler.
-    conv_handler = MessageHandler(Filters.text, search_songs)
     start_handler = CommandHandler('start', start)
 
-    dp.add_handler(conv_handler)
+    conv_handler = MessageHandler(Filters.text, search_songs)
+
     dp.add_handler(start_handler)
+    dp.add_handler(conv_handler)
 
     # Start the Bot
     updater.start_polling()
