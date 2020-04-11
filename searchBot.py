@@ -118,6 +118,7 @@ def convert_line(line, key):
                     current_level = levels[0]
                 print("try _______________________________\n\n\n\n\n")
             except IndexError:
+                current_level = levels[0]
                 temp = line[i]
                 print("except _______________________________\n\n\n\n\n")
 
@@ -134,6 +135,7 @@ def convert_line(line, key):
         elif line[i] != "#" and line[i] != "b":
             print("Regular", line[i])
             new_line += line[i]
+
     new_line = new_line.replace("B#", "C").replace("Cb", "B").replace("E#", "F").replace("Fb", "E").replace("b#",
                                                                                                             "").replace(
         "#b", "")
@@ -142,6 +144,7 @@ def convert_line(line, key):
 
 
 def new_key(data, key):
+    print(data)
     print("converting started")
     new_data = []
 
@@ -163,7 +166,7 @@ def new_key(data, key):
         else:
             print("chords: ", i)
             new_data.append(convert_line(i, key))
-
+        print(data.index(i))
     print("new data: ", new_data)
     return new_data
 
@@ -350,7 +353,7 @@ def start(update, context):
         return
     print("_______" + update.message.text[7:] + "___________")
     print(len(update.message.text[7:]))
-    by_hash(update.message.text[7:], update)
+    by_hash(update.message.text[7:], context, update)
 
 
 def button(update, context):
@@ -358,6 +361,7 @@ def button(update, context):
     print(update.callback_query)
     print(query.message.text)
     data = new_key(query.message.text.split('\n'), query.data)
+    print("sendong___________________")
     send_data(data, query, False)
     context.bot.delete_message(query.message.chat.id, query.message.message_id)
 
