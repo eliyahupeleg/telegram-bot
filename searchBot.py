@@ -334,7 +334,7 @@ def search_songs(update, context):
         cpath = fpath.replace("'", "")
         if data == cpath[len(this_folder + "/uploaded/"):-4]:
             files = [fpath]
-            build_message(files, update)
+            build_message(files, context, update)
             return
         if data in cpath:
             files.append(fpath)
