@@ -1,3 +1,5 @@
+import threading
+import time
 import glob
 import hashlib
 import os
@@ -76,7 +78,19 @@ levels = [["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"],
 to_remove = {i: "" for i in chars_to_remove}
 to_remove = dict((re.escape(k), v) for k, v in to_remove.items())
 saved = {}
+flags = {}
+to_delete = {}
 print("defined")
+
+
+def delete(context, user_hash):
+    print("deleting")
+    time.sleep(40)
+    while True:
+        if flags[user_hash]:
+            break
+    context.bot.delete_message(-1001126502216, to_delete[user_hash][0])
+    context.bot.delete_message(-1001126502216, to_delete[user_hash][0] + 1)
 
 
 def convert_line(line, key):
@@ -181,29 +195,22 @@ def h1(w):
     return hashlib.md5(w).hexdigest()[:9]
 
 
-def by_hash(user_hash, update):
+def by_hash(user_hash, context, update):
     print("user hash " + str(user_hash))
     files = saved[user_hash]
+
     print("len files:   " + str(len(files)))
+    build_message(files, context, update)
 
 
-    build_message(files, update)
-
-
-def build_message(files, update):
-    print("building")
+def build_message(files, context, update):
+    print(len(files))
     print(update.message.chat_id)
 
-    if len(files) == 0 and update.message.chat_id != -1001126502216:
-        print("no results")
-        update.message.reply_text("פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!")
-        return
-
-    keyboard = []
-
-    if update.message.chat_id == -1001126502216:
+    if update.message.chat_id == -1001126502216 and len(files) > 0:
         if "אקורדים" in update.message.text:
-            user_hash = h1(update.message.from_user.username.encode())
+            user_hash = h1(str(time.time()).encode())
+            # user_hash = h1(update.message.from_user.username.encode())
             print(str(user_hash) + "---------------------------------------------")
             saved[user_hash] = files
             print("saved")
@@ -213,18 +220,37 @@ def build_message(files, update):
 
                 url="https://t.me/Tab4usBot?start={}".format(str(user_hash)))]])
 
-            update.message.reply_text('אקורדים ל "{}"'.format(update.message.text.replace("אקורדים ", "")),
-                                      reply_markup=replay_markup)
+            data = update.message.text.replace("?", "")
+            data = data.replace("לשיר ", "ל")
+            data = data[data.index(" ל") + 2:]
+            print("to delete ", int(update.message.message_id))
+            to_delete[user_hash] = [int(update.message.message_id)]
+            update.message.reply_text('אקורדים ל "{}"'.format(data.replace("אקורדים ", "")), reply_markup=replay_markup)
+            print(update.message.message_id)
 
+        flags[user_hash] = False
+        threading.Thread(target=delete, args=(context, user_hash)).start()
+        print("deleted")
         return
 
+    if len(files) == 0:
+        if update.message.chat_id == -1001126502216:
+            return
+        update.message.reply_text("פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!")
+        return
+
+    keyboard = []
+
     if len(files) > 1:
-        print("few results")
         for i in files:
-            keyboard.append(i[len(this_folder)+10:-4])
+            keyboard.append(i[len(this_folder + "/uploaded/"):-4])
+        text = "בחר.."
+        if len(files) > 179:
+            keyboard = keyboard[:179]
+            text = "החיפוש שלך כולל יותר מידי תוצאות, אז צמצמנו ל180 הראשונים.."
         keyboard.append("חזור")
-        update.message.reply_text("בחר..",
-                                  reply_markup=ReplyKeyboardMarkup([[i] for i in keyboard]),
+        update.message.reply_text(text,
+                                  reply_markup=ReplyKeyboardMarkup([[i] for i in keyboard]), resize_keyboard=True,
                                   one_time_keyboard=True,
                                   selective=True)
         return
@@ -233,18 +259,15 @@ def build_message(files, update):
     with open(fname, "r") as f:
         introB = f.read()
 
-    fname =  this_folder + "/message-end.txt"
+    fname = this_folder + "/message-end.txt"
     with open(fname, "r") as f:
         endB = f.read()
 
+    print("open and end")
     fpath = files[0]
-    print("one results")
     with open(fpath, "r") as f:
 
         data = f.read().split('\n')
-        print("to convert..")
-
-        print("converted")
         intro = introB
         intro = intro.replace("song",
                               data[0].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
@@ -253,6 +276,8 @@ def build_message(files, update):
                               data[1].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
                                   ".", "_").replace(",", "_") + "   \n" + data[1])
         intro = intro.replace("capo", data[3])
+        song = {0: ""}
+        counter = 0
         data[3] = intro
         data.append(endB)
         send_data(data[3:], update, True)
@@ -290,8 +315,12 @@ def send_data(data, update, notificate):
 
 
 def search_songs(update, context):
-    print(update.message.text)
-    data = update.message.text.replace("אקורדים ", "").replace("'", "")
+    print(update.message.chat_id)
+    data = update.message.text
+    if update.message.chat_id == -1001126502216:
+        data = data.replace("?", "")
+        data = data.replace("לשיר ", "ל")
+        data = data[data.index(" ל") + 2:]
     if data == "חזור":
         update.message.reply_text("חוזר..",
                                   reply_markup=ReplyKeyboardRemove(selective=True))
@@ -299,15 +328,18 @@ def search_songs(update, context):
 
     files = []
     data = data.title()
+    print(data.title())
+
     for fpath in glob.glob(this_folder + "/uploaded/*"):
         cpath = fpath.replace("'", "")
-        if data == cpath[len(this_folder)+10:-4]:
+        if data == cpath[len(this_folder + "/uploaded/"):-4]:
             files = [fpath]
             build_message(files, update)
             return
         if data in cpath:
             files.append(fpath)
-    build_message(files, update)
+    print("done search", files)
+    build_message(files, context, update)
 
 
 def start(update, context):
