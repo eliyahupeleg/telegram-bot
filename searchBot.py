@@ -1,10 +1,12 @@
 import glob
 import hashlib
+import os
 import re
 
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
 
+this_folder = "/".join(os.path.realpath(__file__).split("/")[:-1])
 chars_to_remove = ["A#6add9", "Ab6add9", "A#add9", "A#dim7", "A#m7b5", "A#maj7", "A#maj9", "A#sus2", "A#sus4", "A6add9",
                    "Abadd9", "Abdim7", "Abm7b5", "Abmaj7", "Abmaj9", "Absus2", "Absus4", "A#7#5", "A#7b5", "A#7b9",
                    "A#aug",
@@ -79,18 +81,13 @@ print("defined")
 
 def convert_line(line, key):
     print("converting started")
-    key = float(key) * 2
-    print(key)
-    key = int(key)
-    print(key)
+    key = int(float(key) * 2)
     new_line = ""
     print(line)
-    temp = ""
     current_level = []
 
     # למצוא את האות הראשונה. לבדוק אם זו שאחריה היא מול או דיאז. אם כן לחבר את שניהם. רק אז לחפש ברשימה ולהחליף.
-    for i in range(0, len(line) - 1):
-
+    for i in range(0, len(line)):
         if line[i] in levels[0]:
             try:
 
@@ -121,6 +118,7 @@ def convert_line(line, key):
             continue
 
         elif line[i] != "#" and line[i] != "b":
+            print("Regular", line[i])
             new_line += line[i]
     new_line = new_line.replace("B#", "C").replace("Cb", "B").replace("E#", "F").replace("Fb", "E").replace("b#",
                                                                                                             "").replace(
@@ -157,8 +155,6 @@ def new_key(data, key):
 
 
 def karaoke_start(update, context):
-    filename = "temp"
-
     print("sending")
     context.bot.sendVideo(chat_id=update.message.chat_id,
                           video='https://www.video-cdn.com/video/show/a677a8b4a518616b807fbc485fa2fe22/0be5160c18eec7373e67a2ca996698ed?type=mp4')
@@ -189,10 +185,7 @@ def by_hash(user_hash, update):
     print("user hash " + str(user_hash))
     files = saved[user_hash]
     print("len files:   " + str(len(files)))
-    '''for i in glob.glob("/home/la/Downloads/HtmlsaveToTxt/uploaded/*"):
-        print(h1(i.encode()))
-        if saved == h1(i.encode()):
-            files.append(i)'''
+
 
     build_message(files, update)
 
@@ -228,7 +221,7 @@ def build_message(files, update):
     if len(files) > 1:
         print("few results")
         for i in files:
-            keyboard.append(i[42:-4])
+            keyboard.append(i[len(this_folder)+10:-4])
         keyboard.append("חזור")
         update.message.reply_text("בחר..",
                                   reply_markup=ReplyKeyboardMarkup([[i] for i in keyboard]),
@@ -236,11 +229,11 @@ def build_message(files, update):
                                   selective=True)
         return
 
-    fname = "/home/la/Downloads/HtmlsaveToTxt/message-intro.txt"
+    fname = this_folder + "/message-intro.txt"
     with open(fname, "r") as f:
         introB = f.read()
 
-    fname = "/home/la/Downloads/HtmlsaveToTxt/message-end.txt"
+    fname =  this_folder + "/message-end.txt"
     with open(fname, "r") as f:
         endB = f.read()
 
@@ -260,14 +253,12 @@ def build_message(files, update):
                               data[1].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
                                   ".", "_").replace(",", "_") + "   \n" + data[1])
         intro = intro.replace("capo", data[3])
-        song = {0: ""}
-        counter = 0
         data[3] = intro
         data.append(endB)
-        send_data(data[3:], update)
+        send_data(data[3:], update, True)
 
 
-def send_data(data, update):
+def send_data(data, update, notificate):
     song = {0: ""}
     counter = 0
 
@@ -290,16 +281,17 @@ def send_data(data, update):
     reply_markup = ReplyKeyboardRemove()
     counter = 0
 
-    for i in song:
+    for _ in song:
         if counter + 1 == len(song):
             reply_markup = InlineKeyboardMarkup(keyboard)
-        update.message.reply_text(song[counter].replace(u'\xa0', u' '), reply_markup=reply_markup)
+        update.message.reply_text(song[counter].replace(u'\xa0', u' '), reply_markup=reply_markup,
+                                  disable_notification=notificate)
         counter += 1
 
 
 def search_songs(update, context):
     print(update.message.text)
-    data = update.message.text.replace("אקורדים ", "")
+    data = update.message.text.replace("אקורדים ", "").replace("'", "")
     if data == "חזור":
         update.message.reply_text("חוזר..",
                                   reply_markup=ReplyKeyboardRemove(selective=True))
@@ -307,12 +299,13 @@ def search_songs(update, context):
 
     files = []
     data = data.title()
-    for fpath in glob.glob("/home/la/Downloads/HtmlsaveToTxt/uploaded/*"):
-        if data == fpath[42:-4]:
+    for fpath in glob.glob(this_folder + "/uploaded/*"):
+        cpath = fpath.replace("'", "")
+        if data == cpath[len(this_folder)+10:-4]:
             files = [fpath]
             build_message(files, update)
             return
-        if data in fpath:
+        if data in cpath:
             files.append(fpath)
     build_message(files, update)
 
@@ -333,13 +326,14 @@ def button(update, context):
     print(update.callback_query)
     print(query.message.text)
     data = new_key(query.message.text.split('\n'), query.data)
-    send_data(data, query)
+    send_data(data, query, False)
     context.bot.delete_message(query.message.chat.id, query.message.message_id)
 
     # query.edit_message_text(text=song)
 
 
 def main():
+    print("/".join(os.path.realpath(__file__).split("/")[:-1]))
     updater = Updater("999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU", use_context=True)
 
     # Get the dispatcher to register handlers
@@ -361,4 +355,5 @@ def main():
 
 
 if __name__ == '__main__':
+    print(len("/".join(os.path.realpath(__file__).split("/")[:-1]) + "/uploaded/*"))
     main()

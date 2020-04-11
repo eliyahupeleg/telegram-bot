@@ -2,10 +2,12 @@
   <dictionary name="la">
     <words>
       <w>conv</w>
+      <w>cpath</w>
       <w>fname</w>
       <w>fpath</w>
       <w>htmlsave</w>
       <w>israchord</w>
+      <w>notificate</w>
     </words>
   </dictionary>
 </component>
