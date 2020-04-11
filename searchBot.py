@@ -351,9 +351,11 @@ def start(update, context):
         update.message.reply_text(
             "היי, ברוכים הבאים לרובוט האקורדים של ‏@tab4us - ISRACHORD.\nשילחו את השם המלא של השיר כדי לקבל אותו, או את של הלהקה לפתיחת רשימת השירים שלהם..\nלדיווח:\n@ADtmr")
         return
-    print("_______" + update.message.text[7:] + "___________")
-    print(len(update.message.text[7:]))
-    by_hash(update.message.text[7:], context, update)
+    user_hash = update.message.text[7:]
+    print("_______" + user_hash + "___________")
+    print(len(user_hash))
+    flags[user_hash] = True
+    by_hash(user_hash, context, update)
 
 
 def button(update, context):
