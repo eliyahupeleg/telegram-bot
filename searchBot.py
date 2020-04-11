@@ -312,6 +312,10 @@ def send_data(data, update, notificate):
     for _ in song:
         if counter + 1 == len(song):
             reply_markup = InlineKeyboardMarkup(keyboard)
+
+        if update.message.chat_id == -1001126502216:
+            reply_markup = ReplyKeyboardRemove()
+
         update.message.reply_text(song[counter].replace(u'\xa0', u' '), reply_markup=reply_markup,
                                   disable_notification=notificate)
         counter += 1
