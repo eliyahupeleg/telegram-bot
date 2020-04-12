@@ -8,11 +8,14 @@ import re
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
 
+# using server and local python- don't need to change the locations of the files all the time.
 this_folder = "/".join(os.path.realpath(__file__).split("/")[:-1])
 
+# using for the convert. one
 levels = [["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"],
           ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"]]
 
+# all the chars that can be in chords line. using for recognise chords lines and convert them.
 chars_to_remove = ["A#6add9", "Ab6add9", "A#add9", "A#dim7", "A#m7b5", "A#maj7", "A#maj9", "A#sus2", "A#sus4", "A6add9",
                    "Abadd9", "Abdim7", "Abm7b5", "Abmaj7", "Abmaj9", "Absus2", "Absus4", "A#7#5", "A#7b5", "A#7b9",
                    "A#aug",
@@ -77,71 +80,82 @@ chars_to_remove = ["A#6add9", "Ab6add9", "A#add9", "A#dim7", "A#m7b5", "A#maj7",
                    "0", "x", chr(32), chr(160), "/", "sus", "maj", "+", "aj", chr(8207), "#"]
 to_remove = {i: "" for i in chars_to_remove}
 to_remove = dict((re.escape(k), v) for k, v in to_remove.items())
+
+# saved: the saved messages, for users that came form the group.
 saved = {}
+# flags- is the link in the group used?
 flags = {}
+# the group messages ids- request and response. cleaning the group from spam.
 to_delete = {}
-print("defined")
+# flag. when the language is hebrew, when converting message needed to move the "#" to the start of the line. 
 HEBREW = False
 
 
+# True if all the chars in the str are hebrew. else False.
 def is_hebrew(s):
     return any("\u0590" <= c <= "\u05EA" for c in s)
 
 
-def delete(context, user_hash):
+# deleting the messages in the group by the "time_hash".
+def delete(context, time_hash):
     print("deleting")
+
+    # only after 40 seconds. users do not want to lose their links in one unsuccessfully presse.
     time.sleep(40)
+
+    # if the link used' delete the messages.
     while True:
-        if flags[user_hash]:
+        if flags[time_hash]:
             break
-    context.bot.delete_message(-1001126502216, to_delete[user_hash][0])
-    context.bot.delete_message(-1001126502216, to_delete[user_hash][0] + 1)
+    context.bot.delete_message(-1001126502216, to_delete[time_hash][0])
+    context.bot.delete_message(-1001126502216, to_delete[time_hash][0] + 1)
 
 
+# converting chords line up or down by the key. the key if from 3 to -3' in steps of 0.5.
 def convert_line(line, key):
     print("converting started")
+
     key = int(float(key) * 2)
     new_line = ""
     print(line)
-    current_level = []
 
     # למצוא את האות הראשונה. לבדוק אם זו שאחריה היא מול או דיאז. אם כן לחבר את שניהם. רק אז לחפש ברשימה ולהחליף.
+    # connecting "#" and "b" to the chord, and then replacing.
     for i in range(0, len(line)):
+
         if line[i] in levels[0]:
             try:
 
                 if line[i + 1] == "#":
-                    print("dies: ", line[i:i + 2])
                     current_level = levels[0]
                     temp = line[i:i + 2]
+
                 elif line[i + 1] == "b":
-                    print("mol: ", line[i:i + 2])
                     current_level = levels[1]
                     temp = line[i:i + 2]
+
                 else:
                     temp = line[i]
                     current_level = levels[0]
-                print("try _______________________________\n\n\n\n\n")
+
+            # if this is the last char in the line, there is no "b" or "#"
             except IndexError:
                 current_level = levels[0]
                 temp = line[i]
-                print("except _______________________________\n\n\n\n\n")
 
+            # back to the start if got the end of the chords (Ab or G#)
             if current_level.index(temp) + key > 11:
                 new_line += current_level[(current_level.index(temp) + key) % 12]
             else:
                 new_line += current_level[current_level.index(temp) + key]
             continue
 
+        # the "#" and the "b" chars already used with their chords.
         elif line[i] != "#" and line[i] != "b":
             new_line += line[i]
-
-    new_line = new_line.replace("B#", "C").replace("Cb", "B").replace("E#", "F").replace("Fb", "E").replace("b#",
-                                                                                                            "").replace(
-        "#b", "")
+    # moving the dies to the start of the line in hebrew. the # jumping to the other side because of RLM and LRM
     if new_line[-1] == "#" and HEBREW:
         new_line = "#" + new_line[:-1]
-    print(new_line)
     return new_line
 
 
@@ -200,9 +214,9 @@ def h1(w):
     return hashlib.md5(w).hexdigest()[:9]
 
 
-def by_hash(user_hash, context, update):
-    print("user hash " + str(user_hash))
-    files = saved[user_hash]
+def by_hash(time_hash, context, update):
+    print("user hash " + str(time_hash))
+    files = saved[time_hash]
 
     print("len files:   " + str(len(files)))
     build_message(files, context, update)
@@ -214,27 +228,27 @@ def build_message(files, context, update):
 
     if update.message.chat_id == -1001126502216 and len(files) > 0:
         if "אקורדים" in update.message.text:
-            user_hash = h1(str(time.time()).encode())
-            # user_hash = h1(update.message.from_user.username.encode())
-            print(str(user_hash) + "---------------------------------------------")
-            saved[user_hash] = files
+            time_hash = h1(str(time.time()).encode())
+            # time_hash = h1(update.message.from_user.username.encode())
+            print(str(time_hash) + "---------------------------------------------")
+            saved[time_hash] = files
             print("saved")
             replay_markup = InlineKeyboardMarkup([[InlineKeyboardButton(
 
                 text="לחץ פה",
 
-                url="https://t.me/Tab4usBot?start={}".format(str(user_hash)))]])
+                url="https://t.me/Tab4usBot?start={}".format(str(time_hash)))]])
 
             data = update.message.text.replace("?", "")
             data = data.replace("לשיר ", "ל")
             data = data[data.index(" ל") + 2:]
             print("to delete ", int(update.message.message_id))
-            to_delete[user_hash] = [int(update.message.message_id)]
+            to_delete[time_hash] = [int(update.message.message_id)]
             update.message.reply_text('אקורדים ל "{}"'.format(data.replace("אקורדים ", "")), reply_markup=replay_markup)
             print(update.message.message_id)
 
-        flags[user_hash] = False
-        threading.Thread(target=delete, args=(context, user_hash)).start()
+        flags[time_hash] = False
+        threading.Thread(target=delete, args=(context, time_hash)).start()
         print("deleted")
         return
 
@@ -334,16 +348,30 @@ def search_songs(update, context):
         return
 
     files = []
-    data = data.title()
-    print(data.title())
+    splt = data.split(' - ')
+    data = ""
+    tmp = []
+
+    # if the singer name is UPPER
+    for i in splt:
+        if i.isupper():
+            tmp.append(i)
+        else:
+            tmp.append(i.title())
+
+    data = " - ".join(tmp)
+
+    if "'" in data:
+        data = data.replace(data[data.index("'"):data.index("'") + 2],
+                            data[data.index("'"):data.index("'") + 2].lower())
+    print(data)
 
     for fpath in glob.glob(this_folder + "/uploaded/*"):
-        cpath = fpath.replace("'", "")
-        if data == cpath[len(this_folder + "/uploaded/"):-4]:
+        if data == fpath[len(this_folder + "/uploaded/"):-4]:
             files = [fpath]
             build_message(files, context, update)
             return
-        if data in cpath:
+        if data in fpath:
             files.append(fpath)
     print("done search", files)
     build_message(files, context, update)
@@ -355,11 +383,11 @@ def start(update, context):
         update.message.reply_text(
             "היי, ברוכים הבאים לרובוט האקורדים של ‏@tab4us - ISRACHORD.\nשילחו את השם המלא של השיר כדי לקבל אותו, או את של הלהקה לפתיחת רשימת השירים שלהם..\nלדיווח:\n@ADtmr")
         return
-    user_hash = update.message.text[7:]
-    print("_______" + user_hash + "___________")
-    print(len(user_hash))
-    flags[user_hash] = True
-    by_hash(user_hash, context, update)
+    time_hash = update.message.text[7:]
+    print("_______" + time_hash + "___________")
+    print(len(time_hash))
+    flags[time_hash] = True
+    by_hash(time_hash, context, update)
 
 
 def button(update, context):
