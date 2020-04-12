@@ -5,6 +5,7 @@ import hashlib
 import os
 import re
 
+import telegram
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
 
@@ -297,10 +298,10 @@ def build_message(files, context, update):
         intro = intro.replace("capo", data[3])
         data[3] = intro
         data.append(endB)
-        send_data(data[3:], update, True)
+        send_data(data[3:], update, True, context)
 
 
-def send_data(data, update, notificate):
+def send_data(data, update, notificate, context):
     song = {0: ""}
     counter = 0
 
@@ -311,6 +312,9 @@ def send_data(data, update, notificate):
             song[counter] = ""
         song[counter] += "\n" + j
 
+    reply_markup = telegram.ReplyKeyboardRemove()
+    update.message.reply_text(text="Wait..", reply_markup=reply_markup)
+    context.bot.delete_message(update.message.chat_id, update.message.message_id+1)
     keyboard = [[InlineKeyboardButton("+1", callback_data='+1'), InlineKeyboardButton("+0.5", callback_data='+0.5'),
                  InlineKeyboardButton("-0.5", callback_data='-0.5'),
                  InlineKeyboardButton("-1", callback_data='-1')],
@@ -319,7 +323,8 @@ def send_data(data, update, notificate):
                  InlineKeyboardButton("-2", callback_data='-2')],
                 [InlineKeyboardButton("+3", callback_data='+3'), InlineKeyboardButton("+2.5", callback_data='+2.5'),
                  InlineKeyboardButton("-2.5", callback_data='-2.5'),
-                 InlineKeyboardButton("-3", callback_data='-3')]]
+                 InlineKeyboardButton("-3", callback_data='-3')],
+                [InlineKeyboardButton("+3", url="https://t.me/Tab4usBot/" + update.message.message_id)]]
     reply_markup = ReplyKeyboardRemove()
     counter = 0
 
@@ -396,7 +401,7 @@ def button(update, context):
     print(query.message.text)
     data = new_key(query.message.text.split('\n'), query.data)
     print("sending___________________")
-    send_data(data, query, False)
+    send_data(data, query, False, context)
     context.bot.delete_message(query.message.chat.id, query.message.message_id)
 
     # query.edit_message_text(text=song)
