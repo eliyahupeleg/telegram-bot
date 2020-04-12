@@ -9,6 +9,10 @@ from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardBut
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
 
 this_folder = "/".join(os.path.realpath(__file__).split("/")[:-1])
+
+levels = [["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"],
+          ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"]]
+
 chars_to_remove = ["A#6add9", "Ab6add9", "A#add9", "A#dim7", "A#m7b5", "A#maj7", "A#maj9", "A#sus2", "A#sus4", "A6add9",
                    "Abadd9", "Abdim7", "Abm7b5", "Abmaj7", "Abmaj9", "Absus2", "Absus4", "A#7#5", "A#7b5", "A#7b9",
                    "A#aug",
@@ -70,17 +74,18 @@ chars_to_remove = ["A#6add9", "Ab6add9", "A#add9", "A#dim7", "A#m7b5", "A#maj7",
                    "Gbm7", "Gbm9", "Gdim", "Gm11", "G#6", "G#7", "G#9", "G#m", "G11", "G13", "Gb6", "Gb7", "Gb9", "Gbm",
                    "Gm6",
                    "Gm7", "Gm9", "G#", "G6", "G7", "G9", "Gb", "Gm", "G", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-                   "0", "x", chr(32), chr(160), "/", "sus", "maj", "+", "aj", chr(8207)]
-
-levels = [["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"],
-          ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"]]
-
+                   "0", "x", chr(32), chr(160), "/", "sus", "maj", "+", "aj", chr(8207), "#"]
 to_remove = {i: "" for i in chars_to_remove}
 to_remove = dict((re.escape(k), v) for k, v in to_remove.items())
 saved = {}
 flags = {}
 to_delete = {}
 print("defined")
+HEBREW = False
+
+
+def is_hebrew(s):
+    return any("\u0590" <= c <= "\u05EA" for c in s)
 
 
 def delete(context, user_hash):
@@ -123,22 +128,19 @@ def convert_line(line, key):
                 print("except _______________________________\n\n\n\n\n")
 
             if current_level.index(temp) + key > 11:
-                print("old: ", temp)
-                print("new: ", current_level[(current_level.index(temp) + key) % 12])
                 new_line += current_level[(current_level.index(temp) + key) % 12]
             else:
-                print("old: ", temp)
-                print("new: ", current_level.index(temp) + key)
                 new_line += current_level[current_level.index(temp) + key]
             continue
 
         elif line[i] != "#" and line[i] != "b":
-            print("Regular", line[i])
             new_line += line[i]
 
     new_line = new_line.replace("B#", "C").replace("Cb", "B").replace("E#", "F").replace("Fb", "E").replace("b#",
                                                                                                             "").replace(
         "#b", "")
+    if new_line[-1] == "#" and HEBREW:
+        new_line = "#" + new_line[:-1]
     print(new_line)
     return new_line
 
@@ -147,9 +149,9 @@ def new_key(data, key):
     print(data)
     print("converting started")
     new_data = []
-
+    global HEBREW
     pattern = re.compile("|".join(to_remove.keys()))
-
+    HEBREW = is_hebrew(data[2])
     for i in data:
 
         if i == "":
@@ -279,8 +281,6 @@ def build_message(files, context, update):
                               data[1].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
                                   ".", "_").replace(",", "_") + "   \n" + data[1])
         intro = intro.replace("capo", data[3])
-        song = {0: ""}
-        counter = 0
         data[3] = intro
         data.append(endB)
         send_data(data[3:], update, True)
@@ -367,7 +367,7 @@ def button(update, context):
     print(update.callback_query)
     print(query.message.text)
     data = new_key(query.message.text.split('\n'), query.data)
-    print("sendong___________________")
+    print("sending___________________")
     send_data(data, query, False)
     context.bot.delete_message(query.message.chat.id, query.message.message_id)
 

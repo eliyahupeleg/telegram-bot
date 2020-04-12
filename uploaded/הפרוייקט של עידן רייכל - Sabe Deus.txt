@@ -50,13 +50,13 @@ S Deus sabe    Como posso eu viver nesta tristeza 
 Am F#m7b5 Am/ G Em    F#m7b5       B7   
 De       saber    que no vais voltar
 
-         Em            Em/ F#
+#         Em            Em/ F
  esta a minha certeza.     
 
 G              G4       F#m7b5           B7  
 Mas se Deus quiser  Tu estars  minha espera
 
-C F#m7b5   G   Am  B4 B  Em Em/ F#
+#C F#m7b5   G   Am  B4 B  Em Em/ F
 Onde      sempre primavera      
 
 G              G4      F#m7b5             B7
@@ -87,12 +87,12 @@ Em C B7 Em Em C B7 Em
 
 E E/ Ab Am/ C Am F#m7b5 B7 C C/ B
 
-Am F#m7b5 Am/ G Em F#m7b5 B7 Em Em/ F#
+#Am F#m7b5 Am/ G Em F#m7b5 B7 Em Em/ F
 
 G              G4       F#m7b5           B7  
 Mas se Deus quiser  Tu estars  minha espera
 
-C F#m7b5   G   Am  B4 B  Em Em/ F#
+#C F#m7b5   G   Am  B4 B  Em Em/ F
 Onde      sempre primavera      
 
 G              G4      F#m7b5             B7
@@ -112,4 +112,6 @@ C/ B C  B7    F#m7b5      Am E/ Ab E
 
      Em               B7  Em    Am
 יום נגמר  לילה שמביא לו התחלה חדשה
+
+
 

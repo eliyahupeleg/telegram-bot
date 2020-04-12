@@ -45,3 +45,5 @@ A C#m A B E 
 Am       G          F      E    
 Nobody's really my friend, no...
 
+
+

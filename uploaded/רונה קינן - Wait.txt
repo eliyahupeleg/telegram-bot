@@ -61,7 +61,7 @@ Yes I see her every   day 
 Em C A     F#5  Em   C   A       F#m
 No I don't know what she looks like 
 
-Em                      D5     D5/ C#
+#Em                      D5     D5/ C
 Don't come looking for love she said
 
     A                           
@@ -76,7 +76,7 @@ Don't come looking for love
 C       
 She said
 
-Em                    D5 D5/ C#
+#Em                    D5 D5/ C
 You're just making it hard    
 
                       A          
@@ -151,4 +151,6 @@ And the heat goes on
 And the heat goes on
 
 Where the hand has been
+
+
 

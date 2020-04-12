@@ -24,7 +24,7 @@ Solo:
 
 C Ab F F# 
 
-Bb F C C#
+#Bb F C C
 
 Eb F F# Ab C# C Bb Ab 
 
@@ -33,10 +33,10 @@ Eb
 Bbm                 Fm       
 Bunu sana yazdığımı bilmezsin
 
-C#                    Fm      F#
+#C#                    Fm      F
 Bir yabancı şarkı gibi dinlersin
 
-Ebm         C#        Fm        F#
+#Ebm         C#        Fm        F
 Benim için önce tanrı sonra sensin
 
 Bbm     Ab         Ebm     Fm     
@@ -64,7 +64,7 @@ Solo:
 
 C Ab F F# 
 
-Bb F C C#
+#Bb F C C
 
 Eb F F# Ab C# C Bb Ab 
 
@@ -79,4 +79,6 @@ Alıştım yıllardır ben yokluğuna
 
 Bbm     Ab         Ebm     Fm  
 Bir tek dileğim var mutlu yeter
+
+
 

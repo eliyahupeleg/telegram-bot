@@ -57,13 +57,13 @@ to come and take me home
 C         C/ B    C/ Bb  Am       
 Into your loving arms    I'll
 
-Em  Em/ Eb Em/ D Em/ C#
+#Em  Em/ Eb Em/ D Em/ C
 Fly...              
 
 C C/ B     C/ Bb B
 L o v e   you   
 
-Em Em/ Eb Em/ D Em/ C#
+#Em Em/ Eb Em/ D Em/ C
 I                  
 
 C C/ B     C/ Bb B
@@ -83,17 +83,19 @@ My heart is yours x3
          C/ Bb  Am        
 Till the day      I'll...
 
-Em  Em/ Eb Em/ D Em/ C#
+#Em  Em/ Eb Em/ D Em/ C
  Die...              
 
 C C/ B    C/ Bb B
 Love     you   
 
-Em Em/ Eb Em/ D Em/ C#
+#Em Em/ Eb Em/ D Em/ C
 I                  
 
 C C/ B     C/ Bb B
 L o v e   you   
 
 סיום כמו הפתיחה
+
+
 

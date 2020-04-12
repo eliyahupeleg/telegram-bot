@@ -43,7 +43,7 @@ G F         G       Dm   
 איך לפעמים קשה     לסלוח לך  
 
 מעבר:
-Em Cmaj7 C#m7b5 Bm Em Em/ D C# F#4 F#
+#Em Cmaj7 C#m7b5 Bm Em Em/ D C# F#4 F
 ‏     Bm     C/ C#     C         Em
 עורי עור   עורי עור   מולדת אהובה
 ‏        Em/ D      Em
@@ -56,3 +56,5 @@ Em Cmaj7 C#m7b5 Bm Em Em/ D C# F#4 F#
 פעם בחיים אנו חיים   תתני קצת אהבה  
 Bm A G A Em D A  G   Bm   
 אההההה                    
+
+
