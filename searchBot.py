@@ -90,6 +90,35 @@ flags = {}
 to_delete = {}
 # flag. when the language is hebrew, when converting message needed to move the "#" to the start of the line. 
 HEBREW = False
+default_keyboard = [[InlineKeyboardButton("+", callback_data="+"), InlineKeyboardButton("-", callback_data="-")]]
+
+keyboard_minus = [[InlineKeyboardButton("-1", callback_data='-1'), InlineKeyboardButton("-2", callback_data='-2'),
+                   InlineKeyboardButton("-3", callback_data='-3')]]
+
+keyboard_plus = [[InlineKeyboardButton("+1", callback_data='+1'),
+                  InlineKeyboardButton("+2", callback_data='+2'),
+                  InlineKeyboardButton("+3", callback_data='+3')]]
+
+keyboard_half = [[InlineKeyboardButton("+0.5", callback_data='+0.5'), InlineKeyboardButton("-0.5", callback_data='-0.5')]]
+
+
+def is_upper(i):
+    if i.isupper():
+        return i
+    else:
+        return i.title()
+
+
+def remove_tag(data):
+    try:
+        return data.replace(data[data.index("'"):data.index("'") + 2],
+                            data[data.index("'"):data.index("'") + 2].lower())
+    except ValueError:
+        return data
+
+
+def replace_to_filename(i):
+    return i[len(this_folder + "/uploaded/"):-4]
 
 
 # True if all the chars in the str are hebrew. else False.
@@ -119,15 +148,19 @@ def convert_line(line, key):
     key = int(float(key) * 2)
     new_line = ""
     print(line)
+    len_line = len(line)
 
     # למצוא את האות הראשונה. לבדוק אם זו שאחריה היא מול או דיאז. אם כן לחבר את שניהם. רק אז לחפש ברשימה ולהחליף.
     # connecting "#" and "b" to the chord, and then replacing.
-    for i in range(0, len(line)):
+    for i in range(0, len_line):
 
         if line[i] in levels[0]:
             try:
 
                 if line[i + 1] == "#":
+                    if HEBREW and i + 1 == len_line:
+                        new_line = f"#{new_line[:-1]}"
+
                     current_level = levels[0]
                     temp = line[i:i + 2]
 
@@ -155,8 +188,6 @@ def convert_line(line, key):
         elif line[i] != "#" and line[i] != "b":
             new_line += line[i]
     # moving the dies to the start of the line in hebrew. the # jumping to the other side because of RLM and LRM
-    if new_line[-1] == "#" and HEBREW:
-        new_line = "#" + new_line[:-1]
     return new_line
 
 
@@ -166,7 +197,7 @@ def new_key(data, key):
     new_data = []
     global HEBREW
     pattern = re.compile("|".join(to_remove.keys()))
-    HEBREW = is_hebrew(data[2])
+    HEBREW = is_hebrew(data[1])
     for i in data:
 
         if i == "":
@@ -216,22 +247,19 @@ def h1(w):
 
 
 def by_hash(time_hash, context, update):
-    print("user hash " + str(time_hash))
     files = saved[time_hash]
 
-    print("len files:   " + str(len(files)))
     build_message(files, context, update)
 
 
 def build_message(files, context, update):
     print(len(files))
     print(update.message.chat_id)
-
-    if update.message.chat_id == -1001126502216 and len(files) > 0:
+    len_files = len(files)
+    if update.message.chat_id == -1001126502216 and len_files > 0:
         if "אקורדים" in update.message.text:
             time_hash = h1(str(time.time()).encode())
             # time_hash = h1(update.message.from_user.username.encode())
-            print(str(time_hash) + "---------------------------------------------")
             saved[time_hash] = files
             print("saved")
             replay_markup = InlineKeyboardMarkup([[InlineKeyboardButton(
@@ -253,17 +281,16 @@ def build_message(files, context, update):
         print("deleted")
         return
 
-    if len(files) == 0:
+    if len_files == 0:
         if update.message.chat_id == -1001126502216:
             return
         update.message.reply_text("פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!")
         return
 
-    keyboard = []
+    if len_files > 1:
 
-    if len(files) > 1:
-        for i in files:
-            keyboard.append(i[len(this_folder + "/uploaded/"):-4])
+        keyboard = list(map(replace_to_filename, files))
+
         text = "בחר.."
         if len(files) > 179:
             keyboard = keyboard[:179]
@@ -275,11 +302,11 @@ def build_message(files, context, update):
                                   selective=True)
         return
 
-    fname = this_folder + "/message-intro.txt"
+    fname = f"{this_folder}/message-intro.txt"
     with open(fname, "r") as f:
         introB = f.read()
 
-    fname = this_folder + "/message-end.txt"
+    fname = f"{this_folder}/message-end.txt"
     with open(fname, "r") as f:
         endB = f.read()
 
@@ -291,40 +318,34 @@ def build_message(files, context, update):
         intro = introB
         intro = intro.replace("song",
                               data[0].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
-                                  ",", "_") + "   \n" + data[0])
+                                  ",", "_") + f"   \n{data[0]}")
         intro = intro.replace("singer",
                               data[1].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
-                                  ".", "_").replace(",", "_") + "   \n" + data[1])
+                                  ".", "_").replace(",", "_") + f"   \n{data[1]}")
         intro = intro.replace("capo", data[3])
         data[3] = intro
         data.append(endB)
+        print(data)
         send_data(data[3:], update, True, context)
 
 
-def send_data(data, update, notificate, context):
+def send_data(data, update, notificate, context, keyboard=None):
+    if not keyboard:
+        keyboard = default_keyboard
     song = {0: ""}
     counter = 0
 
     for j in data:
-        test = song[counter] + "%0A" + j + data[-1]
+        test = f"{song[counter]}%0A{j}{data[-1]}"
         if len(test) >= 4096:
             counter += 1
             song[counter] = ""
-        song[counter] += "\n" + j
+        song[counter] += f"\n{j}"
 
     reply_markup = telegram.ReplyKeyboardRemove()
     update.message.reply_text(text="Wait..", reply_markup=reply_markup)
-    context.bot.delete_message(update.message.chat_id, update.message.message_id+1)
-    keyboard = [[InlineKeyboardButton("+1", callback_data='+1'), InlineKeyboardButton("+0.5", callback_data='+0.5'),
-                 InlineKeyboardButton("-0.5", callback_data='-0.5'),
-                 InlineKeyboardButton("-1", callback_data='-1')],
-                [InlineKeyboardButton("+2", callback_data='+2'), InlineKeyboardButton("+1.5", callback_data='+1.5'),
-                 InlineKeyboardButton("-1.5", callback_data='-1.5'),
-                 InlineKeyboardButton("-2", callback_data='-2')],
-                [InlineKeyboardButton("+3", callback_data='+3'), InlineKeyboardButton("+2.5", callback_data='+2.5'),
-                 InlineKeyboardButton("-2.5", callback_data='-2.5'),
-                 InlineKeyboardButton("-3", callback_data='-3')],
-                [InlineKeyboardButton("+3", url="https://t.me/Tab4usBot/" + update.message.message_id)]]
+    context.bot.delete_message(update.message.chat_id, update.message.message_id + 1)
+
     reply_markup = ReplyKeyboardRemove()
     counter = 0
 
@@ -343,41 +364,50 @@ def send_data(data, update, notificate, context):
 def search_songs(update, context):
     print(update.message.chat_id)
     data = update.message.text
+    print(data)
     if update.message.chat_id == -1001126502216:
         data = data.replace("?", "")
         data = data.replace("לשיר ", "ל")
         data = data[data.index(" ל") + 2:]
     if data == "חזור":
+        print("חזור")
         update.message.reply_text("חוזר..",
                                   reply_markup=ReplyKeyboardRemove(selective=True))
         return
 
     files = []
-    splt = data.split(' - ')
-    data = ""
-    tmp = []
-
+    spilt = data.split(' - ')
+    print("split ", spilt)
     # if the singer name is UPPER
-    for i in splt:
-        if i.isupper():
-            tmp.append(i)
-        else:
-            tmp.append(i.title())
-
+    tmp = list(map(is_upper, spilt))
+    print("temp", tmp)
     data = " - ".join(tmp)
 
-    if "'" in data:
+    folder = f'{this_folder}/uploaded/*'
+    print(folder, "folder")
+    try:
         data = data.replace(data[data.index("'"):data.index("'") + 2],
                             data[data.index("'"):data.index("'") + 2].lower())
-    print(data)
+    except ValueError:
+        print("value error")
+    finally:
+        print("finally", data)
 
-    for fpath in glob.glob(this_folder + "/uploaded/*"):
-        if data == fpath[len(this_folder + "/uploaded/"):-4]:
-            files = [fpath]
-            build_message(files, context, update)
-            return
+    glb = glob.glob(folder)
+
+    full_name = f"{folder[:-1]}{data}.txt"
+    print(full_name)
+
+    if full_name in glb:
+        files = [glb[glb.index(full_name)]]
+        build_message(files, context, update)
+        return
+
+    for fpath in glb:
+        print(fpath)
         if data in fpath:
             files.append(fpath)
+
     print("done search", files)
     build_message(files, context, update)
 
@@ -389,18 +419,29 @@ def start(update, context):
             "היי, ברוכים הבאים לרובוט האקורדים של ‏@tab4us - ISRACHORD.\nשילחו את השם המלא של השיר כדי לקבל אותו, או את של הלהקה לפתיחת רשימת השירים שלהם..\nלדיווח:\n@ADtmr")
         return
     time_hash = update.message.text[7:]
-    print("_______" + time_hash + "___________")
-    print(len(time_hash))
     flags[time_hash] = True
     by_hash(time_hash, context, update)
 
 
 def button(update, context):
-    query = update.callback_query
     print(update.callback_query)
-    print(query.message.text)
-    data = new_key(query.message.text.split('\n'), query.data)
-    print("sending___________________")
+    query = update.callback_query
+    clicked = query.data
+    print(clicked)
+    if clicked == "+":
+        print("+")
+        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id, message_id=update.callback_query.message.message_id, reply_markup=InlineKeyboardMarkup(keyboard_plus))
+        return
+    elif clicked == "-":
+        print("-")
+        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id, message_id=update.callback_query.message.message_id, reply_markup=InlineKeyboardMarkup(keyboard_minus))
+        return
+
+    data = new_key(query.message.text.split('\n'), clicked)
+    if clicked[1:] != "0.5":
+        keyboard = keyboard_half
+        send_data(data, query, False, context, keyboard)
+        return
     send_data(data, query, False, context)
     context.bot.delete_message(query.message.chat.id, query.message.message_id)
 
