@@ -99,7 +99,8 @@ keyboard_plus = [[InlineKeyboardButton("+1", callback_data='+1'),
                   InlineKeyboardButton("+2", callback_data='+2'),
                   InlineKeyboardButton("+3", callback_data='+3')]]
 
-keyboard_half = [[InlineKeyboardButton("+0.5", callback_data='+0.5'), InlineKeyboardButton("-0.5", callback_data='-0.5')]]
+keyboard_half = [
+    [InlineKeyboardButton("+0.5", callback_data='+0.5'), InlineKeyboardButton("-0.5", callback_data='-0.5')]]
 
 
 def is_upper(i):
@@ -149,18 +150,24 @@ def convert_line(line, key):
     new_line = ""
     print(line)
     len_line = len(line)
-
+    # the real start of the line
+    first_index = -1
+    last_index = -1
     # למצוא את האות הראשונה. לבדוק אם זו שאחריה היא מול או דיאז. אם כן לחבר את שניהם. רק אז לחפש ברשימה ולהחליף.
     # connecting "#" and "b" to the chord, and then replacing.
     for i in range(0, len_line):
+        line_i = line[i]
 
-        if line[i] in levels[0]:
+        if line_i != " ":
+            last_index = i
+
+        if line_i in levels[0]:
+            if first_index == -1:
+                first_index = i
+
             try:
 
                 if line[i + 1] == "#":
-                    if HEBREW and i + 1 == len_line:
-                        new_line = f"#{new_line[:-1]}"
-
                     current_level = levels[0]
                     temp = line[i:i + 2]
 
@@ -169,13 +176,13 @@ def convert_line(line, key):
                     temp = line[i:i + 2]
 
                 else:
-                    temp = line[i]
+                    temp = line_i
                     current_level = levels[0]
 
             # if this is the last char in the line, there is no "b" or "#"
             except IndexError:
                 current_level = levels[0]
-                temp = line[i]
+                temp = line_i
 
             # back to the start if got the end of the chords (Ab or G#)
             if current_level.index(temp) + key > 11:
@@ -186,18 +193,29 @@ def convert_line(line, key):
 
         # the "#" and the "b" chars already used with their chords.
         elif line[i] != "#" and line[i] != "b":
-            new_line += line[i]
+            new_line += line_i
+
     # moving the dies to the start of the line in hebrew. the # jumping to the other side because of RLM and LRM
+    # checking every "if" only once, fastest.
+    if HEBREW:
+        if new_line[- 1] == "#":
+            if new_line[first_index] == "#":
+                new_line = new_line[:-1]
+            else:
+                new_line = f"{new_line[:first_index]}#{new_line[first_index:-1]}"
+        elif new_line[first_index] == "#":
+            new_line = f"{new_line[:first_index]}#{new_line[first_index + 1:-1]}"
+
     return new_line
 
 
 def new_key(data, key):
-    print(data)
     print("converting started")
     new_data = []
     global HEBREW
     pattern = re.compile("|".join(to_remove.keys()))
-    HEBREW = is_hebrew(data[1])
+    print("data11------------------", data[5], is_hebrew(data[5]))
+    HEBREW = is_hebrew(data[5])
     for i in data:
 
         if i == "":
@@ -325,7 +343,6 @@ def build_message(files, context, update):
         intro = intro.replace("capo", data[3])
         data[3] = intro
         data.append(endB)
-        print(data)
         send_data(data[3:], update, True, context)
 
 
@@ -430,11 +447,15 @@ def button(update, context):
     print(clicked)
     if clicked == "+":
         print("+")
-        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id, message_id=update.callback_query.message.message_id, reply_markup=InlineKeyboardMarkup(keyboard_plus))
+        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
+                                              message_id=update.callback_query.message.message_id,
+                                              reply_markup=InlineKeyboardMarkup(keyboard_plus))
         return
     elif clicked == "-":
         print("-")
-        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id, message_id=update.callback_query.message.message_id, reply_markup=InlineKeyboardMarkup(keyboard_minus))
+        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
+                                              message_id=update.callback_query.message.message_id,
+                                              reply_markup=InlineKeyboardMarkup(keyboard_minus))
         return
 
     data = new_key(query.message.text.split('\n'), clicked)
