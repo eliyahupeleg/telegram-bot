@@ -11,7 +11,7 @@ from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, Call
 
 # using server and local python- don't need to change the locations of the files all the time.
 this_folder = "/".join(os.path.realpath(__file__).split("/")[:-1])
-
+chords_library = ["A5", "A6", "A7", "A9", "A_Ab", "Aadd9", "Aaug", "Ab5", "Ab6", "Ab7", "Ab9", "Abadd9", "Ab_A", "Abaug", "Ab_Bb", "A_Bb", "Ab_C#", "Ab_C", "Abdim7", "Abdim", "Ab_Eb", "Ab_F#", "Ab_G", "Abm7b5", "Abm7", "Abm9", "Abmaj7", "Abm", "Ab", "A_B", "Absus4", "A_C#", "A_C", "Adim7", "Adim", "A_D", "A_Eb", "A_E", "A_F#", "A_F", "A_G", "Am7b5", "Am7", "Am9", "Am_Ab", "Amaj7", "Am_Bb", "Am_B", "Am_C", "Am_D", "Am_Eb", "Am_E", "Am_F#", "Am_F", "Am_G", "Ammaj7", "Am", "A", "Asus4", "B5_", "B6", "B7", "B9_2", "B_Ab", "Badd9", "B_A", "Baug", "Bb5", "Bb6", "Bb7", "Bb9_2", "Bb9", "Bb_Ab", "Bbadd9", "Bb_A", "Bbaug", "Bb_B", "Bbdim7", "Bbdim", "Bb_Eb", "Bbm7b5", "Bbm7", "Bbm9", "Bbmaj7", "Bbm", "Bb", "Bbsus4", "Bdim7", "Bdim", "Bm7b5", "Bm7", "Bm9", "Bm_Ab", "Bmaj7", "Bm_A", "Bm_Bb", "Bm_C#", "Bm_C", "Bm_F#", "Bm", "B", "Bsus4", "C#5", "C5", "C#6", "C6", "C#7", "C7", "C#9_2", "C9_2", "C#add9", "Cadd9", "C_A", "C#aug", "Caug", "C_Bb", "C_B", "C_C#", "C#dim7", "Cdim7", "C#dim", "Cdim", "C_G", "C#m7b5", "Cm7b5", "C#m7", "Cm7", "C#m9", "Cm9", "C#maj7", "Cmaj7", "C#mmaj7", "C#m", "Cm", "C#", "C", "C#sus4", "Csus4", "D5", "D6", "D7", "D9", "Dadd9", "D_A", "Daug", "D_Bb", "D_B", "D_C#", "D_C", "Ddim7", "Ddim", "D_F#", "Dm7b5", "Dm7", "Dm9", "Dmaj7", "Dm_A", "Dm_B", "Dm_C", "Dm", "D", "Dsus4", "E5", "E6", "E7", "E9", "E_Ab", "Eadd9", "E_A", "Eaug", "Eb5", "Eb6", "Eb7", "Eb9_2", "Eb9", "Ebadd9", "Ebaug", "E_Bb", "Ebdim7", "Ebdim", "Ebm7b5", "Ebm7", "Ebm9", "Ebmaj7", "Ebm", "Eb", "E_B", "Ebsus4", "E_C#", "E_C", "Edim7", "Edim", "E_D", "E_Eb", "E_F#", "E_F", "E_G", "Em7b5", "Em7", "Em9", "Em_Ab", "Emaj7", "Em_A", "Em_Bb", "Em_B", "Em_C#", "Em_C", "Em_D", "Em_Eb", "Em_F#", "Em_F", "Em_G", "Em", "E", "Esus4", "F#5", "F5", "F#6", "F6", "F#7", "F7", "F9_2", "F#9", "F#_Ab", "F#add9", "Fadd9", "F_A", "F#aug", "Faug", "F#_Bb", "F_Bb", "F#_B", "F#_C#", "F_C", "F#dim7", "Fdim7", "F#dim", "Fdim", "F_D", "F_Eb", "F#_E", "F_E", "F#_F", "F_F#", "F#_G", "F_G", "F#m7b5", "Fm7b5", "F#m7", "Fm7", "F#m9", "Fm9", "Fm_Ab", "F#maj7", "Fmaj7", "Fm_D", "Fm_Eb", "F#m_E", "Fm_E", "F#m_F", "Fm_F#", "F#m_G", "F#m", "Fm", "F#", "F", "F#sus4", "Fsus4", "G5", "G6", "G7", "G9", "Gadd9", "Gaug", "G_C", "Gdim7", "Gdim", "G_D", "G_E", "G_F#", "G_F", "Gm7b5", "Gm7", "Gm9", "Gm_Ab", "Gmaj7", "Gm_D", "Gm_E", "Gm_F", "Gm", "G", "Gsus4"]
 # using for the convert. one
 levels = [["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"],
           ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"]]
@@ -378,6 +378,26 @@ def send_data(data, update, notificate, context, keyboard=None):
         counter += 1
 
 
+def message_handler(update, context):
+    message = update.message.text.replace("/", "_").replace("A#", "Bb")\
+        .replace("Db", "C#").replace("D#", "Eb").replace("Gb", "F#").replace("G#", "Ab")
+    if update.message.chat_id == -1001126502216:
+        if "אקורד " in message:
+            message = message.replace("אקורד ", "")
+        else:
+            print(False)
+            search_songs(update, context)
+    print(message)
+    if message in chords_library:
+        print(True)
+        context.bot.send_photo(chat_id=update.message.chat_id, photo=open(f'{this_folder}/chords/{message}.png', 'rb'))
+        print("sent")
+        return
+    else:
+        print(False)
+        search_songs(update, context)
+
+
 def search_songs(update, context):
     print(update.message.chat_id)
     data = update.message.text
@@ -479,7 +499,7 @@ def main():
     # Add message handler.
     start_handler = CommandHandler('start', start)
     key_button = CallbackQueryHandler(button)
-    conv_handler = MessageHandler(Filters.text, search_songs)
+    conv_handler = MessageHandler(Filters.text, message_handler)
 
     dp.add_handler(key_button)
     dp.add_handler(start_handler)

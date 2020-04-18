@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "urls",
+  "version": "0.1",
+"content_scripts": [
+  {
+    "matches": [
+     "https://www.tab4u.com/resultsSimple?tab=songs&q=&type=&cat=&content=&max_chords=0&n=30&sort=&s=*"
+    ],
+    "js": ["run.js"],
+    "permissions": ["activeTab"]
+  }
+]
+}
