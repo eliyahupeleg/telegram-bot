@@ -381,12 +381,16 @@ def send_data(data, update, notificate, context, keyboard=None):
 def message_handler(update, context):
     message = update.message.text.replace("/", "_").replace("A#", "Bb")\
         .replace("Db", "C#").replace("D#", "Eb").replace("Gb", "F#").replace("G#", "Ab")
+
     if update.message.chat_id == -1001126502216:
         if "אקורד " in message:
             message = message.replace("אקורד ", "")
         else:
-            print(False)
-            search_songs(update, context)
+            if "אקורדים" in message:
+                print(False)
+                search_songs(update, context)
+            else:
+                return
     print(message)
     if message in chords_library:
         print(True)

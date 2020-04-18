@@ -1,37 +1,67 @@
 שיר של קיץ
-תומר ישעיהו
+תומר ישעיהו 
 גולש
+ 
 
-‏  D   Fmaj7     Em        Am
-יש לה עיניים גדולות של ים   
-‏D    Fmaj7  Em   Fmaj7
+
+פתיחה:
+‏Am D Am D
+
+‏  G  Fmaj7     G    Fmaj7
+יש לה עיניים גדולות של ים
+‏ G    Fmaj7  G   Fmaj7
 ושיער ברוך צמר גפן לבן
-‏    D   Am      D      C
+‏ Bm   Am      Bm      Am
 ארוכה כמו הלילה, הלב שלה
-‏   Am  D   Am    D     C
+‏   G    F      Em     Dm
 מושך אותי תופס מחזיק חזק
-‏D     Fmaj7  Em     Am
-יש לה קול דק של שתיקה 
-‏D      Fmaj7 Em  Fmaj7
-ירח מלא בצום של שינה  
-‏    D      Am          D    C
+
+מעבר:
+‏Am D Am D
+
+‏G  Fmaj7     G    Fmaj7
+יש לה קול דק של שתיקה  
+‏G  Fmaj7     G    Fmaj7
+ירח מלא בצום של שינה   
+‏      Bm   Am      Bm      Am
 אני לא מפחד בלי מילים בלי מגע
-‏   Am   D    Am    D   C
+‏   G    F      Em     Dm
 מושך אותי תופס מחזיק חזק
-‏D   Fmaj7   Em    Am
-היא ואני מוצאים נחמה
-‏  D    Fmaj7   Em   Fmaj7
+
+מעבר:
+‏Am D Am D x2
+
+‏G  Fmaj7     G    Fmaj7
+היא ואני מוצאים נחמה   
+‏  G  Fmaj7     G    Fmaj7
 בנפרד בשדות על ספסל בגינה
-‏    D    Am   D     C
-כי לנו הכל מרחק נגיעה
-‏  Am   D  Am    D      C
+‏Bm   Am      Bm      Am
+כי לנו הכל מרחק נגיעה  
+‏   G    F      Em     Dm
 בלילה ביום אני אוהב אותה
-‏Am      D  Fmaj7       G  C
-הלילה הצלחתי לראות רק אותה 
-‏   Fmaj7 D Fmaj7     G    Am    D
+
+מעבר:
+‏Am D Am D x2
+
+‏    Em    Fmaj7     Bb   C
+הלילה הצלחתי לראות רק אותה
+‏  Em   Fmaj7  Bb   C      F    Cm
 ישנה לידי, הידיים שלה עדינות משלי
-‏     Am   D
+‏     F   Cm
 מלטפות אותי
-‏ 
 
+מעבר: x2
+‏C D C D
 
+‏C D C D
+
+‏Em F#m Em F#m
+
+‏Am Bm Am Bm
+
+‏Em D Em Em
+
+סיום:
+‏Em D Em D
+
+‏         
