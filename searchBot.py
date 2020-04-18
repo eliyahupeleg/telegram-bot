@@ -421,7 +421,6 @@ def search_songs(update, context):
         return
 
     for fpath in glb:
-        print(fpath)
         if data in fpath:
             files.append(fpath)
 
@@ -430,6 +429,7 @@ def search_songs(update, context):
 
 
 def start(update, context):
+    print("started")
     print(update.message.chat_id)
     if len(update.message.text[7:]) != 9:
         update.message.reply_text(
