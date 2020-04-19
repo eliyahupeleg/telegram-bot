@@ -11,7 +11,30 @@ from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, Call
 
 # using server and local python- don't need to change the locations of the files all the time.
 this_folder = "/".join(os.path.realpath(__file__).split("/")[:-1])
-chords_library = ["A5", "A6", "A7", "A9", "A_Ab", "Aadd9", "Aaug", "Ab5", "Ab6", "Ab7", "Ab9", "Abadd9", "Ab_A", "Abaug", "Ab_Bb", "A_Bb", "Ab_C#", "Ab_C", "Abdim7", "Abdim", "Ab_Eb", "Ab_F#", "Ab_G", "Abm7b5", "Abm7", "Abm9", "Abmaj7", "Abm", "Ab", "A_B", "Absus4", "A_C#", "A_C", "Adim7", "Adim", "A_D", "A_Eb", "A_E", "A_F#", "A_F", "A_G", "Am7b5", "Am7", "Am9", "Am_Ab", "Amaj7", "Am_Bb", "Am_B", "Am_C", "Am_D", "Am_Eb", "Am_E", "Am_F#", "Am_F", "Am_G", "Ammaj7", "Am", "A", "Asus4", "B5_", "B6", "B7", "B9_2", "B_Ab", "Badd9", "B_A", "Baug", "Bb5", "Bb6", "Bb7", "Bb9_2", "Bb9", "Bb_Ab", "Bbadd9", "Bb_A", "Bbaug", "Bb_B", "Bbdim7", "Bbdim", "Bb_Eb", "Bbm7b5", "Bbm7", "Bbm9", "Bbmaj7", "Bbm", "Bb", "Bbsus4", "Bdim7", "Bdim", "Bm7b5", "Bm7", "Bm9", "Bm_Ab", "Bmaj7", "Bm_A", "Bm_Bb", "Bm_C#", "Bm_C", "Bm_F#", "Bm", "B", "Bsus4", "C#5", "C5", "C#6", "C6", "C#7", "C7", "C#9_2", "C9_2", "C#add9", "Cadd9", "C_A", "C#aug", "Caug", "C_Bb", "C_B", "C_C#", "C#dim7", "Cdim7", "C#dim", "Cdim", "C_G", "C#m7b5", "Cm7b5", "C#m7", "Cm7", "C#m9", "Cm9", "C#maj7", "Cmaj7", "C#mmaj7", "C#m", "Cm", "C#", "C", "C#sus4", "Csus4", "D5", "D6", "D7", "D9", "Dadd9", "D_A", "Daug", "D_Bb", "D_B", "D_C#", "D_C", "Ddim7", "Ddim", "D_F#", "Dm7b5", "Dm7", "Dm9", "Dmaj7", "Dm_A", "Dm_B", "Dm_C", "Dm", "D", "Dsus4", "E5", "E6", "E7", "E9", "E_Ab", "Eadd9", "E_A", "Eaug", "Eb5", "Eb6", "Eb7", "Eb9_2", "Eb9", "Ebadd9", "Ebaug", "E_Bb", "Ebdim7", "Ebdim", "Ebm7b5", "Ebm7", "Ebm9", "Ebmaj7", "Ebm", "Eb", "E_B", "Ebsus4", "E_C#", "E_C", "Edim7", "Edim", "E_D", "E_Eb", "E_F#", "E_F", "E_G", "Em7b5", "Em7", "Em9", "Em_Ab", "Emaj7", "Em_A", "Em_Bb", "Em_B", "Em_C#", "Em_C", "Em_D", "Em_Eb", "Em_F#", "Em_F", "Em_G", "Em", "E", "Esus4", "F#5", "F5", "F#6", "F6", "F#7", "F7", "F9_2", "F#9", "F#_Ab", "F#add9", "Fadd9", "F_A", "F#aug", "Faug", "F#_Bb", "F_Bb", "F#_B", "F#_C#", "F_C", "F#dim7", "Fdim7", "F#dim", "Fdim", "F_D", "F_Eb", "F#_E", "F_E", "F#_F", "F_F#", "F#_G", "F_G", "F#m7b5", "Fm7b5", "F#m7", "Fm7", "F#m9", "Fm9", "Fm_Ab", "F#maj7", "Fmaj7", "Fm_D", "Fm_Eb", "F#m_E", "Fm_E", "F#m_F", "Fm_F#", "F#m_G", "F#m", "Fm", "F#", "F", "F#sus4", "Fsus4", "G5", "G6", "G7", "G9", "Gadd9", "Gaug", "G_C", "Gdim7", "Gdim", "G_D", "G_E", "G_F#", "G_F", "Gm7b5", "Gm7", "Gm9", "Gm_Ab", "Gmaj7", "Gm_D", "Gm_E", "Gm_F", "Gm", "G", "Gsus4"]
+chords_library = ["A5", "A6", "A7", "A9", "A_Ab", "Aadd9", "Aaug", "Ab5", "Ab6", "Ab7", "Ab9", "Abadd9", "Ab_A",
+                  "Abaug", "Ab_Bb", "A_Bb", "Ab_C#", "Ab_C", "Abdim7", "Abdim", "Ab_Eb", "Ab_F#", "Ab_G", "Abm7b5",
+                  "Abm7", "Abm9", "Abmaj7", "Abm", "Ab", "A_B", "Absus4", "A_C#", "A_C", "Adim7", "Adim", "A_D", "A_Eb",
+                  "A_E", "A_F#", "A_F", "A_G", "Am7b5", "Am7", "Am9", "Am_Ab", "Amaj7", "Am_Bb", "Am_B", "Am_C", "Am_D",
+                  "Am_Eb", "Am_E", "Am_F#", "Am_F", "Am_G", "Ammaj7", "Am", "A", "Asus4", "B5_", "B6", "B7", "B9_2",
+                  "B_Ab", "Badd9", "B_A", "Baug", "Bb5", "Bb6", "Bb7", "Bb9_2", "Bb9", "Bb_Ab", "Bbadd9", "Bb_A",
+                  "Bbaug", "Bb_B", "Bbdim7", "Bbdim", "Bb_Eb", "Bbm7b5", "Bbm7", "Bbm9", "Bbmaj7", "Bbm", "Bb",
+                  "Bbsus4", "Bdim7", "Bdim", "Bm7b5", "Bm7", "Bm9", "Bm_Ab", "Bmaj7", "Bm_A", "Bm_Bb", "Bm_C#", "Bm_C",
+                  "Bm_F#", "Bm", "B", "Bsus4", "C#5", "C5", "C#6", "C6", "C#7", "C7", "C#9_2", "C9_2", "C#add9",
+                  "Cadd9", "C_A", "C#aug", "Caug", "C_Bb", "C_B", "C_C#", "C#dim7", "Cdim7", "C#dim", "Cdim", "C_G",
+                  "C#m7b5", "Cm7b5", "C#m7", "Cm7", "C#m9", "Cm9", "C#maj7", "Cmaj7", "C#mmaj7", "C#m", "Cm", "C#", "C",
+                  "C#sus4", "Csus4", "D5", "D6", "D7", "D9", "Dadd9", "D_A", "Daug", "D_Bb", "D_B", "D_C#", "D_C",
+                  "Ddim7", "Ddim", "D_F#", "Dm7b5", "Dm7", "Dm9", "Dmaj7", "Dm_A", "Dm_B", "Dm_C", "Dm", "D", "Dsus4",
+                  "E5", "E6", "E7", "E9", "E_Ab", "Eadd9", "E_A", "Eaug", "Eb5", "Eb6", "Eb7", "Eb9_2", "Eb9", "Ebadd9",
+                  "Ebaug", "E_Bb", "Ebdim7", "Ebdim", "Ebm7b5", "Ebm7", "Ebm9", "Ebmaj7", "Ebm", "Eb", "E_B", "Ebsus4",
+                  "E_C#", "E_C", "Edim7", "Edim", "E_D", "E_Eb", "E_F#", "E_F", "E_G", "Em7b5", "Em7", "Em9", "Em_Ab",
+                  "Emaj7", "Em_A", "Em_Bb", "Em_B", "Em_C#", "Em_C", "Em_D", "Em_Eb", "Em_F#", "Em_F", "Em_G", "Em",
+                  "E", "Esus4", "F#5", "F5", "F#6", "F6", "F#7", "F7", "F9_2", "F#9", "F#_Ab", "F#add9", "Fadd9", "F_A",
+                  "F#aug", "Faug", "F#_Bb", "F_Bb", "F#_B", "F#_C#", "F_C", "F#dim7", "Fdim7", "F#dim", "Fdim", "F_D",
+                  "F_Eb", "F#_E", "F_E", "F#_F", "F_F#", "F#_G", "F_G", "F#m7b5", "Fm7b5", "F#m7", "Fm7", "F#m9", "Fm9",
+                  "Fm_Ab", "F#maj7", "Fmaj7", "Fm_D", "Fm_Eb", "F#m_E", "Fm_E", "F#m_F", "Fm_F#", "F#m_G", "F#m", "Fm",
+                  "F#", "F", "F#sus4", "Fsus4", "G5", "G6", "G7", "G9", "Gadd9", "Gaug", "G_C", "Gdim7", "Gdim", "G_D",
+                  "G_E", "G_F#", "G_F", "Gm7b5", "Gm7", "Gm9", "Gm_Ab", "Gmaj7", "Gm_D", "Gm_E", "Gm_F", "Gm", "G",
+                  "Gsus4"]
 # using for the convert. one
 levels = [["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"],
           ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"]]
@@ -88,21 +111,32 @@ saved = {}
 flags = {}
 # the group messages ids- request and response. cleaning the group from spam.
 to_delete = {}
-# flag. when the language is hebrew, when converting message needed to move the "#" to the start of the line. 
+# flag. when the language is hebrew, when converting message needed to move the "#" to the start of the line.
 HEBREW = False
+
+# optimized. conclusions only once.
+len_uploaded_path = len(this_folder + "/uploaded/")
+
+# the "convert" keyboard that sends with every song that the bot sent.
 default_keyboard = [[InlineKeyboardButton("+", callback_data="+"), InlineKeyboardButton("-", callback_data="-")]]
 
-keyboard_minus = [[InlineKeyboardButton("-1", callback_data='-1'), InlineKeyboardButton("-2", callback_data='-2'),
+# the "convert" keyboard that sends when the "-" button pressed in the default_keyboard.
+keyboard_minus = [[InlineKeyboardButton("-1", callback_data='-1'),
+                   InlineKeyboardButton("-2", callback_data='-2'),
                    InlineKeyboardButton("-3", callback_data='-3')]]
 
+# the "convert" keyboard that sends when the "+" button pressed in the default_keyboard.
 keyboard_plus = [[InlineKeyboardButton("+1", callback_data='+1'),
                   InlineKeyboardButton("+2", callback_data='+2'),
                   InlineKeyboardButton("+3", callback_data='+3')]]
 
-keyboard_half = [
-    [InlineKeyboardButton("+0.5", callback_data='+0.5'), InlineKeyboardButton("-0.5", callback_data='-0.5')]]
+# the "convert" keyboard that sends when the key converted by round number (1, 2, 3, -3, -2, -1)
+keyboard_half = [[InlineKeyboardButton("+0.5", callback_data='+0.5'),
+                  InlineKeyboardButton("-0.5", callback_data='-0.5')]]
 
 
+# if the name of the song or the artist is not UPPER, that mean that it should be in the format title().
+# using function for optimized for loop to map function.
 def is_upper(i):
     if i.isupper():
         return i
@@ -110,16 +144,9 @@ def is_upper(i):
         return i.title()
 
 
-def remove_tag(data):
-    try:
-        return data.replace(data[data.index("'"):data.index("'") + 2],
-                            data[data.index("'"):data.index("'") + 2].lower())
-    except ValueError:
-        return data
-
-
+# used when there are few results. getting the file path, and returning the "artist - song" name.
 def replace_to_filename(i):
-    return i[len(this_folder + "/uploaded/"):-4]
+    return i[len_uploaded_path:-4]
 
 
 # True if all the chars in the str are hebrew. else False.
@@ -134,7 +161,7 @@ def delete(context, time_hash):
     # only after 40 seconds. users do not want to lose their links in one unsuccessfully presse.
     time.sleep(40)
 
-    # if the link used' delete the messages.
+    # if the link used, delete the messages.
     while True:
         if flags[time_hash]:
             break
@@ -152,14 +179,10 @@ def convert_line(line, key):
     len_line = len(line)
     # the real start of the line
     first_index = -1
-    last_index = -1
     # למצוא את האות הראשונה. לבדוק אם זו שאחריה היא מול או דיאז. אם כן לחבר את שניהם. רק אז לחפש ברשימה ולהחליף.
     # connecting "#" and "b" to the chord, and then replacing.
     for i in range(0, len_line):
         line_i = line[i]
-
-        if line_i != " ":
-            last_index = i
 
         if line_i in levels[0]:
             if first_index == -1:
@@ -198,13 +221,20 @@ def convert_line(line, key):
     # moving the dies to the start of the line in hebrew. the # jumping to the other side because of RLM and LRM
     # checking every "if" only once, fastest.
     if HEBREW:
+
+        # in hebrew, if the dies in the end of the line, should move it to the start.
         if new_line[- 1] == "#":
+
+            # if in the last convert the "#" already moved, needs only to delete the "#" in the end.
+            # impossible to have "#" in the start of the chord line.
             if new_line[first_index] == "#":
                 new_line = new_line[:-1]
             else:
+                # put the "#" in the start of the line, right after the spaces.
                 new_line = f"{new_line[:first_index]}#{new_line[first_index:-1]}"
         elif new_line[first_index] == "#":
-            new_line = f"{new_line[:first_index]}#{new_line[first_index + 1:-1]}"
+
+            new_line = new_line[:-1]
 
     return new_line
 
@@ -379,7 +409,7 @@ def send_data(data, update, notificate, context, keyboard=None):
 
 
 def message_handler(update, context):
-    message = update.message.text.replace("/", "_").replace("A#", "Bb")\
+    message = update.message.text.replace("/", "_").replace("A#", "Bb") \
         .replace("Db", "C#").replace("D#", "Eb").replace("Gb", "F#").replace("G#", "Ab")
 
     if update.message.chat_id == -1001126502216:
