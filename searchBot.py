@@ -305,7 +305,9 @@ def build_message(files, context, update):
     print(update.message.chat_id)
     len_files = len(files)
     if update.message.chat_id == -1001126502216 and len_files > 0:
+
         if "אקורדים" in update.message.text:
+            print(update.message.from_user)
             time_hash = h1(str(time.time()).encode())
             # time_hash = h1(update.message.from_user.username.encode())
             saved[time_hash] = files
@@ -324,9 +326,9 @@ def build_message(files, context, update):
             update.message.reply_text('אקורדים ל "{}"'.format(data.replace("אקורדים ", "")), reply_markup=replay_markup)
             print(update.message.message_id)
 
-        flags[time_hash] = False
-        threading.Thread(target=delete, args=(context, time_hash)).start()
-        print("deleted")
+            flags[time_hash] = False
+            threading.Thread(target=delete, args=(context, time_hash)).start()
+            print("deleted")
         return
 
     if len_files == 0:
@@ -419,6 +421,7 @@ def message_handler(update, context):
             if "אקורדים" in message:
                 print(False)
                 search_songs(update, context)
+                return
             else:
                 return
     print(message)
@@ -433,6 +436,7 @@ def message_handler(update, context):
 
 
 def search_songs(update, context):
+
     print(update.message.chat_id)
     data = update.message.text
     print(data)
@@ -459,10 +463,11 @@ def search_songs(update, context):
     try:
         data = data.replace(data[data.index("'"):data.index("'") + 2],
                             data[data.index("'"):data.index("'") + 2].lower())
+        print("replace ' success")
     except ValueError:
         print("value error")
     finally:
-        print("finally", data)
+        print("finally: ", data)
 
     glb = glob.glob(folder)
 
@@ -480,6 +485,7 @@ def search_songs(update, context):
 
     print("done search", files)
     build_message(files, context, update)
+    print("building")
 
 
 def start(update, context):
@@ -513,9 +519,11 @@ def button(update, context):
         return
 
     data = new_key(query.message.text.split('\n'), clicked)
+
     if clicked[1:] != "0.5":
-        keyboard = keyboard_half
-        send_data(data, query, False, context, keyboard)
+        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
+                                              message_id=update.callback_query.message.message_id,
+                                              reply_markup=InlineKeyboardMarkup(keyboard_half))
         return
     send_data(data, query, False, context)
     context.bot.delete_message(query.message.chat.id, query.message.message_id)
