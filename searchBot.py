@@ -114,8 +114,15 @@ to_delete = {}
 # flag. when the language is hebrew, when converting message needed to move the "#" to the start of the line.
 HEBREW = False
 
+uploaded_path = this_folder + "/uploaded/"
+
 # optimized. conclusions only once.
-len_uploaded_path = len(this_folder + "/uploaded/")
+len_uploaded_path = len(uploaded_path)
+
+uploaded_list = glob.glob(f"{uploaded_path}/*")
+
+songs_list = []
+artists_list = []
 
 # the "convert" keyboard that sends with every song that the bot sent.
 default_keyboard = [[InlineKeyboardButton("+", callback_data="+"), InlineKeyboardButton("-", callback_data="-")]]
@@ -137,6 +144,18 @@ keyboard_half = [[InlineKeyboardButton("+0.5", callback_data='+0.5'),
 
 # if the name of the song or the artist is not UPPER, that mean that it should be in the format title().
 # using function for optimized for loop to map function.
+def get_song(song):
+    try:
+        return replace_to_filename(song).split(" - ")[1]
+    except IndexError:
+        print("index error", song)
+    return
+
+
+def get_artist(name):
+    return replace_to_filename(name).split(" - ")[0]
+
+
 def is_upper(i):
     if i.isupper():
         return i
@@ -175,7 +194,6 @@ def convert_line(line, key):
 
     key = int(float(key) * 2)
     new_line = ""
-    print(line)
     len_line = len(line)
     # the real start of the line
     first_index = -1
@@ -222,19 +240,20 @@ def convert_line(line, key):
     # checking every "if" only once, fastest.
     if HEBREW:
 
-        # in hebrew, if the dies in the end of the line, should move it to the start.
-        if new_line[- 1] == "#":
+        if len(list(filter(None, new_line.split(' ')))) != 1:
+            # in hebrew, if the dies in the end of the line, should move it to the start.
+            if new_line[- 1] == "#":
 
-            # if in the last convert the "#" already moved, needs only to delete the "#" in the end.
-            # impossible to have "#" in the start of the chord line.
-            if new_line[first_index] == "#":
+                # if in the last convert the "#" already moved, needs only to delete the "#" in the end.
+                # impossible to have "#" in the start of the chord line.
+                if new_line[first_index] == "#":
+                    new_line = new_line[:-1]
+                else:
+                    # put the "#" in the start of the line, right after the spaces.
+                    new_line = f"{new_line[:first_index]}#{new_line[first_index:-1]}"
+            elif new_line[first_index] == "#":
+
                 new_line = new_line[:-1]
-            else:
-                # put the "#" in the start of the line, right after the spaces.
-                new_line = f"{new_line[:first_index]}#{new_line[first_index:-1]}"
-        elif new_line[first_index] == "#":
-
-            new_line = new_line[:-1]
 
     return new_line
 
@@ -250,20 +269,15 @@ def new_key(data, key):
 
         if i == "":
             new_data.append(i)
-            print(i)
             continue
 
-        print("before: ", i)
         j = pattern.sub(lambda m: to_remove[re.escape(m.group(0))], i)
 
         if j:
-            print("regular: ", i)
             new_data.append(i)
         else:
-            print("chords: ", i)
             new_data.append(convert_line(i, key))
         print(data.index(i))
-    print("new data: ", new_data)
     return new_data
 
 
@@ -276,16 +290,17 @@ def karaoke_start(update, context):
 def main_karaoke():
     print("karaoke started")
 
-    updater = Updater("1223729088:AAHmZyVGZd6hDDjYYfvhuSqk3yWpqk4S57U", use_context=True,
-                      request_kwargs={'read_timeout': 1000, 'connect_timeout': 1000})
+    updater = Updater("1223729088:AAHmZyVGZd6hDDjYYfvhuSqk3yWpqk4S57U", use_context=True)
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
     start_handler = CommandHandler('start', karaoke_start)
 
     dp.add_handler(start_handler)
+    print("added")
     # Start the Bot
     updater.start_polling()
+    print("pulling")
 
     updater.idle()
 
@@ -380,7 +395,7 @@ def build_message(files, context, update):
 
 def send_data(data, update, notificate, context, keyboard=None):
     if not keyboard:
-        keyboard = default_keyboard
+        keyboard = InlineKeyboardMarkup(default_keyboard)
     song = {0: ""}
     counter = 0
 
@@ -392,6 +407,7 @@ def send_data(data, update, notificate, context, keyboard=None):
         song[counter] += f"\n{j}"
 
     reply_markup = telegram.ReplyKeyboardRemove()
+    print("wait--------------")
     update.message.reply_text(text="Wait..", reply_markup=reply_markup)
     context.bot.delete_message(update.message.chat_id, update.message.message_id + 1)
 
@@ -399,8 +415,9 @@ def send_data(data, update, notificate, context, keyboard=None):
     counter = 0
 
     for _ in song:
+        print("message ")
         if counter + 1 == len(song):
-            reply_markup = InlineKeyboardMarkup(keyboard)
+            reply_markup = keyboard
 
         if update.message.chat_id == -1001126502216:
             reply_markup = ReplyKeyboardRemove()
@@ -425,9 +442,35 @@ def message_handler(update, context):
             else:
                 return
     print(message)
+
+    if "מה יש" in message:
+        send_data(songs_list + artists_list, update, True, context, ReplyKeyboardRemove())
+        return
+
+    if "רשימת שירים" in message:
+        result = list(filter(lambda x: x.startswith(message.replace("רשימת שירים ", "")), songs_list))
+        print(result)
+        if not result:
+            result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
+        send_data(result, update, True, context, ReplyKeyboardRemove())
+        return
+
+    if "רשימת אמנים" in message:
+        result = list(filter(lambda x: x.startswith(message.replace("רשימת אמנים ", "")), songs_list))
+        print(result)
+        if not result:
+            result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
+        send_data(result, update, True, context, ReplyKeyboardRemove())
+        return
+
     if message in chords_library:
         print(True)
-        context.bot.send_photo(chat_id=update.message.chat_id, photo=open(f'{this_folder}/chords/{message}.png', 'rb'))
+
+        reply_markup = InlineKeyboardMarkup(default_keyboard)
+        # לתקן את הקריאה חוזרת להמרת אקורד ושליחת תמונה חדשה
+        context.bot.send_photo(caption=message,
+                               chat_id=update.message.chat_id,
+                               photo=open(f'{this_folder}/chords/{message}.png', 'rb'))
         print("sent")
         return
     else:
@@ -436,7 +479,6 @@ def message_handler(update, context):
 
 
 def search_songs(update, context):
-
     print(update.message.chat_id)
     data = update.message.text
     print(data)
@@ -459,7 +501,6 @@ def search_songs(update, context):
     data = " - ".join(tmp)
 
     folder = f'{this_folder}/uploaded/*'
-    print(folder, "folder")
     try:
         data = data.replace(data[data.index("'"):data.index("'") + 2],
                             data[data.index("'"):data.index("'") + 2].lower())
@@ -469,7 +510,7 @@ def search_songs(update, context):
     finally:
         print("finally: ", data)
 
-    glb = glob.glob(folder)
+    glb = uploaded_list
 
     full_name = f"{folder[:-1]}{data}.txt"
     print(full_name)
@@ -501,7 +542,6 @@ def start(update, context):
 
 
 def button(update, context):
-    print(update.callback_query)
     query = update.callback_query
     clicked = query.data
     print(clicked)
@@ -532,7 +572,15 @@ def button(update, context):
 
 
 def main():
-    print("/".join(os.path.realpath(__file__).split("/")[:-1]))
+    global songs_list
+    global artists_list
+
+    songs_list = list(dict.fromkeys(list(map(get_song, uploaded_list))))
+    artists_list = list(dict.fromkeys(list(map(get_artist, uploaded_list))))
+
+    artists_list.sort()
+    songs_list.sort()
+
     updater = Updater("999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU", use_context=True)
 
     # Get the dispatcher to register handlers
@@ -554,5 +602,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print(len("/".join(os.path.realpath(__file__).split("/")[:-1]) + "/uploaded/*"))
     main()

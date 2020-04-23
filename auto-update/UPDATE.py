@@ -48,7 +48,7 @@ while True:
             data = f.read().split('\n')
 
             os.replace("/home/la/Downloads/update.txt",
-                       "/home/la/Downloads/HtmlsaveToTxt/bot/toUpload/" + data[1] + "- " + data[0] + ".txt")
+                       "/home/la/Downloads/HtmlsaveToTxt/bot/toUpload/" + data[1] + " - " + data[0] + ".txt")
 
         with open(fname, "r+") as f:
             f.seek(0)

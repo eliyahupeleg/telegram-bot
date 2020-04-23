@@ -111,7 +111,7 @@ for (let j of lst){
 	editedBy = "המערכת";
 if(document.getElementById("editByUser")) editedBy = "גולש";
 
-singer = name.split(" - ")[0];
+singer = name.split("  - ")[0];
 song = name.split(" - ")[1];
 newData = song + '\n' + singer + '\n' + editedBy + '\n' + capo + '\n' + newData;
 newData = newData.replace(new RegExp("[?!]", 'g'), "");
