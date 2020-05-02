@@ -81,6 +81,7 @@ for (let j of lst){
 		
 		if(language == "HE"){
 			//I סופר כמה רווחים להוסיף אחרי האקורדים. מעביר את הרווחים מהסוף להתחלה כי הם עברו צד.
+
 			for(var i = 0; i < j.length; i++){
 				if(j.slice(j.length - spccntr, j.length).replace(new RegExp(String.fromCharCode(160), 'g'), "") == "")
 					{spccntr++; continue;}

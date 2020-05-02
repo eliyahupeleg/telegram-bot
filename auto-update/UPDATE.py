@@ -5,7 +5,7 @@ import os
 import webbrowser
 import requests
 
-fname = "/home/la/Downloads/HtmlsaveToTxt/tab4u/auto-update/lst.txt"
+fname = "/home/la/Desktop/bots/chords-bot/auto-update/lst.txt"
 print("checking for updates..")
 while True:
     with open(fname, "r") as f:
@@ -48,7 +48,7 @@ while True:
             data = f.read().split('\n')
 
             os.replace("/home/la/Downloads/update.txt",
-                       "/home/la/Downloads/HtmlsaveToTxt/bot/toUpload/" + data[1] + " - " + data[0] + ".txt")
+                       "/home/la/Desktop/bots/chords-bot/toUpload/" + data[1] + " - " + data[0] + ".txt")
 
         with open(fname, "r+") as f:
             f.seek(0)
