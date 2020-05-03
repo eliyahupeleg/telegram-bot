@@ -576,8 +576,8 @@ def main():
     artists_list.sort()
     songs_list.sort()
 
-    users_read = open(users_path, 'r')
-    users = users_read.read().split('\n')
+    with open(users_path, 'r') as f:
+        users = f.read().split('\n')
 
     updater = Updater("999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU", use_context=True)
 

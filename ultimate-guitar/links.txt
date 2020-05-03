@@ -1,0 +1,8 @@
+artists:
+	https://www.ultimate-guitar.com/bands/a.htm
+	https://www.ultimate-guitar.com/bands/a2.htm
+	https://www.ultimate-guitar.com/bands/z.htm
+
+check if empty result:
+	if (document.getElementsByClassName('pZcWD').length == 0){ console.log("false")}
+	else {console.log("true")}
