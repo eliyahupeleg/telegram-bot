@@ -21,19 +21,12 @@ with open("/home/la/Desktop/bots/chords-bot/ultimate-guitar/all_artists.txt", "r
     artist_links = f.read().split("\n")
 
 for artist_link in artist_links:
-    while True:
-        try:
-            browser.get(artist_link)
-            songs_links += browser.execute_script(js)
-            print(songs_links)
-            browser.quit()
-            break
-        except Exception as e:
-            print(artist_link)
-            print("except..", str(e))
-            time.sleep(10)
+    browser.get(artist_link)
+    songs_links += browser.execute_script(js)
+    print("artist finished")
+    print(songs_links)
 
-    time.sleep(4)
+browser.quit()
 
 with open("/home/la/Desktop/bots/chords-bot/ultimate-guitar/all_songs.txt", "w+") as f:
     f.write(songs_links)
