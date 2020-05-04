@@ -1,4 +1,6 @@
 import os
+import time
+
 from selenium import webdriver
 
 options = webdriver.ChromeOptions()
@@ -19,9 +21,19 @@ with open("/home/la/Desktop/bots/chords-bot/ultimate-guitar/all_artists.txt", "r
     artist_links = f.read().split("\n")
 
 for artist_link in artist_links:
-    browser.get(artist_link)
-    songs_links += browser.execute_script(js)
-    browser.quit()
+    while True:
+        try:
+            browser.get(artist_link)
+            songs_links += browser.execute_script(js)
+            print(songs_links)
+            browser.quit()
+            break
+        except Exception as e:
+            print(artist_link)
+            print("except..", str(e))
+            time.sleep(10)
+
+    time.sleep(4)
 
 with open("/home/la/Desktop/bots/chords-bot/ultimate-guitar/all_songs.txt", "w+") as f:
     f.write(songs_links)

@@ -75,15 +75,15 @@ def main():
 		  ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"]]
 
 	for fpath in glob.glob(this_folder + "/toUpload/*"):
-	    if is_hebrew(fpath):
-		print(fpath)
-		with open(fpath, "r+") as f:
-		    data = f.read().split('\n')
-		    data = n_k(data)
-		    song = ''.join(data)
-		    f.seek(0)
-		    f.truncate()
-		    f.write(song)
+		if is_hebrew(fpath):
+			print(fpath)
+			with open(fpath, "r+") as f:
+			    data = f.read().split('\n')
+			    data = n_k(data)
+			    song = ''.join(data)
+			    f.seek(0)
+			    f.truncate()
+			    f.write(song)
 
 
 def c_l(line):

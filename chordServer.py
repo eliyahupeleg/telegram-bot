@@ -176,9 +176,11 @@ def is_hebrew(s):
 
 
 def write_users():
+    global users
     while True:
-        with open(users_path, 'a') as out:
+        with open(users_path, 'w+') as out:
             out.write('\n'.join(users))
+            out.close()
         time.sleep(1800)
 
 
@@ -199,8 +201,6 @@ def delete(context, time_hash):
 
 # converting chords line up or down by the key. the key if from 3 to -3' in steps of 0.5.
 def convert_line(line, key):
-    print("converting started")
-
     key = int(float(key) * 2)
     new_line = ""
     len_line = len(line)
@@ -249,7 +249,7 @@ def convert_line(line, key):
     # checking every "if" only once, fastest.
     if HEBREW:
 
-	# more than one chord in the line.
+        # more than one chord in the line.
         if len(list(filter(None, new_line.split(' ')))) != 1:
             # in hebrew, if the dies in the end of the line, should move it to the start.
             if new_line[- 1] == "#":
@@ -269,11 +269,9 @@ def convert_line(line, key):
 
 
 def new_key(data, key):
-    print("converting started")
     new_data = []
     global HEBREW
     pattern = re.compile("|".join(to_remove.keys()))
-    print("data11------------------", data[5], is_hebrew(data[5]))
     HEBREW = is_hebrew(data[5])
     for i in data:
 
@@ -287,7 +285,6 @@ def new_key(data, key):
             new_data.append(i)
         else:
             new_data.append(convert_line(i, key))
-        print(data.index(i))
     return new_data
 
 
@@ -302,17 +299,14 @@ def by_hash(time_hash, context, update):
 
 
 def build_message(files, context, update):
-    print(len(files))
-    print(update.message.chat_id)
+    print(len(files), "results\n")
     len_files = len(files)
     if update.message.chat_id == -1001126502216 and len_files > 0:
 
         if "אקורדים" in update.message.text:
-            print(update.message.from_user)
             time_hash = h1(str(time.time()).encode())
             # time_hash = h1(update.message.from_user.username.encode())
             saved[time_hash] = files
-            print("saved")
             replay_markup = InlineKeyboardMarkup([[InlineKeyboardButton(
 
                 text="לחץ פה",
@@ -322,14 +316,11 @@ def build_message(files, context, update):
             data = update.message.text.replace("?", "")
             data = data.replace("לשיר ", "ל")
             data = data[data.index(" ל") + 2:]
-            print("to delete ", int(update.message.message_id))
             to_delete[time_hash] = [int(update.message.message_id)]
             update.message.reply_text('אקורדים ל "{}"'.format(data.replace("אקורדים ", "")), reply_markup=replay_markup)
-            print(update.message.message_id)
 
             flags[time_hash] = False
             threading.Thread(target=delete, args=(context, time_hash)).start()
-            print("deleted")
         return
 
     if len_files == 0:
@@ -361,7 +352,7 @@ def build_message(files, context, update):
     with open(fname, "r") as f:
         endB = f.read()
 
-    print("open and end")
+    print("sending song..\n\n")
     fpath = files[0]
     with open(fpath, "r") as f:
 
@@ -393,7 +384,6 @@ def send_data(data, update, notificate, context, keyboard=None):
         song[counter] += f"\n{j}"
 
     reply_markup = telegram.ReplyKeyboardRemove()
-    print("wait--------------")
     update.message.reply_text(text="Wait..", reply_markup=reply_markup)
     context.bot.delete_message(update.message.chat_id, update.message.message_id + 1)
 
@@ -401,7 +391,6 @@ def send_data(data, update, notificate, context, keyboard=None):
     counter = 0
 
     for _ in song:
-        print("message ")
         if counter + 1 == len(song):
             reply_markup = keyboard
 
@@ -426,12 +415,10 @@ def message_handler(update, context):
             message = message.replace("אקורד ", "")
         else:
             if "אקורדים" in message:
-                print(False)
                 search_songs(update, context)
                 return
             else:
                 return
-    print(message)
 
     if "מה יש" in message:
         send_data(songs_list + artists_list, update, True, context, ReplyKeyboardRemove())
@@ -439,7 +426,6 @@ def message_handler(update, context):
 
     if "רשימת שירים" in message:
         result = list(filter(lambda x: x.startswith(message.replace("רשימת שירים ", "")), songs_list))
-        print(result)
         if not result:
             result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
         send_data(result, update, True, context, ReplyKeyboardRemove())
@@ -447,30 +433,27 @@ def message_handler(update, context):
 
     if "רשימת אמנים" in message:
         result = list(filter(lambda x: x.startswith(message.replace("רשימת אמנים ", "")), songs_list))
-        print(result)
         if not result:
             result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
         send_data(result, update, True, context, ReplyKeyboardRemove())
         return
 
     if message in chords_library:
-        print(True)
 
         reply_markup = InlineKeyboardMarkup(default_keyboard)
         # לתקן את הקריאה חוזרת להמרת אקורד ושליחת תמונה חדשה
         context.bot.send_photo(heigth=10, caption=message,
                                chat_id=update.message.chat_id,
                                photo=open(f'{this_folder}/chords/{message}.png', 'rb'))
-        print("sent")
+        print("chord pic sent")
         return
     else:
-        print(False)
         search_songs(update, context)
 
 
 def search_songs(update, context):
-    print(update.message.chat_id)
     data = update.message.text
+    print(update.message.chat_id)
     print(data)
     if update.message.chat_id == -1001126502216:
         data = data.replace("?", "")
@@ -484,26 +467,22 @@ def search_songs(update, context):
 
     files = []
     spilt = data.split(' - ')
-    print("split ", spilt)
     # if the singer name is UPPER
     tmp = list(map(is_upper, spilt))
-    print("temp", tmp)
     data = " - ".join(tmp)
 
     folder = f'{this_folder}/uploaded/*'
     try:
         data = data.replace(data[data.index("'"):data.index("'") + 2],
                             data[data.index("'"):data.index("'") + 2].lower())
-        print("replace ' success")
     except ValueError:
-        print("value error")
+        pass
     finally:
-        print("finally: ", data)
+        pass
 
     glb = uploaded_list
 
     full_name = f"{folder[:-1]}{data}.txt"
-    print(full_name)
 
     if full_name in glb:
         files = [glb[glb.index(full_name)]]
@@ -514,13 +493,12 @@ def search_songs(update, context):
         if data in fpath:
             files.append(fpath)
 
-    print("done search", files)
+    print("done search")
     build_message(files, context, update)
-    print("building")
 
 
 def start(update, context):
-    print("started")
+    print("start")
     print(update.message.chat_id)
     if update.message.from_user.id not in users:
         users.append(update.message.from_user.id)
