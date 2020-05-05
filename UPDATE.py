@@ -1,6 +1,6 @@
 import os
 import time
-
+import UPLOAD
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -199,13 +199,15 @@ while True:
         # creating full address
         full_link = basic_url + link
 
+        print("full link", full_link)
         # getting the page from the server.
         browser.get(full_link)
 
-        # tring to get easy version, if exist.
+        # try to get easy version, if exist.
         easy = browser.execute_script(js_go_2_easy)
 
         if easy != "ok":
+            print("easy", easy)
             # get the easy instead.
             browser.get(easy)
 
@@ -229,3 +231,4 @@ while True:
             f.write(str(num + int(links.index(link)) + 1))
 
 browser.quit()
+

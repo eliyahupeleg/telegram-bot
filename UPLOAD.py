@@ -1,32 +1,31 @@
-import convert_right_left
-from pprint import pprint
-from urllib.parse import urljoin
-import time
-import os
-import unicodedata
 import glob
+import os
+import time
 import requests
+import convert_right_left
+from urllib.parse import urljoin
 
-convert_right_left.main()
 
-folder_len = 42
 files = []
 counter = 0
+this_folder = "/".join(os.path.realpath(__file__).split("/")[:-1])
+folder_len = len(f"{this_folder}/toUpload/")
+
 for fpath in glob.glob("/home/la/Desktop/bots/chords-bot/toUpload/*"):
     files.append(fpath)
 
 # for fname in files:
-fname = "/home/la/Desktop/bots/chords-bot/message-intro.txt"
+fname = f"{this_folder}/message-intro.txt"
 with open(fname, "r") as f:
     introB = f.read()
 
-fname = "/home/la/Desktop/bots/chords-bot/message-end.txt"
+fname = f"{this_folder}/message-end.txt"
 with open(fname, "r") as f:
     endB = f.read()
 
 counting = 1
 if len(files) == 0:
-    print("nothing to update..")
+    print("nothing to update!")
 else:
     print("uploading updates..")
 username = 'elikopeleg'
@@ -37,12 +36,14 @@ api_base = f"https://{pythonanywhere_host}/api/v0/user/{username}/"
 for fpath in files:
     with open(fpath, "r") as f:
         data = f.read()
-        os.replace(fpath, "/home/la/Desktop/bots/chords-bot/uploaded/" + fpath[folder_len:])
-        resp = requests.post(
+        os.replace(fpath, f"{this_folder}/uploaded/" + fpath[folder_len:])
+        # no need to upload- running on the server.
+        '''resp = requests.post(
             urljoin(api_base, f"files/path/home/{username}/uploaded/{fpath[folder_len:]}"),
             files={"content": data},
             headers={"Authorization": "Token {api_token}".format(api_token=token)}
-        )
+        )'''
+
         print(fpath)
         data = data.split('\n')
         intro = introB
@@ -79,10 +80,8 @@ for fpath in files:
 
                 r = requests.get(url.replace("#", "%23").replace('\n', '%0A'), timeout=None)
 
-                print(r.text + '\n')
                 counting += 1
             except requests.Timeout as err:
-                exeptions.append(fpath + "| ")
                 break
             r.connection.close()
             counter += 1
