@@ -1,6 +1,5 @@
 import os
 import time
-import UPLOAD
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -232,3 +231,6 @@ while True:
 
 browser.quit()
 
+if input("UPLOAD? (Y/N)\n") == "Y":
+    print("uploading...")
+    import UPLOAD

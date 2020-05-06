@@ -86,9 +86,7 @@ def is_hebrew(s):
 
 
 def c_l(line):
-    print("converting started")
     new_line = line
-    print(line)
     if new_line[-1] == "#":
         new_line = "#" + new_line[:-1]
 
@@ -96,30 +94,23 @@ def c_l(line):
 
 
 def n_k(data):
-    print(data)
-    print("converting started")
     new_data = ""
 
     for i in data:
 
         if i == "":
             new_data += '\n'
-            print(i)
             continue
 
-        print("before: ", i)
         j = pattern.sub(lambda m: to_remove[re.escape(m.group(0))], i)
 
         if j:
-            print("regular: ", i)
             new_data += i
             new_data += '\n'
         else:
-            print("chords: ", i)
             new_data += c_l(i)
             new_data += '\n'
 
-    print("new data: ", new_data)
     return new_data
 
 

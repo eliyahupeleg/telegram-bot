@@ -25,7 +25,7 @@ with open(fname, "r") as f:
 
 counting = 1
 if len(files) == 0:
-    print("nothing to update!")
+    print("nothing to upload!")
 else:
     print("uploading updates..")
 username = 'elikopeleg'
@@ -37,12 +37,12 @@ for fpath in files:
     with open(fpath, "r") as f:
         data = f.read()
         os.replace(fpath, f"{this_folder}/uploaded/" + fpath[folder_len:])
-        # no need to upload- running on the server.
-        '''resp = requests.post(
+        # no need to upload if running on the server.
+        resp = requests.post(
             urljoin(api_base, f"files/path/home/{username}/uploaded/{fpath[folder_len:]}"),
             files={"content": data},
             headers={"Authorization": "Token {api_token}".format(api_token=token)}
-        )'''
+        )
 
         print(fpath)
         data = data.split('\n')
