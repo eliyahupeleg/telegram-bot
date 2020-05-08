@@ -4,8 +4,8 @@ import glob
 import hashlib
 import os
 import re
-
 import telegram
+
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
 
@@ -104,8 +104,10 @@ chars_to_remove = ["A#6add9", "Ab6add9", "A#add9", "A#dim7", "A#m7b5", "A#maj7",
                    "0", "x", chr(32), chr(160), "/", "sus", "maj", "+", "aj", chr(8207), "#"]
 to_remove = {i: "" for i in chars_to_remove}
 to_remove = dict((re.escape(k), v) for k, v in to_remove.items())
-
+to_remove_lambda = lambda m: to_remove[re.escape(m.group(0))]
 users = []
+old_users = []
+
 # saved: the saved messages, for users that came form the group.
 saved = {}
 # flags- is the link in the group used?
@@ -117,6 +119,14 @@ HEBREW = False
 
 uploaded_path = this_folder + "/uploaded/"
 users_path = f'{this_folder}/users.txt'
+
+fname = f"{this_folder}/message-intro.txt"
+with open(fname, "r") as f:
+    introB = f.read()
+
+fname = f"{this_folder}/message-end.txt"
+with open(fname, "r") as f:
+    endB = f.read()
 
 # optimized. conclusions only once.
 len_uploaded_path = len(uploaded_path)
@@ -176,12 +186,10 @@ def is_hebrew(s):
 
 
 def write_users():
-    global users
-    while True:
-        with open(users_path, 'w+') as out:
-            out.write('\n'.join(users))
-            out.close()
-        time.sleep(1800)
+    with open(users_path, 'w+') as out:
+        out.write('\n'.join(users))
+        out.close()
+        print("new user wrote")
 
 
 # deleting the messages in the group by the "time_hash".
@@ -279,7 +287,7 @@ def new_key(data, key):
             new_data.append(i)
             continue
 
-        j = pattern.sub(lambda m: to_remove[re.escape(m.group(0))], i)
+        j = pattern.sub(to_remove_lambda, i)
 
         if j:
             new_data.append(i)
@@ -305,7 +313,6 @@ def build_message(files, context, update):
 
         if "אקורדים" in update.message.text:
             time_hash = h1(str(time.time()).encode())
-            # time_hash = h1(update.message.from_user.username.encode())
             saved[time_hash] = files
             replay_markup = InlineKeyboardMarkup([[InlineKeyboardButton(
 
@@ -343,14 +350,6 @@ def build_message(files, context, update):
                                   one_time_keyboard=True,
                                   selective=True)
         return
-
-    fname = f"{this_folder}/message-intro.txt"
-    with open(fname, "r") as f:
-        introB = f.read()
-
-    fname = f"{this_folder}/message-end.txt"
-    with open(fname, "r") as f:
-        endB = f.read()
 
     print("sending song..\n\n")
     fpath = files[0]
@@ -406,9 +405,9 @@ def message_handler(update, context):
     message = update.message.text.replace("/", "_").replace("A#", "Bb") \
         .replace("Db", "C#").replace("D#", "Eb").replace("Gb", "F#").replace("G#", "Ab")
 
-    if update.message.from_user.id not in users:
-        users.append(update.message.from_user.id)
-        print(users)
+    if str(update.message.from_user.id) not in users:
+        users.append(str(update.message.from_user.id))
+        write_users()
 
     if update.message.chat_id == -1001126502216:
         if "אקורד " in message:
@@ -500,8 +499,9 @@ def search_songs(update, context):
 def start(update, context):
     print("start")
     print(update.message.chat_id)
-    if update.message.from_user.id not in users:
-        users.append(update.message.from_user.id)
+    if str(update.message.from_user.id) not in users:
+        users.append(str(update.message.from_user.id))
+        write_users()
         print(users)
 
     if len(update.message.text[7:]) != 9:

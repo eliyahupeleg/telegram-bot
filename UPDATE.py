@@ -171,7 +171,8 @@ while True:
 
     # the number of the results (how many songs in the site)
     num = int(soup.find_all(class_="foundTxtTd")[0].getText().split(" ")[1])
-
+    print("num", num)
+    print(int(lst), int(num))
     # if the number of the updated and the number of the songs in the site are equal, up to date.
     if int(lst) == int(num):
         print("up-to-date!!")
