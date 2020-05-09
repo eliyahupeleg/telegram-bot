@@ -1,5 +1,6 @@
 import os
-
+import time
+import urllib.request
 from selenium import webdriver
 
 options = webdriver.ChromeOptions()
@@ -40,6 +41,25 @@ for artist_link in artist_links:
         print("artist ", artist_link)
         print("new: ", new)
         print(artist_links.index(artist_link), "/", len(artist_links))
+
+        if (artist_links.index(artist_link) + 1) % 400 == 0:
+            print("400. waiting for reset network.")
+            ip = urllib.request.urlopen("https://api.ipify.org").read().decode("utf-8")
+            old_ip = urllib.request.urlopen("https://api.ipify.org").read().decode("utf-8")
+            print("old ip: ", ip)
+            while ip == old_ip:
+                try:
+                    urllib.request.urlopen(
+                        "https://api.telegram.org/bot999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU/sendMessage?chat_id=386848836&text=change-ip")
+                    ip = urllib.request.urlopen("https://api.ipify.org").read().decode("utf-8")
+                    print("waiting... ip is: ", ip)
+                    time.sleep(4)
+                except Exception as e:
+                    print(e)
+
+            urllib.request.urlopen(f"https://api.telegram.org/bot999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU/sendMessage?chat_id=386848836&text=new-ip:{ip}")
+            print("new ip: ", ip)
+
     except Exception as e:
         print(e, artist_link)
         errors.append(artist_link)
