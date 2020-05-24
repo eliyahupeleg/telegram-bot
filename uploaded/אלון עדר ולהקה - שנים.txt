@@ -1,83 +1,82 @@
 שנים
 אלון עדר ולהקה
 גולש
- קאפו בשריג 5
+
 
 פתיחה:
-‏Em C
+‏Em G G/ E G/ D Baug B7
 
-‏ F       Em
+‏ F/ Eb   Em
 נתפסתי ברשת
-‏ G  C  Ab     Am
-כי את מרגשת אותי
-‏     Dm    Am
+‏ G C C/ G Ab/ F#    Am
+כי את מרגשת אותי    
+‏Dm7b5      Am
 את שיר מתוחכם
-‏     F       C
+‏Am C B7/ F# C/ E
 העוגן בים שלנו
 
 מעבר:
-‏Em G Em Am C
+‏C Am Em G G/ E G/ D Baug B7
 
-‏  F        Em
+‏   F/ Eb   Em
 את לא מתייאשת
-‏   G  C  Ab     Am
-כן, את מתעקשת איתי
-‏     Dm    Am
+‏G C C/ G Ab/ F#      Am
+כן, את מתעקשת איתי   
+‏Dm7b5      Am
 כך דופק לדופק
-‏            B      C
+‏  Am C  B7/ F#    C/ E
 שוכבים על האופק שלנו
-‏ 
 
 מעבר:
-‏ CG  Em Am C Am
+‏C Am Em G G/ E G/ D G/ B
 
-‏     Em        Am
+‏    Em Bm7 D7 Am7
 שנים לא ראיתי טוב
-‏      Am       E
+‏D C Am      E7 E
 לימדת אותי לאהוב
-‏    D   C  G
-יופי, זה טוב
-‏   Em       Am
+‏D  Am C Gaug G
+יופי, זה טוב  
+‏ Em Bm7 D7 Am7
 מאה אחוז חשיפה
-‏      Am      E
+‏ D C Am    E7 E
 שנינו על העטיפה
-‏     C        G
+‏  Am   C Gaug G
 שנינו באותה שפה
-‏   D
-קרוב
-‏F        Em
+‏ B7 Baug/ D D/ E  D
+קרוב             
+‏   F/ Eb  Em
 את טעם וניל
-‏ G  C  Ab     Am
-את רחש הסליל שלי
-‏       Dm    Am
+‏G C C/ G Ab/ F#      Am
+את רחש הסליל שלי     
+‏Dm7b5        Am
 כך יום אחרי יום
-‏     C    D      C
+‏Am C  B7/ F#    C/ E
 לומדים ת'מקום שלנו
 
 מעבר:
-‏G Em Am C Am
+‏C Am Bbmaj7 Am G/ B C Baug/ Eb
 
-‏     Em        Am
+‏    Em Bm7 D7 Am7
 שנים לא ראיתי טוב
-‏      Am       E
+‏D C Am      E7 E
 לימדת אותי לאהוב
-‏    D   C  G
-יופי, זה טוב
-‏   Em       Am
+‏D  Am C Gaug G
+יופי, זה טוב  
+‏ Em Bm7 D7 Am7
 מאה אחוז חשיפה
-‏      Am      E
+‏ D C Am    E7 E
 שנינו על העטיפה
-‏     C        G
+ 
+‏  Am   C Gaug G
 שנינו באותה שפה
-‏   D
-קרוב
-‏ F        Em
+‏ B7 Baug/ D D/ E  D
+קרוב             
+‏    F/ Eb  Em
 נתפסתי עלייך
-‏   E C Bb     Am
-חיי הם חייך היום
-‏    Am    Dm7
-תוציאי שפתיים
-‏      Am    C
-תמיד ובינתיים
-
+‏E7 E C C/ G Bb/ Ab    Am
+חיי הם חייך היום      
+‏   Dm7b5    Am
+תוציאי שפתיים 
+‏  Am7 Bm7b5 C/ E
+תמיד ובינתיים  
 
