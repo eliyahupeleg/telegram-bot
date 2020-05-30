@@ -36,7 +36,6 @@ with open(f"{this_folder}//last.txt", "r") as f:
 		start = int(read)
 	else:
 		start = 0
-	print(type(start))
 	f.close()
 
 counter = 0
@@ -47,9 +46,9 @@ while True:
 			while True:
 				try:
 					if counter < start:
-						if counter % 10 != 0:
+						if counter % 20 != 0:
 							break
-						elif counter + 10 < start:		
+						elif counter + 20 < start:		
 							break
 						start = counter
 						print("starting in ", counter)
@@ -65,7 +64,6 @@ while True:
 						while get("https://api.ipify.org/").text == ip:
 							time.sleep(6)
 						browser.get(artist_link)
-						new = browser.execute_script(js_save_links)
 						next_page = browser.execute_script(js_check_next)
 
 

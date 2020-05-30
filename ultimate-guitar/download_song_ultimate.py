@@ -30,23 +30,26 @@ return(song)
 
 
 with open(f"{this_folder}/new_songs.txt", "r") as f:
-    song_links = f.read().split("\n")
+	song_links = f.read().split("\n")
 
 for song_link in song_links:
-    browser.get(song_link)
+	if song_link[32:35] == "pro":
+		continue
 
-    singer = browser.execute_script(js_get_singer)
-    chords = browser.execute_script(js_get_song_chords)
-    song = browser.execute_script(js_get_song_name)
+	browser.get(song_link)
 
-    fpath = f'{this_folder}/toUploadUltimate/{singer} - {song}.txt'
+	singer = browser.execute_script(js_get_singer)
+	chords = browser.execute_script(js_get_song_chords)
+	song = browser.execute_script(js_get_song_name)
 
-    with open(fpath, "x") as f:
-        f.write('\n'.join([song, singer, "גולש", "", chords]))
-        f.close()
+	fpath = f'{this_folder}/toUploadUltimate/{singer} - {song}.txt'
 
-    print("song wrote.")
-    print(song_link)
-    print(len(song_links), song_links.index(song_link))
+	with open(fpath, "x") as f:
+		f.write('\n'.join([song, singer, "גולש", "", chords]))
+		f.close()
+
+	print("song wrote.")
+	print(song_link)
+	print(len(song_links), song_links.index(song_link))
 
 browser.quit()
