@@ -39,7 +39,7 @@ for song_link in song_links:
     chords = browser.execute_script(js_get_song_chords)
     song = browser.execute_script(js_get_song_name)
 
-    fpath = f'{this_folder}/toUploadUltimate/{singer} - {song}.txt'
+    fpath = f'{this_folder}/toUpload/{singer} - {song}.txt'
     os.mknod(fpath)
 
     with open(fpath, "w+") as f:

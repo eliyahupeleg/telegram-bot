@@ -30,101 +30,72 @@ js_get_song_chords = '''
 song = document.getElementsByClassName("_3zygO")[0].textContent.slice(0, -1);
 return(song)
 '''
-
-songs_f = open(f"{this_folder}//all_songs.txt", "r+")
-songs_links = songs_f.read().split("\n")
-new_songs = []
-errors = []
-
-with open(f"{this_folder}//all_artists.txt", "r") as f:
-	artist_links = f.read().split("\n")
-	f.close()
-
-with open(f"{this_folder}//last.txt", "r") as f:
-	read = f.read()
-	if read:
-		start = int(read)
-	else:
-		start = 0
-	f.close()
+all_songs_f = open(f"{this_folder}//all_songs.txt", "r+")
+songs_links_f = open(f"{this_folder}//songs_links.txt", "r+")
+songs_links = songs_links_f.read().split("\n")
+downloaded_songs = []
 
 counter = 0
 while True:
-	try:
-		for artist_link in artist_links:
-			counter += 1
-			while True:
-				try:
-					if counter < start:
-						if counter % 20 != 0:
-							break
-						elif counter + 20 < start:		
-							break
-						start = counter
-						print("starting in ", counter)
+    try:
+        for new_song in songs_links:
+            counter += 1
+            while True:
+                try:
+                    browser.get(new_song)
 
+                    singer = browser.execute_script(js_get_singer)
+                    chords = browser.execute_script(js_get_song_chords)
+                    song = browser.execute_script(js_get_song_name)
 
-					browser.get(artist_link)
+                    fpath = f'{this_folder}/toUpload/{singer} - {song}.txt'
+                    os.mknod(fpath)
 
-					next_page = browser.execute_script(js_check_next)			
+                    if browser.title == "":
+                        urllib.request.urlopen(
+                            f"https://api.telegram.org/bot999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU/sendMessage?chat_id=386848836&text=400-ip")
+                        ip = get("https://api.ipify.org/").text
+                        while get("https://api.ipify.org/").text == ip:
+                            time.sleep(6)
+                        browser.get(new_song)
 
-					if browser.title == "":
-						urllib.request.urlopen(f"https://api.telegram.org/bot999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU/sendMessage?chat_id=386848836&text=400-ip")
-						ip = get("https://api.ipify.org/").text
-						while get("https://api.ipify.org/").text == ip:
-							time.sleep(6)
-						browser.get(artist_link)
-						next_page = browser.execute_script(js_check_next)
+                    with open(fpath, "w+") as f:
+                        f.write('\n'.join([song, singer, "גולש", "", "", "", chords]))
+                        f.close()
 
+                    print("song link: ", new_song)
+                    print("song name: ", song)
+                    al = len(songs_links)
+                    print(counter, "/", al)
+                    print("%.3f" % (100 * (counter / al)), "%")
+                    t0 = time.time()
 
-					new = browser.execute_script(js_save_links)[:-1].split('\n')
-					for song in new:
-						if song not in songs_links and song != '':
-							new_songs.append(song)
-						
-					
-					if next_page:
-						if next_page not in artist_links:
-							artist_links.append(next_page)				
-							with open(f"{this_folder}//all_artists.txt", "a") as f:
-								f.write('\n' + next_page)
-								f.close()
-							print("next: ", next_page)
+                    if counter % 20 == 0:
+                        songs = '\n'.join(map(str, downloaded_songs)) + '\n'
+                        print(songs)
+                        all_songs_f.write(songs)
+                        songs_links = []
+                        d = time.time() - t0
+                        print("\n\n\n\n\n\n wrote in: %.3f s. \n\n\n" % d)
 
-					print("artist: ", artist_link)
-					print("num of new: \n", len(new))
-					al = len(artist_links)
-					print(counter, "/", al)
-					print("%.3f" %(100*(counter/al)), "%")
-					t0 = time.time()
+                    else:
+                        downloaded_songs.append(new_song)
+                    break
+                except Exception as e:
+                    print(e, new_song)
+                    urllib.request.urlopen(
+                        f"https://api.telegram.org/bot999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU/sendMessage?chat_id=386848836&text=error\n{e}")
+                    print(e, '\n')
 
-					if counter % 20 == 0:
-						songs = '\n'.join(map(str, new_songs)) + '\n'
-						print(songs)
-						songs_f.write(songs)
-						new_songs = []
-						d = time.time() - t0
-						print ("\n\n\n\n\n\nwrote in: %.3f s. \n\n\n" % d)
-					with open(f"{this_folder}//last.txt", "w") as f:
-						f.write(str(counter))
-						f.close()
-					break
-				except Exception as e:
-					print(e, artist_link)
-					errors.append(artist_link)
-					urllib.request.urlopen(f"https://api.telegram.org/bot999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU/sendMessage?chat_id=386848836&text=error")			
-					print(e, '\n')
-				
-		browser.quit()
+        browser.quit()
 
+        fpath = f"{this_folder}/all_songs_errors.txt"
+        if not os.exist(fpath):
+            os.mknod(fpath)
 
-		fpath = f"{this_folder}/all_songs_errors.txt"
-		if not os.exist(fpath):
-			os.mknod(fpath)
-
-		with open(fpath, "a") as f:
-			f.write("\n".join(errors))
-			f.close()
-		break
-	except Exception as e:
-		print(e)
+        with open(fpath, "a") as f:
+            f.write("\n".join(errors))
+            f.close()
+        break
+    except Exception as e:
+        print(e)

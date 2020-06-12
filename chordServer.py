@@ -338,7 +338,7 @@ def build_message(files, context, update):
 
     if len_files > 1:
 
-        keyboard = list(map(replace_to_filename, files))
+        keyboard = sorted(list(map(replace_to_filename, files)))
 
         text = "בחר.."
         if len(files) > 179:
@@ -369,9 +369,7 @@ def build_message(files, context, update):
         send_data(data[3:], update, True, context)
 
 
-def send_data(data, update, notificate, context, keyboard=None):
-    if not keyboard:
-        keyboard = InlineKeyboardMarkup(default_keyboard)
+def send_data(data, update, notificate, context, keyboard=InlineKeyboardMarkup(default_keyboard)):
     song = {0: ""}
     counter = 0
 
@@ -533,13 +531,13 @@ def button(update, context):
     data = new_key(query.message.text.split('\n'), clicked)
 
     if clicked[1:] != "0.5":
-        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
-                                              message_id=update.callback_query.message.message_id,
-                                              reply_markup=InlineKeyboardMarkup(keyboard_half))
+        reply_keyboard = InlineKeyboardMarkup(keyboard_half)
+        send_data(data, query, False, context, reply_keyboard)
+        context.bot.delete_message(query.message.chat.id, query.message.message_id)
         return
+
     send_data(data, query, False, context)
     context.bot.delete_message(query.message.chat.id, query.message.message_id)
-
     # query.edit_message_text(text=song)
 
 
