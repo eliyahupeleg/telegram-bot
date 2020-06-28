@@ -6,6 +6,7 @@ import os
 import re
 import telegram
 
+from random import randrange
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
 
@@ -135,6 +136,10 @@ uploaded_list = glob.glob(f"{uploaded_path}/*")
 
 songs_list = []
 artists_list = []
+
+# one option keyboard, send me random song.
+
+random_keyboard = ReplyKeyboardMarkup([["שיר אקראי"]])
 
 # the "convert" keyboard that sends with every song that the bot sent.
 default_keyboard = [[InlineKeyboardButton("+", callback_data="+"), InlineKeyboardButton("-", callback_data="-")]]
@@ -351,7 +356,7 @@ def build_message(files, context, update):
                                   selective=True)
         return
 
-    print("sending song..\n\n")
+    print("sending song..\n\n", files)
     fpath = files[0]
     with open(fpath, "r") as f:
 
@@ -366,6 +371,7 @@ def build_message(files, context, update):
         intro = intro.replace("capo", data[3])
         data[3] = intro
         data.append(endB)
+        print("send data...")
         send_data(data[3:], update, True, context)
 
 
@@ -380,8 +386,7 @@ def send_data(data, update, notificate, context, keyboard=InlineKeyboardMarkup(d
             song[counter] = ""
         song[counter] += f"\n{j}"
 
-    reply_markup = telegram.ReplyKeyboardRemove()
-    update.message.reply_text(text="Wait..", reply_markup=reply_markup)
+    update.message.reply_text(text="Wait..", reply_markup=random_keyboard, resize_keyboard=True)
     context.bot.delete_message(update.message.chat_id, update.message.message_id + 1)
 
     reply_markup = ReplyKeyboardRemove()
@@ -397,6 +402,9 @@ def send_data(data, update, notificate, context, keyboard=InlineKeyboardMarkup(d
         update.message.reply_text(song[counter].replace(u'\xa0', u' '), reply_markup=reply_markup,
                                   disable_notification=notificate)
         counter += 1
+
+    update.message.reply_text(".", reply_markup=random_keyboard, disable_notification=notificate, resize_keyboard=True)
+    context.bot.delete_message(update.message.chat_id, update.message.message_id + len(song)-2)
 
 
 def message_handler(update, context):
@@ -416,6 +424,11 @@ def message_handler(update, context):
                 return
             else:
                 return
+
+    if message == "שיר אקראי":
+        send_random(update, context)
+        return
+        return
 
     if "מה יש" in message:
         send_data(songs_list + artists_list, update, True, context, ReplyKeyboardRemove())
@@ -459,7 +472,9 @@ def search_songs(update, context):
     if data == "חזור":
         print("חזור")
         update.message.reply_text("חוזר..",
-                                  reply_markup=ReplyKeyboardRemove(selective=True))
+                                  reply_markup=random_keyboard, resize_keyboard=True,
+                                  one_time_keyboard=True,
+                                  selective=True)
         return
 
     files = []
@@ -503,17 +518,27 @@ def start(update, context):
         print(users)
 
     if len(update.message.text[7:]) != 9:
-        update.message.reply_text(" היי, ברוכים הבאים לרובוט האקורדים של 🎶‏ISRACHORD🎶.\nשילחו שם  של שיר או אמן, וקבלו את האקורדים. כן, כזה פשוט..\nשלחו שם של אקורד (למשל A#m) כדי לקבל איצבוע לגיטרה..\n\nלדיווח:\n@ADtmr")
+        update.message.reply_text(
+            " היי, ברוכים הבאים לרובוט האקורדים של 🎶‏ISRACHORD🎶.\nשילחו שם  של שיר או אמן, וקבלו את האקורדים. כן, כזה פשוט..\nשלחו שם של אקורד (למשל A#m) כדי לקבל איצבוע לגיטרה..\n\nלדיווח:\n@ADtmr",
+            reply_markup=random_keyboard, resize_keyboard=True,
+            one_time_keyboard=True,
+            selective=True)
         return
     time_hash = update.message.text[7:]
     flags[time_hash] = True
     by_hash(time_hash, context, update)
 
 
+def send_random(update, context):
+    song_name = uploaded_list[randrange(len(uploaded_list))]
+    build_message([song_name], context, update)
+
+
 def button(update, context):
     query = update.callback_query
     clicked = query.data
     print(clicked)
+
     if clicked == "+":
         print("+")
         context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,

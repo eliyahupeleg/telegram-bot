@@ -31,7 +31,7 @@ song = document.getElementsByClassName("_3zygO")[0].textContent.slice(0, -1);
 return(song)
 '''
 all_songs_f = open(f"{this_folder}//all_songs.txt", "r+")
-songs_links_f = open(f"{this_folder}//songs_links.txt", "r+")
+songs_links_f = open(f"{this_folder}//new_songs.txt", "r+")
 songs_links = songs_links_f.read().split("\n")
 downloaded_songs = []
 
@@ -39,15 +39,17 @@ counter = 0
 while True:
     try:
         for new_song in songs_links:
+            print("inloop")
             counter += 1
             while True:
                 try:
+                    print("getting ", new_song)
                     browser.get(new_song)
-
+                    print(browser.title)
                     singer = browser.execute_script(js_get_singer)
                     chords = browser.execute_script(js_get_song_chords)
                     song = browser.execute_script(js_get_song_name)
-
+                    print(song, "songs", singer)
                     fpath = f'{this_folder}/toUpload/{singer} - {song}.txt'
                     os.mknod(fpath)
 
