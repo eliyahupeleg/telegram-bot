@@ -503,8 +503,7 @@ def start(update, context):
         print(users)
 
     if len(update.message.text[7:]) != 9:
-        update.message.reply_text(
-            "היי, ברוכים הבאים לרובוט האקורדים של ‏@tab4us - ISRACHORD.\nשילחו את השם המלא של השיר כדי לקבל אותו, או את של הלהקה לפתיחת רשימת השירים שלהם..\nלדיווח:\n@ADtmr")
+        update.message.reply_text(" היי, ברוכים הבאים לרובוט האקורדים של 🎶‏ISRACHORD🎶.\nשילחו שם  של שיר או אמן, וקבלו את האקורדים. כן, כזה פשוט..\nשלחו שם של אקורד (למשל A#m) כדי לקבל איצבוע לגיטרה..\n\nלדיווח:\n@ADtmr")
         return
     time_hash = update.message.text[7:]
     flags[time_hash] = True
