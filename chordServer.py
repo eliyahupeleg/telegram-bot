@@ -1,12 +1,13 @@
-import threading
-import time
+import operator                             #Importing operator module
 import glob
 import hashlib
+import json
 import os
 import re
-import telegram
-
+import threading
+import time
 from random import randrange
+
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
 
@@ -157,6 +158,8 @@ keyboard_plus = [[InlineKeyboardButton("+1", callback_data='+1'),
 # the "convert" keyboard that sends when the key converted by round number (1, 2, 3, -3, -2, -1)
 keyboard_half = [[InlineKeyboardButton("+0.5", callback_data='+0.5'),
                   InlineKeyboardButton("-0.5", callback_data='-0.5')]]
+
+statistics = json.load(open(f'{this_folder}/statistics.json'))
 
 
 # if the name of the song or the artist is not UPPER, that mean that it should be in the format title().
@@ -404,18 +407,20 @@ def send_data(data, update, notificate, context, keyboard=InlineKeyboardMarkup(d
         counter += 1
 
     update.message.reply_text(".", reply_markup=random_keyboard, disable_notification=notificate, resize_keyboard=True)
-    context.bot.delete_message(update.message.chat_id, update.message.message_id + len(song)-2)
+    context.bot.delete_message(update.message.chat_id, update.message.message_id + len(song) - 2)
 
 
 def message_handler(update, context):
+
+    global statistics
     message = update.message.text.replace("/", "_").replace("A#", "Bb") \
         .replace("Db", "C#").replace("D#", "Eb").replace("Gb", "F#").replace("G#", "Ab")
-
+    chat_id = update.message.chat_id
     if str(update.message.from_user.id) not in users:
         users.append(str(update.message.from_user.id))
         write_users()
 
-    if update.message.chat_id == -1001126502216:
+    if chat_id == -1001126502216:
         if "אקורד " in message:
             message = message.replace("אקורד ", "")
         else:
@@ -424,28 +429,32 @@ def message_handler(update, context):
                 return
             else:
                 return
+    if message == "statistics" and chat_id == 386848836:
+        statistics = sorted(statistics.items(), key=operator.itemgetter(1), reverse=True)
+        print(statistics)
+        send_data(str(statistics).replace("\n", ""), update, True, context)
+        return
 
     if message == "שיר אקראי":
         send_random(update, context)
         return
-        return
 
     if "מה יש" in message:
-        send_data(songs_list + artists_list, update, True, context, ReplyKeyboardRemove())
+        send_data(songs_list + artists_list, update, True, context)
         return
 
     if "רשימת שירים" in message:
         result = list(filter(lambda x: x.startswith(message.replace("רשימת שירים ", "")), songs_list))
         if not result:
             result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
-        send_data(result, update, True, context, ReplyKeyboardRemove())
+        send_data(result, update, True, context)
         return
 
     if "רשימת אמנים" in message:
         result = list(filter(lambda x: x.startswith(message.replace("רשימת אמנים ", "")), songs_list))
         if not result:
             result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
-        send_data(result, update, True, context, ReplyKeyboardRemove())
+        send_data(result, update, True, context)
         return
 
     if message in chords_library:
@@ -453,7 +462,7 @@ def message_handler(update, context):
         reply_markup = InlineKeyboardMarkup(default_keyboard)
         # לתקן את הקריאה חוזרת להמרת אקורד ושליחת תמונה חדשה
         context.bot.send_photo(heigth=10, caption=message,
-                               chat_id=update.message.chat_id,
+                               chat_id=chat_id,
                                photo=open(f'{this_folder}/chords/{message}.png', 'rb'))
         print("chord pic sent")
         return
@@ -463,6 +472,13 @@ def message_handler(update, context):
 
 def search_songs(update, context):
     data = update.message.text
+    try:
+        statistics[data] += 1
+    except KeyError:
+        statistics[data] = 1
+    finally:
+        json.dump(statistics, open(f'{this_folder}/statistics.json', 'w'))
+
     print(update.message.chat_id)
     print(data)
     if update.message.chat_id == -1001126502216:
