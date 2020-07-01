@@ -1,4 +1,5 @@
-import operator                             #Importing operator module
+import pickle
+import operator
 import glob
 import hashlib
 import json
@@ -159,7 +160,18 @@ keyboard_plus = [[InlineKeyboardButton("+1", callback_data='+1'),
 keyboard_half = [[InlineKeyboardButton("+0.5", callback_data='+0.5'),
                   InlineKeyboardButton("-0.5", callback_data='-0.5')]]
 
-statistics = json.load(open(f'{this_folder}/statistics.json'))
+statistics_path = f'{this_folder}/statistics.pkl'
+
+try:
+    if os.path.getsize(statistics_path) == 0 or not os.path.exists(statistics_path):
+        with open(statistics_path, 'wb') as fp:
+            pickle.dump({}, fp, protocol=pickle.HIGHEST_PROTOCOL)
+except FileNotFoundError:
+    with open(statistics_path, 'wb') as fp:
+        pickle.dump({}, fp, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open(statistics_path, 'rb') as fp:
+    statistics = pickle.load(fp)
 
 
 # if the name of the song or the artist is not UPPER, that mean that it should be in the format title().
@@ -406,7 +418,7 @@ def send_data(data, update, notificate, context, keyboard=InlineKeyboardMarkup(d
                                   disable_notification=notificate)
         counter += 1
 
-    update.message.reply_text(".", reply_markup=random_keyboard, disable_notification=notificate, resize_keyboard=True)
+    update.message.reply_text(u'\u202B', reply_markup=random_keyboard, disable_notification=notificate, resize_keyboard=True)
     context.bot.delete_message(update.message.chat_id, update.message.message_id + len(song) - 2)
 
 
@@ -471,13 +483,19 @@ def message_handler(update, context):
 
 
 def search_songs(update, context):
+
     data = update.message.text
+    print(data)
     try:
+        print(type(statistics))
         statistics[data] += 1
+
     except KeyError:
         statistics[data] = 1
+
     finally:
-        json.dump(statistics, open(f'{this_folder}/statistics.json', 'w'))
+        with open(statistics_path, 'wb') as fp:
+            pickle.dump(statistics, fp)
 
     print(update.message.chat_id)
     print(data)
