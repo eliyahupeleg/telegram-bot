@@ -429,7 +429,6 @@ def send_data(data, update, notificate, context, keyboard=InlineKeyboardMarkup(d
 def message_handler(update, context):
 
     global statistics
-
     message = update.message.text.replace("/", "_").replace("A#", "Bb") \
         .replace("Db", "C#").replace("D#", "Eb").replace("Gb", "F#").replace("G#", "Ab")
 
@@ -449,9 +448,9 @@ def message_handler(update, context):
                 return
 
     # reporting the statistics to ADtmr by telegram message.
-    if message == "st" and chat_id == 386848836:
+    if message.title() == "St" and chat_id == 386848836:
 
-        # OrderedDicd cause the sorted returns list.
+        # Ordered Dicd cause the sorted returns a list and not a dict.
         statistics = collections.OrderedDict(sorted(statistics.items(), key=lambda kv: kv[1]))
 
         # file= because the "print" printing well, but the "send" adding \n between the chars.
@@ -459,7 +458,7 @@ def message_handler(update, context):
         print(statistics, file=strStream)
 
         # not sending by "send_data" cause it is only text.
-        update.message.reply_text(strStream.getvalue().replace("OrderedDict([", "").replace("])", ""))
+        update.message.reply_text(strStream.getvalue().replace("OrderedDict([", "").replace("])", "").replace("), (", ")\n ("))
         return
 
     # sending random song.
@@ -488,11 +487,10 @@ def message_handler(update, context):
 
     if message in chords_library:
 
-        reply_markup = InlineKeyboardMarkup(default_keyboard)
         # לתקן את הקריאה חוזרת להמרת אקורד ושליחת תמונה חדשה
         context.bot.send_photo(heigth=10, caption=message,
                                chat_id=chat_id,
-                               photo=open(f'{this_folder}/chords/{message}.png', 'rb'))
+                               photo=open(f'{this_folder}/chords/{message}.png', 'rb'), reply_markup=random_keyboard)
         print("chord pic sent")
         return
     else:
@@ -530,6 +528,7 @@ def search_songs(update, context):
 
     files = []
     spilt = data.split(' - ')
+
     # if the singer name is UPPER
     tmp = list(map(is_upper, spilt))
     data = " - ".join(tmp)

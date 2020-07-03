@@ -180,7 +180,7 @@ while True:
         break
 
     # else, new update coming,
-    print("update coming..")
+    print(int(num) - int(lst), " updates coming..")
 
     # removing the downloaded songs from the list.
     num = num - (num - int(lst))
