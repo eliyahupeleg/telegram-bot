@@ -1,4 +1,5 @@
 import collections
+import io
 import pickle
 import operator
 import glob
@@ -167,14 +168,14 @@ try:
     if os.path.getsize(statistics_path) == 0 or not os.path.exists(statistics_path):
         with open(statistics_path, 'wb') as fp:
             pickle.dump({}, fp, protocol=pickle.HIGHEST_PROTOCOL)
-            statistics = {}
+            statistics = collections.OrderedDict()
     else:
         with open(statistics_path, 'rb') as fp:
             statistics = pickle.load(fp)
 except FileNotFoundError:
     with open(statistics_path, 'wb') as fp:
         pickle.dump({}, fp, protocol=pickle.HIGHEST_PROTOCOL)
-        statistics = {}
+        statistics = collections.OrderedDict()
 
 
 # if the name of the song or the artist is not UPPER, that mean that it should be in the format title().
@@ -428,8 +429,10 @@ def send_data(data, update, notificate, context, keyboard=InlineKeyboardMarkup(d
 def message_handler(update, context):
 
     global statistics
+
     message = update.message.text.replace("/", "_").replace("A#", "Bb") \
         .replace("Db", "C#").replace("D#", "Eb").replace("Gb", "F#").replace("G#", "Ab")
+
     chat_id = update.message.chat_id
     if str(update.message.from_user.id) not in users:
         users.append(str(update.message.from_user.id))
@@ -444,17 +447,27 @@ def message_handler(update, context):
                 return
             else:
                 return
-    if message == "statistics" and chat_id == 386848836:
+
+    # reporting the statistics to ADtmr by telegram message.
+    if message == "st" and chat_id == 386848836:
+
+        # OrderedDicd cause the sorted returns list.
         statistics = collections.OrderedDict(sorted(statistics.items(), key=lambda kv: kv[1]))
 
-        print(statistics)
-        send_data(str(statistics).replace("\n", ""), update, True, context)
+        # file= because the "print" printing well, but the "send" adding \n between the chars.
+        strStream = io.StringIO()
+        print(statistics, file=strStream)
+
+        # not sending by "send_data" cause it is only text.
+        update.message.reply_text(strStream.getvalue().replace("OrderedDict([", "").replace("])", ""))
         return
 
+    # sending random song.
     if message == "שיר אקראי":
         send_random(update, context)
         return
 
+    # sending full list of what the bot have.
     if "מה יש" in message:
         send_data(songs_list + artists_list, update, True, context)
         return
