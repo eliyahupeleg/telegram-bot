@@ -1,3 +1,4 @@
+import collections
 import pickle
 import operator
 import glob
@@ -166,12 +167,14 @@ try:
     if os.path.getsize(statistics_path) == 0 or not os.path.exists(statistics_path):
         with open(statistics_path, 'wb') as fp:
             pickle.dump({}, fp, protocol=pickle.HIGHEST_PROTOCOL)
+            statistics = {}
+    else:
+        with open(statistics_path, 'rb') as fp:
+            statistics = pickle.load(fp)
 except FileNotFoundError:
     with open(statistics_path, 'wb') as fp:
         pickle.dump({}, fp, protocol=pickle.HIGHEST_PROTOCOL)
-
-with open(statistics_path, 'rb') as fp:
-    statistics = pickle.load(fp)
+        statistics = {}
 
 
 # if the name of the song or the artist is not UPPER, that mean that it should be in the format title().
@@ -442,7 +445,8 @@ def message_handler(update, context):
             else:
                 return
     if message == "statistics" and chat_id == 386848836:
-        statistics = sorted(statistics.items(), key=operator.itemgetter(1), reverse=True)
+        statistics = collections.OrderedDict(sorted(statistics.items(), key=lambda kv: kv[1]))
+
         print(statistics)
         send_data(str(statistics).replace("\n", ""), update, True, context)
         return
