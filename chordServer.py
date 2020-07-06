@@ -461,10 +461,9 @@ def message_handler(update, context):
             result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
         send_data(result, update, True, context)
         return
+
     chord = message.replace("_", "_ ").replace("#", "# P").title().replace("_ ", "_").replace("# P", "#")
-    print("chord", chord)
     if chord in chords_library:
-        print("chord ", f'{this_folder}/chords/{chord}.png')
         # לתקן את הקריאה חוזרת להמרת אקורד ושליחת תמונה חדשה
         context.bot.send_photo(heigth=10, caption=message.replace("_", "/"),
                                chat_id=chat_id,
