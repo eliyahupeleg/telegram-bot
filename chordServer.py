@@ -1,11 +1,8 @@
 import collections
-import io
-import pickle
-import operator
 import glob
 import hashlib
-import json
 import os
+import pickle
 import re
 import threading
 import time
@@ -425,18 +422,25 @@ def message_handler(update, context):
                 return
 
     # reporting the statistics to ADtmr by telegram message.
-    if message.title() == "St" and chat_id == 386848836:
+    if chat_id == 386848836:
+        if message.title() == "St":
 
-        # Ordered Dicd cause the sorted returns a list and not a dict.
-        statistics = collections.OrderedDict(sorted(statistics.items(), key=lambda kv: kv[1]))
+            # Ordered Dicd cause the sorted returns a list and not a dict.
+            statistics = collections.OrderedDict(sorted(statistics.items(), key=lambda kv: kv[1]))
+            print("statistics:  ", statistics)
+            # file= because the "print" printing well, but the "send" adding \n between str(s.getvalue())str(s.getvalue())n the chars.
 
-        # file= because the "print" printing well, but the "send" adding \n between the chars.
-        strStream = io.StringIO()
-        print(statistics, file=strStream)
+            # not sending by "send_data" cause it is only text.
+            # update.message.reply_text(strStream.getvalue().replace("OrderedDict([", "").replace("])", "").replace("), (", ")\n ("))
+            update.message.reply_text(str(statistics))
+            return
 
-        # not sending by "send_data" cause it is only text.
-        update.message.reply_text(strStream.getvalue().replace("OrderedDict([", "").replace("])", "").replace("), (", ")\n ("))
-        return
+        if message.title() == "C U":
+            update.message.reply_text(str(len(users)))
+            return
+        if message.title() == "Usr":
+            update.message.reply_text("\n".join(users))
+            return
 
     # sending random song.
     if message == "שיר אקראי":
