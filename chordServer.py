@@ -111,12 +111,15 @@ to_remove_lambda = lambda m: to_remove[re.escape(m.group(0))]
 users = []
 old_users = []
 
-# saved: the saved messages, for users that came form the group.
+# saved: the saved messages, for users that came form the group with button "start".
 saved = {}
+
 # flags- is the link in the group used?
 flags = {}
+
 # the group messages ids- request and response. cleaning the group from spam.
 to_delete = {}
+
 # flag. when the language is hebrew, when converting message needed to move the "#" to the start of the line.
 HEBREW = False
 
@@ -389,10 +392,10 @@ def build_message(files, context, update):
         data[3] = intro
         data.append(endB)
         print("send data...")
-        send_data(data[3:], update, True, context)
+        send_data(data[3:], update, context, True)
 
 
-def send_data(data, update, notificate, context, keyboard=random_keyboard):
+def send_data(data, update, context, is_song=False, keyboard=InlineKeyboardMarkup(default_keyboard)):
     song = {0: ""}
     counter = 0
 
@@ -401,26 +404,27 @@ def send_data(data, update, notificate, context, keyboard=random_keyboard):
         if len(test) >= 4096:
             counter += 1
             song[counter] = ""
-        song[counter] += f"\n{j}"
-
-    update.message.reply_text(text="Wait..", reply_markup=random_keyboard, resize_keyboard=True)
-    context.bot.delete_message(update.message.chat_id, update.message.message_id + 1)
-
-    reply_markup = ReplyKeyboardRemove()
+        if is_song:
+            song[counter] += f"\n{j}"
+        else:
+            song[counter] += f"{j}"
 
     counter = 0
     for _ in song:
         if counter + 1 == len(song):
             reply_markup = keyboard
+        else:
+            reply_markup = ReplyKeyboardRemove()
 
         if update.message.chat_id == -1001126502216:
             reply_markup = ReplyKeyboardRemove()
 
-        update.message.reply_text(song[counter].replace(u'\xa0', u' '), reply_markup=reply_markup,
-                                  disable_notification=notificate)
+        update.message.reply_text(song[counter].replace(u'\xa0', u' '), reply_markup=reply_markup)
         counter += 1
-    update.message.reply_text(u'ִ ', reply_markup=random_keyboard, disable_notification=notificate,
+
+    update.message.reply_text(".", reply_markup=random_keyboard,
                               resize_keyboard=True)
+
     context.bot.delete_message(update.message.chat_id, update.message.message_id + len(song) - 2)
 
 
@@ -446,17 +450,22 @@ def message_handler(update, context):
 
     # reporting the statistics to ADtmr by telegram message.
     if chat_id == 386848836:
+
         if message.title() == "St":
             # Ordered Dicd cause the sorted returns a list and not a dict.
             statistics = collections.OrderedDict(sorted(statistics.items(), key=lambda kv: kv[1]))
 
             # file= because the "print" printing well, but the "send" adding \n between str(s.getvalue())str(s.getvalue())n the chars.
             strStream = io.StringIO()
-            print("", file=strStream)
-            send_data(strStream.getvalue().replace("OrderedDict([", "").replace("])", "").replace("), (", ")\n ("), update, context)
+            print(statistics.items(), file=strStream)
+            send_data(
+                strStream.getvalue().replace("OrderedDict([", "").replace("])", "").replace("), (", "\n (").replace(
+                    "',", " - ").replace("('", ""),
+                update, context, False)
+
             return
 
-        if message.title() == "C U":
+        if message.title() == "Cu":
             update.message.reply_text(str(len(users)))
             return
 
@@ -471,21 +480,21 @@ def message_handler(update, context):
 
     # sending full list of what the bot have.
     if "מה יש" in message:
-        send_data(songs_list + artists_list, update, True, context)
+        send_data(songs_list + artists_list, update, context)
         return
 
     if "רשימת שירים" in message:
         result = list(filter(lambda x: x.startswith(message.replace("רשימת שירים ", "")), songs_list))
         if not result:
             result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
-        send_data(result, update, True, context)
+        send_data(result, update, context)
         return
 
     if "רשימת אמנים" in message:
         result = list(filter(lambda x: x.startswith(message.replace("רשימת אמנים ", "")), songs_list))
         if not result:
             result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
-        send_data(result, update, True, context)
+        send_data(result, update, context)
         return
 
     chord = message.replace("_", "_ ").replace("#", "# P").title().replace("_ ", "_").replace("# P", "#")
@@ -503,23 +512,25 @@ def message_handler(update, context):
 def search_songs(update, context):
     data = update.message.text
     print(data)
-    try:
-        print(type(statistics))
-        statistics[data] += 1
-
-    except KeyError:
-        statistics[data] = 1
-
-    finally:
-        with open(statistics_path, 'wb') as fp:
-            pickle.dump(statistics, fp)
-
     print(update.message.chat_id)
     print(data)
     if update.message.chat_id == -1001126502216:
         data = data.replace("?", "")
         data = data.replace("לשיר ", "ל")
         data = data[data.index(" ל") + 2:]
+
+    else:
+        try:
+            print(type(statistics))
+            statistics[data] += 1
+
+        except KeyError:
+            statistics[data] = 1
+
+        finally:
+            with open(statistics_path, 'wb') as fp:
+                pickle.dump(statistics, fp)
+
     if data == "חזור":
         print("חזור")
         update.message.reply_text("חוזר..",
@@ -608,13 +619,12 @@ def button(update, context):
 
     if clicked[1:] != "0.5":
         reply_keyboard = InlineKeyboardMarkup(keyboard_half)
-        send_data(data, query, False, context, reply_keyboard)
+        send_data(data, query, context, True, reply_keyboard)
         context.bot.delete_message(query.message.chat.id, query.message.message_id)
         return
 
-    send_data(data, query, False, context)
+    send_data(data, query, context, True)
     context.bot.delete_message(query.message.chat.id, query.message.message_id)
-    # query.edit_message_text(text=song)
 
 
 def main():
