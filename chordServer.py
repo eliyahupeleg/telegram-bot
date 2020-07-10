@@ -1,6 +1,7 @@
 import collections
 import glob
 import hashlib
+import io
 import os
 import pickle
 import re
@@ -13,7 +14,30 @@ from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, Call
 
 # using server and local python- don't need to change the locations of the files all the time.
 this_folder = "/".join(os.path.realpath(__file__).split("/")[:-1])
-chords_library = ["A" , "A5" , "A6" , "A7" , "A9" , "A_Ab" , "A_B" , "A_Bb" , "A_C#" , "A_C" , "A_D" , "A_E" , "A_Eb" , "A_F#" , "A_F" , "A_G" , "Aadd9" , "Aaug" , "Ab" , "Ab5" , "Ab6" , "Ab7" , "Ab9" , "Ab_A" , "Ab_Bb" , "Ab_C#" , "Ab_C" , "Ab_Eb" , "Ab_F#" , "Ab_G" , "Abadd9" , "Abaug" , "Abdim" , "Abdim7" , "Abm" , "Abm7" , "Abm7b5" , "Abm9" , "Abmaj7" , "Absus4" , "Adim" , "Adim7" , "Am" , "Am7" , "Am7b5" , "Am9" , "Am_Ab" , "Am_B" , "Am_Bb" , "Am_C" , "Am_D" , "Am_E" , "Am_Eb" , "Am_F#" , "Am_F" , "Am_G" , "Amaj7" , "Ammaj7" , "Asus4" , "B" , "B5_" , "B6" , "B7" , "B9_2" , "B_A" , "B_Ab" , "Badd9" , "Baug" , "Bb" , "Bb5" , "Bb6" , "Bb7" , "Bb9" , "Bb9_2" , "Bb_A" , "Bb_Ab" , "Bb_B" , "Bb_Eb" , "Bbadd9" , "Bbaug" , "Bbdim" , "Bbdim7" , "Bbm" , "Bbm7" , "Bbm7b5" , "Bbm9" , "Bbmaj7" , "Bbsus4" , "Bdim" , "Bdim7" , "Bm" , "Bm7" , "Bm7b5" , "Bm9" , "Bm_A" , "Bm_Ab" , "Bm_Bb" , "Bm_C#" , "Bm_C" , "Bm_F#" , "Bmaj7" , "Bsus4" , "C#" , "C#5" , "C#6" , "C#7" , "C#9_2" , "C#add9" , "C#aug" , "C#dim" , "C#dim7" , "C#m" , "C#m7" , "C#m7b5" , "C#m9" , "C#maj7" , "C#mmaj7" , "C#sus4" , "C" , "C5" , "C6" , "C7" , "C9_2" , "C_A" , "C_B" , "C_Bb" , "C_C#" , "C_G" , "Cadd9" , "Caug" , "Cdim" , "Cdim7" , "Cm" , "Cm7" , "Cm7b5" , "Cm9" , "Cmaj7" , "Csus4" , "D" , "D5" , "D6" , "D7" , "D9" , "D_A" , "D_B" , "D_Bb" , "D_C#" , "D_C" , "D_F#" , "Dadd9" , "Daug" , "Ddim" , "Ddim7" , "Dm" , "Dm7" , "Dm7b5" , "Dm9" , "Dm_A" , "Dm_B" , "Dm_C" , "Dmaj7" , "Dsus4" , "E" , "E5" , "E6" , "E7" , "E9" , "E_A" , "E_Ab" , "E_B" , "E_Bb" , "E_C#" , "E_C" , "E_D" , "E_Eb" , "E_F#" , "E_F" , "E_G" , "Eadd9" , "Eaug" , "Eb" , "Eb5" , "Eb6" , "Eb7" , "Eb9" , "Eb9_2" , "Ebadd9" , "Ebaug" , "Ebdim" , "Ebdim7" , "Ebm" , "Ebm7" , "Ebm7b5" , "Ebm9" , "Ebmaj7" , "Ebsus4" , "Edim" , "Edim7" , "Em" , "Em7" , "Em7b5" , "Em9" , "Em_A" , "Em_Ab" , "Em_B" , "Em_Bb" , "Em_C#" , "Em_C" , "Em_D" , "Em_Eb" , "Em_F#" , "Em_F" , "Em_G" , "Emaj7" , "Esus4" , "F#" , "F#5" , "F#6" , "F#7" , "F#9" , "F#_Ab" , "F#_B" , "F#_Bb" , "F#_C#" , "F#_E" , "F#_F" , "F#_G" , "F#add9" , "F#aug" , "F#dim" , "F#dim7" , "F#m" , "F#m7" , "F#m7b5" , "F#m9" , "F#m_E" , "F#m_F" , "F#m_G" , "F#maj7" , "F#sus4" , "F" , "F5" , "F6" , "F7" , "F9_2" , "F_A" , "F_Bb" , "F_C" , "F_D" , "F_E" , "F_Eb" , "F_F#" , "F_G" , "Fadd9" , "Faug" , "Fdim" , "Fdim7" , "Fm" , "Fm7" , "Fm7b5" , "Fm9" , "Fm_Ab" , "Fm_D" , "Fm_E" , "Fm_Eb" , "Fm_F#" , "Fmaj7" , "Fsus4" , "G" , "G5" , "G6" , "G7" , "G9" , "G_C" , "G_D" , "G_E" , "G_F#" , "G_F" , "Gadd9" , "Gaug" , "Gdim" , "Gdim7" , "Gm" , "Gm7" , "Gm7b5" , "Gm9" , "Gm_Ab" , "Gm_D" , "Gm_E" , "Gm_F" , "Gmaj7" , "Gsus4"]
+chords_library = ["A", "A5", "A6", "A7", "A9", "A_Ab", "A_B", "A_Bb", "A_C#", "A_C", "A_D", "A_E", "A_Eb", "A_F#",
+                  "A_F", "A_G", "Aadd9", "Aaug", "Ab", "Ab5", "Ab6", "Ab7", "Ab9", "Ab_A", "Ab_Bb", "Ab_C#", "Ab_C",
+                  "Ab_Eb", "Ab_F#", "Ab_G", "Abadd9", "Abaug", "Abdim", "Abdim7", "Abm", "Abm7", "Abm7b5", "Abm9",
+                  "Abmaj7", "Absus4", "Adim", "Adim7", "Am", "Am7", "Am7b5", "Am9", "Am_Ab", "Am_B", "Am_Bb", "Am_C",
+                  "Am_D", "Am_E", "Am_Eb", "Am_F#", "Am_F", "Am_G", "Amaj7", "Ammaj7", "Asus4", "B", "B5_", "B6", "B7",
+                  "B9_2", "B_A", "B_Ab", "Badd9", "Baug", "Bb", "Bb5", "Bb6", "Bb7", "Bb9", "Bb9_2", "Bb_A", "Bb_Ab",
+                  "Bb_B", "Bb_Eb", "Bbadd9", "Bbaug", "Bbdim", "Bbdim7", "Bbm", "Bbm7", "Bbm7b5", "Bbm9", "Bbmaj7",
+                  "Bbsus4", "Bdim", "Bdim7", "Bm", "Bm7", "Bm7b5", "Bm9", "Bm_A", "Bm_Ab", "Bm_Bb", "Bm_C#", "Bm_C",
+                  "Bm_F#", "Bmaj7", "Bsus4", "C#", "C#5", "C#6", "C#7", "C#9_2", "C#add9", "C#aug", "C#dim", "C#dim7",
+                  "C#m", "C#m7", "C#m7b5", "C#m9", "C#maj7", "C#mmaj7", "C#sus4", "C", "C5", "C6", "C7", "C9_2", "C_A",
+                  "C_B", "C_Bb", "C_C#", "C_G", "Cadd9", "Caug", "Cdim", "Cdim7", "Cm", "Cm7", "Cm7b5", "Cm9", "Cmaj7",
+                  "Csus4", "D", "D5", "D6", "D7", "D9", "D_A", "D_B", "D_Bb", "D_C#", "D_C", "D_F#", "Dadd9", "Daug",
+                  "Ddim", "Ddim7", "Dm", "Dm7", "Dm7b5", "Dm9", "Dm_A", "Dm_B", "Dm_C", "Dmaj7", "Dsus4", "E", "E5",
+                  "E6", "E7", "E9", "E_A", "E_Ab", "E_B", "E_Bb", "E_C#", "E_C", "E_D", "E_Eb", "E_F#", "E_F", "E_G",
+                  "Eadd9", "Eaug", "Eb", "Eb5", "Eb6", "Eb7", "Eb9", "Eb9_2", "Ebadd9", "Ebaug", "Ebdim", "Ebdim7",
+                  "Ebm", "Ebm7", "Ebm7b5", "Ebm9", "Ebmaj7", "Ebsus4", "Edim", "Edim7", "Em", "Em7", "Em7b5", "Em9",
+                  "Em_A", "Em_Ab", "Em_B", "Em_Bb", "Em_C#", "Em_C", "Em_D", "Em_Eb", "Em_F#", "Em_F", "Em_G", "Emaj7",
+                  "Esus4", "F#", "F#5", "F#6", "F#7", "F#9", "F#_Ab", "F#_B", "F#_Bb", "F#_C#", "F#_E", "F#_F", "F#_G",
+                  "F#add9", "F#aug", "F#dim", "F#dim7", "F#m", "F#m7", "F#m7b5", "F#m9", "F#m_E", "F#m_F", "F#m_G",
+                  "F#maj7", "F#sus4", "F", "F5", "F6", "F7", "F9_2", "F_A", "F_Bb", "F_C", "F_D", "F_E", "F_Eb", "F_F#",
+                  "F_G", "Fadd9", "Faug", "Fdim", "Fdim7", "Fm", "Fm7", "Fm7b5", "Fm9", "Fm_Ab", "Fm_D", "Fm_E",
+                  "Fm_Eb", "Fm_F#", "Fmaj7", "Fsus4", "G", "G5", "G6", "G7", "G9", "G_C", "G_D", "G_E", "G_F#", "G_F",
+                  "Gadd9", "Gaug", "Gdim", "Gdim7", "Gm", "Gm7", "Gm7b5", "Gm9", "Gm_Ab", "Gm_D", "Gm_E", "Gm_F",
+                  "Gmaj7", "Gsus4"]
 # using for the convert. one
 levels = [["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"],
           ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"]]
@@ -368,7 +392,7 @@ def build_message(files, context, update):
         send_data(data[3:], update, True, context)
 
 
-def send_data(data, update, notificate, context, keyboard=InlineKeyboardMarkup(default_keyboard)):
+def send_data(data, update, notificate, context, keyboard=random_keyboard):
     song = {0: ""}
     counter = 0
 
@@ -383,8 +407,8 @@ def send_data(data, update, notificate, context, keyboard=InlineKeyboardMarkup(d
     context.bot.delete_message(update.message.chat_id, update.message.message_id + 1)
 
     reply_markup = ReplyKeyboardRemove()
-    counter = 0
 
+    counter = 0
     for _ in song:
         if counter + 1 == len(song):
             reply_markup = keyboard
@@ -395,13 +419,12 @@ def send_data(data, update, notificate, context, keyboard=InlineKeyboardMarkup(d
         update.message.reply_text(song[counter].replace(u'\xa0', u' '), reply_markup=reply_markup,
                                   disable_notification=notificate)
         counter += 1
-
-    update.message.reply_text(u'\u202B', reply_markup=random_keyboard, disable_notification=notificate, resize_keyboard=True)
+    update.message.reply_text(u'ִ ', reply_markup=random_keyboard, disable_notification=notificate,
+                              resize_keyboard=True)
     context.bot.delete_message(update.message.chat_id, update.message.message_id + len(song) - 2)
 
 
 def message_handler(update, context):
-
     global statistics
     message = update.message.text.replace("/", "_").replace("\\", "_").replace("A#", "Bb") \
         .replace("Db", "C#").replace("D#", "Eb").replace("Gb", "F#").replace("G#", "Ab")
@@ -424,22 +447,21 @@ def message_handler(update, context):
     # reporting the statistics to ADtmr by telegram message.
     if chat_id == 386848836:
         if message.title() == "St":
-
             # Ordered Dicd cause the sorted returns a list and not a dict.
             statistics = collections.OrderedDict(sorted(statistics.items(), key=lambda kv: kv[1]))
-            print("statistics:  ", statistics)
-            # file= because the "print" printing well, but the "send" adding \n between str(s.getvalue())str(s.getvalue())n the chars.
 
-            # not sending by "send_data" cause it is only text.
-            # update.message.reply_text(strStream.getvalue().replace("OrderedDict([", "").replace("])", "").replace("), (", ")\n ("))
-            update.message.reply_text(str(statistics))
+            # file= because the "print" printing well, but the "send" adding \n between str(s.getvalue())str(s.getvalue())n the chars.
+            strStream = io.StringIO()
+            print("", file=strStream)
+            send_data(strStream.getvalue().replace("OrderedDict([", "").replace("])", "").replace("), (", ")\n ("), update, context)
             return
 
         if message.title() == "C U":
             update.message.reply_text(str(len(users)))
             return
+
         if message.title() == "Usr":
-            update.message.reply_text("\n".join(users))
+            send_data("\n".join(users), update, context)
             return
 
     # sending random song.
@@ -479,7 +501,6 @@ def message_handler(update, context):
 
 
 def search_songs(update, context):
-
     data = update.message.text
     print(data)
     try:
