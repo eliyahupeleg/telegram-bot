@@ -1,74 +1,85 @@
 My Heart Will Go On
 Celine Dion
-המערכת
+גולש
 
- F              C        
-Every night in my dreams,
+   G               D    
+Every night in my dreams
 
- Bbadd9       F    C 
+   C           G   D 
 I see you, I feel you
 
- F             C         Bbadd9
-That is how I know you go on.  
+ G              D       C  D
+That is how I know you go on
 
- F              C      
+   G               D   
 Far across the distance
 
- Bbadd9        F   C 
-and spaces between us
+   C           G   D 
+And spaces between us
 
- F                 C     Bbadd9 
-you have come to show you go on.
+ G              D       C  D   
+You have come to show you go on
 
- Dm   C     Bbadd9      C  
+Em     D       C         D 
 Near, far, wherever you are
 
-    Dm              C          Bbadd9      C
-I believe that the heart does go on.        
+    Em              D          C D 
+I believe that the heart does go on
 
- Dm   C      Bbadd9      C 
-Once more you open the door
+Em     D       C         D  
+Once more, you open the door
 
-          Dm           Am7 
-and you're here in my heart
+            Em           D 
+And you're here in my heart
 
-        Bbadd9       F      C  
-and my heart will go on and on.
+         C            G  D   G
+And my heart will go on and on
 
- F                 C      
+   G               D      
 Love can touch us one time
 
-   Bbadd9       F    C  
-and last for a life time
+   C           G   D   
+And last for a lifetime
 
- F             C           Bbadd9
-and never let go till we're one. 
+ G              D       C  D    
+And never let go 'til we're gone
 
- F                C      
+   G               D     
 Love was when I loved you
 
-   Bbadd9        F   A7/ C#
-one true time I hold to   
+   C           G   D   
+One true time I hold to
 
- Dm              Am7     Bbadd9
-in my life we'll always go on. 
+ G              D       C  D  
+In my life, we'll always go on
 
- F#m     E             Dadd2        E
+Em     D       C         D 
+Near, far, wherever you are
 
-You're  here, there's nothing I fear 
+    Em              D          C D 
+I believe that the heart does go on
 
-       F#m          E           Dadd2      E
+Em     D       C         D  
+Once more, you open the door
 
-and i know that my heart will go on.        
+            Em           D 
+And you're here in my heart
 
- F#m   E    Dadd2           E
+         C            G  D   G
+And my heart will go on and on
 
-We'll stay forever this way  
+Em     D       C         D         
+You're here, there's nothing I fear
 
-         F#m        C#m7
-you are safe in my heart
+    Em              D          C D 
+And I know that my heart will go on
 
-        Dadd2        A   E   A
+Em     D       C         D 
+We'll stay forever this way
 
-and my heart will go on and on.
+            Em           D
+You are safe in my heart  
+
+         C            G  D   G
+And my heart will go on and on
 

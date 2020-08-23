@@ -9,6 +9,7 @@ import threading
 import time
 from random import randrange
 
+from datetime import datetime
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
 
@@ -429,9 +430,9 @@ def send_data(data, update, context, is_song=False, keyboard=InlineKeyboardMarku
 
 
 def message_handler(update, context):
+    print(str(datetime.now())[:-7])
     global statistics
-    message = update.message.text.replace("/", "_").replace("\\", "_").replace("A#", "Bb") \
-        .replace("Db", "C#").replace("D#", "Eb").replace("Gb", "F#").replace("G#", "Ab")
+    message = update.message.text
 
     chat_id = update.message.chat_id
     if str(update.message.from_user.id) not in users:
@@ -497,12 +498,14 @@ def message_handler(update, context):
         send_data(result, update, context)
         return
 
-    chord = message.replace("_", "_ ").replace("#", "# P").title().replace("_ ", "_").replace("# P", "#")
+    # title the message.
+    chord = message.replace("_", "_ ").replace("#", "# P").title().replace("_ ", "_").replace("# P", "#").replace("/", "_").replace("\\", "_").replace("A#", "Bb") \
+        .replace("Db", "C#").replace("D#", "Eb").replace("Gb", "F#").replace("G#", "Ab")
     if chord in chords_library:
         # לתקן את הקריאה חוזרת להמרת אקורד ושליחת תמונה חדשה
         context.bot.send_photo(heigth=10, caption=message.replace("_", "/"),
                                chat_id=chat_id,
-                               photo=open(f'{this_folder}/chords/{chord}.png', 'rb'), reply_markup=random_keyboard)
+                               photo=open(f'{this_folder}/chords/{chord}.png', 'rb'))
         print("chord pic sent")
         return
     else:
@@ -512,14 +515,13 @@ def message_handler(update, context):
 def search_songs(update, context):
     data = update.message.text
     print(data)
-    print(update.message.chat_id)
-    print(data)
+    print(update.message.chat_id, "\n\n")
     if update.message.chat_id == -1001126502216:
         data = data.replace("?", "")
         data = data.replace("לשיר ", "ל")
         data = data[data.index(" ל") + 2:]
 
-    else:
+    elif update.message.chat_id != 386848836:
         try:
             print(type(statistics))
             statistics[data] += 1
@@ -565,6 +567,13 @@ def search_songs(update, context):
         return
 
     for fpath in glb:
+
+        # some songs names have "and" or "the" in there names, what goes bad with "search.title()" (returns "And" or "The").
+        # so if the song is not in the songs list, it'll be when the file name will be titled.
+        if fpath.title() == full_name.title():
+            files = [fpath]
+            build_message(files, context, update)
+            return
         if data in fpath:
             files.append(fpath)
 

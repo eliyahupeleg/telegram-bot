@@ -207,6 +207,12 @@ while True:
 	#check if the song is locked for non-premium users.
         if browser.execute_script(js_is_premium):
             print("\n\n\npremium song\n\n\n")
+        
+            # updating the uploaded counter.
+            with open(file_name, "r+") as f:
+                f.seek(0)
+                f.truncate()
+                f.write(str(num + int(links.index(link)) + 1))
             continue
 
         # try to get easy version, if exist.
