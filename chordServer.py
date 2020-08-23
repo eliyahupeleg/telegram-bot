@@ -7,8 +7,9 @@ import pickle
 import re
 import threading
 import time
-from random import randrange
 
+from pytz import timezone
+from random import randrange
 from datetime import datetime
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
@@ -430,7 +431,7 @@ def send_data(data, update, context, is_song=False, keyboard=InlineKeyboardMarku
 
 
 def message_handler(update, context):
-    print(str(datetime.now())[:-7])
+    print(str(datetime.now(timezone("Israel")))[:-13])
     global statistics
     message = update.message.text
 
