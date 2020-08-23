@@ -378,7 +378,7 @@ def build_message(files, context, update):
                                   selective=True)
         return
 
-    print("sending song..\n\n", files)
+    print("sending song..\n", files)
     fpath = files[0]
     with open(fpath, "r") as f:
 
@@ -393,7 +393,6 @@ def build_message(files, context, update):
         intro = intro.replace("capo", data[3])
         data[3] = intro
         data.append(endB)
-        print("send data...")
         send_data(data[3:], update, context, True)
 
 
@@ -431,7 +430,7 @@ def send_data(data, update, context, is_song=False, keyboard=InlineKeyboardMarku
 
 
 def message_handler(update, context):
-    print(str(datetime.now(timezone("Israel")))[:-13])
+    print("\n", str(datetime.now(timezone("Israel")))[:-13], "\n")
     global statistics
     message = update.message.text
 
@@ -481,7 +480,7 @@ def message_handler(update, context):
         return
 
     # sending full list of what the bot have.
-    if "מה יש" in message:
+    '''if "מה יש" in message:
         send_data(songs_list + artists_list, update, context)
         return
 
@@ -497,7 +496,7 @@ def message_handler(update, context):
         if not result:
             result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
         send_data(result, update, context)
-        return
+        return'''
 
     # title the message.
     chord = message.replace("_", "_ ").replace("#", "# P").title().replace("_ ", "_").replace("# P", "#").replace("/", "_").replace("\\", "_").replace("A#", "Bb") \
@@ -515,8 +514,8 @@ def message_handler(update, context):
 
 def search_songs(update, context):
     data = update.message.text
-    print(data)
-    print(update.message.chat_id, "\n\n")
+    print(data, "\n")
+    print(update.message.chat_id, "\n")
     if update.message.chat_id == -1001126502216:
         data = data.replace("?", "")
         data = data.replace("לשיר ", "ל")
@@ -592,7 +591,10 @@ def start(update, context):
 
     if len(update.message.text[7:]) != 9:
         update.message.reply_text(
-            " היי, ברוכים הבאים לרובוט האקורדים של 🎶‏ISRACHORD🎶.\nשילחו שם  של שיר או אמן, וקבלו את האקורדים. כן, כזה פשוט..\nשלחו שם של אקורד (למשל A#m) כדי לקבל איצבוע לגיטרה..\n\nלדיווח:\n@ADtmr",
+            '''היי, ברוכים הבאים לרובוט האקורדים של 🎶‏ISRACHORD🎶.\n
+שילחו שם מלא או חלקי של שיר או אמן, וקבלו את האקורדים. כן, כזה פשוט.\n
+שלחו שם של אקורד (למשל A#m) כדי לקבל איצבוע לגיטרה.\n
+לדיווח:@ADtmr''',
             reply_markup=random_keyboard, resize_keyboard=True,
             one_time_keyboard=True,
             selective=True)
