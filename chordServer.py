@@ -8,12 +8,14 @@ import re
 import threading
 import time
 
+import telegram
 from pytz import timezone
 from random import randrange
 from datetime import datetime
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
 
+bot = None
 # using server and local python- don't need to change the locations of the files all the time.
 this_folder = "/".join(os.path.realpath(__file__).split("/")[:-1])
 chords_library = ["A", "A5", "A6", "A7", "A9", "A_Ab", "A_B", "A_Bb", "A_C#", "A_C", "A_D", "A_E", "A_Eb", "A_F#",
@@ -423,8 +425,8 @@ def send_data(data, update, context, is_song=False, keyboard=InlineKeyboardMarku
         update.message.reply_text(song[counter].replace(u'\xa0', u' '), reply_markup=reply_markup)
         counter += 1
 
-    update.message.reply_text(".", reply_markup=random_keyboard,
-                              resize_keyboard=True)
+    update.message.reply_text(u'\u261d', reply_markup=random_keyboard,
+                              resize_keyboard=True, reply_to_message_id=update.message.message_id + 1)
 
     context.bot.delete_message(update.message.chat_id, update.message.message_id + len(song) - 2)
 
@@ -470,6 +472,10 @@ def message_handler(update, context):
             update.message.reply_text(str(len(users)))
             return
 
+        if "Msg" == message[:3].title():
+            msg(message[4:])
+            return
+
         if message.title() == "Usr":
             send_data("\n".join(users), update, context)
             return
@@ -499,7 +505,9 @@ def message_handler(update, context):
         return'''
 
     # title the message.
-    chord = message.replace("_", "_ ").replace("#", "# P").title().replace("_ ", "_").replace("# P", "#").replace("/", "_").replace("\\", "_").replace("A#", "Bb") \
+    chord = message.replace("_", "_ ").replace("#", "# P").title().replace("_ ", "_").replace("# P", "#").replace("/",
+                                                                                                                  "_").replace(
+        "\\", "_").replace("A#", "Bb") \
         .replace("Db", "C#").replace("D#", "Eb").replace("Gb", "F#").replace("G#", "Ab")
     if chord in chords_library:
         # לתקן את הקריאה חוזרת להמרת אקורד ושליחת תמונה חדשה
@@ -592,9 +600,10 @@ def start(update, context):
     if len(update.message.text[7:]) != 9:
         update.message.reply_text(
             '''היי, ברוכים הבאים לרובוט האקורדים של 🎶‏ISRACHORD🎶.\n
-שילחו שם מלא או חלקי של שיר או אמן, וקבלו את האקורדים. כן, כזה פשוט.\n
+שילחו שם מלא או חלקי של שיר *או* אמן, וקבלו את האקורדים. כן, כזה פשוט.\n
 שלחו שם של אקורד (למשל A#m) כדי לקבל איצבוע לגיטרה.\n
-לדיווח:@ADtmr''',
+לדיווח: @ADtmr\n
+הערוץ שלנו: @tab4us ''',
             reply_markup=random_keyboard, resize_keyboard=True,
             one_time_keyboard=True,
             selective=True)
@@ -639,10 +648,21 @@ def button(update, context):
     context.bot.delete_message(query.message.chat.id, query.message.message_id)
 
 
+def msg(message):
+    for user in users:
+        try:
+            print(user)
+            bot.sendMessage(chat_id=user, text=message)
+            print("sent to: ", users.index(user), " / ", len(users))
+        except Exception as e:
+            print("exception", e)
+
+
 def main():
     global songs_list
     global artists_list
     global users
+    global bot
 
     songs_list = list(dict.fromkeys(list(map(get_song, uploaded_list))))
     artists_list = list(dict.fromkeys(list(map(get_artist, uploaded_list))))
@@ -652,7 +672,7 @@ def main():
 
     with open(users_path, 'r') as f:
         users = f.read().split('\n')
-
+    bot = telegram.Bot(token="999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU")
     updater = Updater("999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU", use_context=True)
 
     # Get the dispatcher to register handlers
