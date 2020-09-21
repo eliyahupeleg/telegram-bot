@@ -122,22 +122,6 @@ newData = newData.replace(new RegExp("/", 'g'), "/ ");
 return (newData);
 '''
 
-# the js code that returning the "easy version" link if exist.
-# else- returning "ok"
-js_go_2_easy = '''if (document.querySelector("#page_content > div.row > div > div.song_block_content_wrap > div.bArae4 > a")) {
-    return(document.querySelector("#page_content > div.row > div > div.song_block_content_wrap > div.bArae4 > a").href);
-} else hrf = window.location.href;
-
-if (hrf.length >= 51 && !document.querySelector("#page_content > div.row > div > div.song_block_content_wrap > div.bArae4 > span")) {
-    try {
-        return(document.querySelector("#page_content > div.row > div > div.song_block_content_wrap > div.bArae4 > a").href)
-    } catch (error) {
-        console.log(error)
-    }
-}else{
-    return("ok")
-}'''
-
 # current folder
 this_folder = "/".join(os.path.realpath(__file__).split("/")[:-1])
 
@@ -204,24 +188,16 @@ while True:
         # getting the page from the server.
         browser.get(full_link)
 
-	#check if the song is locked for non-premium users.
+        # check if the song is locked for non-premium users.
         if browser.execute_script(js_is_premium):
             print("\n\n\npremium song\n\n\n")
-        
+
             # updating the uploaded counter.
             with open(file_name, "r+") as f:
                 f.seek(0)
                 f.truncate()
                 f.write(str(num + int(links.index(link)) + 1))
             continue
-
-        # try to get easy version, if exist.
-        easy = browser.execute_script(js_go_2_easy)
-
-        if easy != "ok":
-            print("easy", easy)
-            # get the easy instead.
-            browser.get(easy)
 
         song = browser.execute_script(js)
         # print(f"{this_folder}/toUpload/{song_split[1]} - {song_split[0]}.txt")
