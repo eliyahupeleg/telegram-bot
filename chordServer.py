@@ -428,8 +428,6 @@ def send_data(data, update, context, is_song=False, keyboard=InlineKeyboardMarku
     update.message.reply_text(u'\u261d', reply_markup=random_keyboard,
                               resize_keyboard=True, reply_to_message_id=update.message.message_id + 1)
 
-    context.bot.delete_message(update.message.chat_id, update.message.message_id + len(song) - 2)
-
 
 def message_handler(update, context):
     print("\n", str(datetime.now(timezone("Israel")))[:-13], "\n")
