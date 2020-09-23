@@ -184,7 +184,7 @@ while True:
         # creating full address
         full_link = basic_url + link
 
-        print("full link", full_link)
+        print(full_link)
         # getting the page from the server.
         browser.get(full_link)
 

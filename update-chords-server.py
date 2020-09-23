@@ -13,8 +13,13 @@ api_base = "https://{pythonanywhere_host}/api/v0/user/{username}/".format(
 fpath = "/home/la/Desktop/bots/chords-bot/chordServer.py"
 with open(fpath, "r") as f:
     data = f.read()
-resp = requests.post(
+update_resp = requests.post(
     urljoin(api_base, f"files/path/home/{username}/chordServer.py"),
     files={"content": data},
+    headers={"Authorization": "Token {api_token}".format(api_token=token)}
+)
+run_resp = requests.post(
+    f"{api_base}/consoles/16352775/send_input/",
+    data={"input": str(chr(3)) + "\npython3 chordServer.py \n"},
     headers={"Authorization": "Token {api_token}".format(api_token=token)}
 )
