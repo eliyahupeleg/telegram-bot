@@ -136,7 +136,7 @@ with open(fname, "r") as f:
 
 fname = f"{this_folder}/message-end.txt"
 with open(fname, "r") as f:
-    endB = f.read()
+    endB = f.read().replace("‏@Tab4us", "‏@Tab4usBot")
 
 # optimized. conclusions only once.
 len_uploaded_path = len(uploaded_path)
