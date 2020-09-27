@@ -670,8 +670,8 @@ def main():
 
     with open(users_path, 'r') as f:
         users = f.read().split('\n')
-    bot = telegram.Bot(token="999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU")
-    updater = Updater("999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU", use_context=True)
+    bot = telegram.Bot(token=BOT_TOKEN)
+    updater = Updater(BOT_TOKEN, use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
