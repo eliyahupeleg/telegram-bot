@@ -7,17 +7,32 @@ import pickle
 import re
 import threading
 import time
-
 import telegram
+
 from pytz import timezone
 from random import randrange
 from datetime import datetime
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
 
+# רשימת הקבוצות בהן נמצא הרובוט.
+# לקבוצות יש פעילות ייחודית:
+# הרובוט קורא את ההודעה, בודק אם יש בתוכה פרמטרים ספציפיים (אקורדים ל(שיר)[]) ואם יש, מקפיץ הודעה קטנה עם כפתור שמעביר את המשתמש לצ'אט פרטי.
+# לארח מכן הבוט מוחק את ההודעות מהקבוצה כדי שהיא תישאר נקייה מספאם.
+# הרובוט מזהה צ'אט קבוצתי ע"פ הID של הצ'אט.
+# לא עשיתי שיזהה לפי ההתחלה במינוס כדי שלא יצרפו אותו לקבוצות בלי ידיעה ואישור (הם לא יכולים להשאיר אותו בלי שאני משנה לו מוד, זה מספים אותם)
+groups = [-1001126502216, -1001061709539, -1001199754819]
+
+# אובייקט של בוט, נועד לשליחת הודעות פרטיות למשתמש.
+# מוגדר פה כדי שיהיה גלובלי. מאותחל מייד בתחילת התכנית.
 bot = None
+
+# מזהה לבד את המיקום. אפשר להעביר תיקיות וכד' בלי שישתבש (בתנאי שמעבירים את כל הפרוייקט יחד לתיקייה אחרת)
 # using server and local python- don't need to change the locations of the files all the time.
 this_folder = "/".join(os.path.realpath(__file__).split("/")[:-1])
+
+# כל האקורדים שאמורים להיות אי פעם בשירים.
+# שימושי בהמרות סולם לאקורדים.
 chords_library = ["A", "A5", "A6", "A7", "A9", "A_Ab", "A_B", "A_Bb", "A_C#", "A_C", "A_D", "A_E", "A_Eb", "A_F#",
                   "A_F", "A_G", "Aadd9", "Aaug", "Ab", "Ab5", "Ab6", "Ab7", "Ab9", "Ab_A", "Ab_Bb", "Ab_C#", "Ab_C",
                   "Ab_Eb", "Ab_F#", "Ab_G", "Abadd9", "Abaug", "Abdim", "Abdim7", "Abm", "Abm7", "Abm7b5", "Abm9",
@@ -42,11 +57,12 @@ chords_library = ["A", "A5", "A6", "A7", "A9", "A_Ab", "A_B", "A_Bb", "A_C#", "A
                   "Fm_Eb", "Fm_F#", "Fmaj7", "Fsus4", "G", "G5", "G6", "G7", "G9", "G_C", "G_D", "G_E", "G_F#", "G_F",
                   "Gadd9", "Gaug", "Gdim", "Gdim7", "Gm", "Gm7", "Gm7b5", "Gm9", "Gm_Ab", "Gm_D", "Gm_E", "Gm_F",
                   "Gmaj7", "Gsus4"]
-# using for the convert. one
+
+# משמש להמרת סולמות. האקורדים במרווחים של חצי בדיוק.
 levels = [["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"],
           ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"]]
 
-# all the chars that can be in chords line. using for recognise chords lines and convert them.
+# כל האקורדים האפשריים. עוזר לזיהוי איזו שורה היא אקורדים וצריכה המרה כשמשנים סולם, ואיזו שורה היא טקסט ולא צריך להמיר.
 chars_to_remove = ["A#6add9", "Ab6add9", "A#add9", "A#dim7", "A#m7b5", "A#maj7", "A#maj9", "A#sus2", "A#sus4", "A6add9",
                    "Abadd9", "Abdim7", "Abm7b5", "Abmaj7", "Abmaj9", "Absus2", "Absus4", "A#7#5", "A#7b5", "A#7b9",
                    "A#aug",
@@ -109,90 +125,118 @@ chars_to_remove = ["A#6add9", "Ab6add9", "A#add9", "A#dim7", "A#m7b5", "A#maj7",
                    "Gm6",
                    "Gm7", "Gm9", "G#", "G6", "G7", "G9", "Gb", "Gm", "G", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                    "0", "x", chr(32), chr(160), "/", "sus", "maj", "+", "aj", chr(8207), "#"]
+
+# משמש להמרות. רשימה מיוחדת של כל התווים שצריך להסיר (האקורדים והסימונים שלהם). אם אחרי שהסירו את כל מה שיש ברשימה השורה נשראת ריקה, היא הייתה שורת אקורדים.
 to_remove = {i: "" for i in chars_to_remove}
 to_remove = dict((re.escape(k), v) for k, v in to_remove.items())
 to_remove_lambda = lambda m: to_remove[re.escape(m.group(0))]
 users = []
 old_users = []
 
-# saved: the saved messages, for users that came form the group with button "start".
+# התוצאות חיפוש של ההודעה בקבוצה. נגיד משתמש שלח בקבוצה "אקורדים לאייל גולן", בתוך ה-saved יישמרו התוצאות לחיפוש "אייל גולן", כך שהן יוצגו למשתמש מייד לאחר הלחיצה על הקישור לרובוט.
 saved = {}
 
-# flags- is the link in the group used?
+# דגל שבודק האם הקישור בקבוצה שומש. אם כן, הבוט ימחק את ההודעות.
+# נבדק פעם ב5 דקות. אחרי 3 שעות יימחק בכל מקרה (למנוע עבודה מיותרת של הבוט)
 flags = {}
 
-# the group messages ids- request and response. cleaning the group from spam.
+# המזהה הייחודי של ההודעות בקבוצות, הודעה של בקשת אקורדים והתגובה של הרובוט נשמר כדי למחוק את ההודעות אחרי שהקישור בהן נלחץ ולמנוע הספמה על ידי הבוט.
 to_delete = {}
 
-# flag. when the language is hebrew, when converting message needed to move the "#" to the start of the line.
+# דגל שבודק האם השפה של השורה היא עברית. אם כן, צריך להזיז את הסימן דיאז (#) למקום אחר, שלא יקפוץ לסוף השורה.
 HEBREW = False
 
+# נתיב לקבצי האקורדים שהועלו כבר לערוץ (בעיקרון כולם חוץ מאלו שעודכנו למחשב המקומי של המנהל ועוד לא הועלו לערוץ).
 uploaded_path = this_folder + "/uploaded/"
+
+# נתיב לקובץ טקסט ששומר את ה-ID של כל הצ'אטים עם המשתמשים. משמש כדי לשלוח להם הודעה (לדעת מי משתמש) וכדי לספור כמה משתמשים יש.
 users_path = f'{this_folder}/users.txt'
 
+# השירים נשמרים בלי הפתיחה והסיום (שורות מיוחדות עם אמוג'ים וקישור לערוץ או לרובוט). 
+# כדי לחסוך פתיחה מחדש של הקובץ ששומר את נתוני הפתיחה והסיום (הם קבועים), הפתיחה והסיום של ההודעות נשמרים בקבועים.
 fname = f"{this_folder}/message-intro.txt"
 with open(fname, "r") as f:
-    introB = f.read()
+    INTRO = f.read()
 
 fname = f"{this_folder}/message-end.txt"
 with open(fname, "r") as f:
-    endB = f.read().replace("‏@Tab4us", "‏@Tab4usBot")
+    # בקובץ סיום יש קישור לערוץ של האקורדים. בגלל שהבוט הוא זה ששלח את ההודעה ולא הערוץ, הקישור בסוף משתנה לקישור לבוט ולא לערוץ.
+    ENDING = f.read().replace("‏@Tab4us", "‏@Tab4usBot")
 
-# optimized. conclusions only once.
+# אורך הנתיב נשמר מטעמי אופטימזציה. מחושב רק פה במקום שוב ושוב. משמש כדי לחתוך נתיב לקובץ אקורדים ולקבל רק את השם של הקובץ.
 len_uploaded_path = len(uploaded_path)
 
+# רשימת שמות הקבצים (השירים) שקיימים. נשמר פעם אחת מטעמי אופטימזציה. אחרי עדכון, הבוט מורץ מחדש ע"י סקריפט העדכון וכך מעשכן את רשימת הקבצים.
 uploaded_list = glob.glob(f"{uploaded_path}/*")
 
+# רשימות ששומרות את שמות כל האמנים ושמות כל השירים שישנם. שימש כדי לקבל רשימת שירים. בוטל מטעמי חשש להעתקת הבוט.
 songs_list = []
 artists_list = []
 
-# one option keyboard, send me random song.
-
+# "מקלדת" עם אופציה אחת - שלח לי שיר אקראי.
 random_keyboard = ReplyKeyboardMarkup([["שיר אקראי"]])
 
-# the "convert" keyboard that sends with every song that the bot sent.
+# מקלדת המרות האקורדים. מאפשרת להעלות או להוריד סולם.
 default_keyboard = [[InlineKeyboardButton("+", callback_data="+"), InlineKeyboardButton("-", callback_data="-")]]
 
-# the "convert" keyboard that sends when the "-" button pressed in the default_keyboard.
+# מקלדת שנשלחת לאחר לחיצה על "-" במקלדת הקודמת. מראה את אופציות השינוי.
 keyboard_minus = [[InlineKeyboardButton("-1", callback_data='-1'),
                    InlineKeyboardButton("-2", callback_data='-2'),
                    InlineKeyboardButton("-3", callback_data='-3')]]
 
-# the "convert" keyboard that sends when the "+" button pressed in the default_keyboard.
+# מקלדת שנשלחת לאחר לחיצה על "+" במקלדת הקודמת. מראה את אופציות השינוי.
 keyboard_plus = [[InlineKeyboardButton("+1", callback_data='+1'),
                   InlineKeyboardButton("+2", callback_data='+2'),
                   InlineKeyboardButton("+3", callback_data='+3')]]
 
-# the "convert" keyboard that sends when the key converted by round number (1, 2, 3, -3, -2, -1)
+# אחרי לחיצה על + או - של מספר שלם (1, 2 או 3) ניתנת האופציה להזיז בחצי טון כדי להגיע לסולם המדוייק.
 keyboard_half = [[InlineKeyboardButton("+0.5", callback_data='+0.5'),
                   InlineKeyboardButton("-0.5", callback_data='-0.5')]]
 
+# נתיב הקובץ ששומר את הסטטיסטיקה. זהו קובץ ששומר "מילון". המילון מבטא: כמה פעמים חיפשו,על פי מה חיפשו.
 statistics_path = f'{this_folder}/statistics.pkl'
 
+# קורא את הסטטיסטיקה לתוך המילון. אם הקובץ לא קיים או ריק, יוצר אותו.
 try:
-    if os.path.getsize(statistics_path) == 0 or not os.path.exists(statistics_path):
-        with open(statistics_path, 'wb') as fp:
-            pickle.dump({}, fp, protocol=pickle.HIGHEST_PROTOCOL)
-            statistics = collections.OrderedDict()
-    else:
-        with open(statistics_path, 'rb') as fp:
-            statistics = pickle.load(fp)
-except FileNotFoundError:
+    with open(statistics_path, 'rb') as fp:
+        statistics = pickle.load(fp)
+
+# אם האורך של הקובץ יהיה 0, תוחזר שגיאה EOFError.
+# אם הקובץ לא קיים, תוחזר שגיאה FileNotFoundError.
+# בכל מקרה, הפתרון הוא ליצור את הקובץ מחדש.
+except (FileNotFoundError, EOFError) as e:
+
+    # יוצר את הקובץ, ומכניס לתוכו מילון ריק.
     with open(statistics_path, 'wb') as fp:
+
+        # מכניס מילון ריק({}) לתוך הקובץ, כדי שלא יהיה עם אורך 0.
         pickle.dump({}, fp, protocol=pickle.HIGHEST_PROTOCOL)
+        # יוצר את המילון של הסטטיסטיקה ריק.
         statistics = collections.OrderedDict()
 
 
-# if the name of the song or the artist is not UPPER, that mean that it should be in the format title().
-# using function for optimized for loop to map function.
+# הפונקציה משמשת כדי להגדיר בעזרתה את רשימת השירים.
+# בתחילה יש לתוכנית את רשימת הקבצים (glob), וכדי לקבל את רשימת השירים (למחוק את הנתיב ואת שם הזמר ולהשאיר רק את שם השיר) צריך פונקציה שעושה את זה.
+# מכניסים את הפונקציה ואת הרשימה ל-map (בתוך main), וזה מריץ את הפונקציה (get_song) על כל אחד מהערכים ברשימה (רשימת קבצים) ומחזיר רשימה חדשה.
+# ה-map זו אחת מהפונקציות היותר חסכניות, לכן לא משתמשים בלולאה שמסירה את התווים המיותרים.
 def get_song(song):
+
     try:
+        # הפורמט של שמות הקבצים הוא: "שם זמר - שם קובץ.txt"
+        # כדי לחלץ את שם השיר, קוראים לפונקציה replace_to_filename (שמורידה את הנתיב ומשאירה רק את שם הקובץ), ואז חותכים ב " - " ונשארת רשימה.
+        # האיבר הראשון יהיה שם הזמר, והשני יהיה שם השיר.
         return replace_to_filename(song).split(" - ")[1]
+
+    # אם יש שגיאה בפורמט של שם הקובץ, פשוט מדלג עליו (לא אמור לקרות).
     except IndexError:
         print("index error", song)
     return
 
 
+# הפונקציה משמשת כדי להגדיר בעזרתה את רשימת האמנים.
+# בתחילה יש לתוכנית את רשימת הקבצים (glob), וכדי לקבל את רשימת השירים (למחוק את הנתיב ואת שם הזמר ולהשאיר רק את שם השיר) צריך פונקציה שעושה את זה.
+# מכניסים את הפונקציה ואת הרשימה ל-map (בתוך main), וזה מריץ את הפונקציה (get_song) על כל אחד מהערכים ברשימה (רשימת קבצים) ומחזיר רשימה חדשה.
+# ה-map זו אחת מהפונקציות היותר חסכניות, לכן לא משתמשים בלולאה שמסירה את התווים המיותרים.
 def get_artist(name):
     return replace_to_filename(name).split(" - ")[0]
 
@@ -223,17 +267,14 @@ def write_users():
 
 # deleting the messages in the group by the "time_hash".
 def delete(context, time_hash):
-    print("deleting")
-
-    # only after 40 seconds. users do not want to lose their links in one unsuccessfully presse.
-    time.sleep(40)
-
     # if the link used, delete the messages.
-    while True:
+    for i in range(36):
         if flags[time_hash]:
             break
-    context.bot.delete_message(-1001126502216, to_delete[time_hash][0])
-    context.bot.delete_message(-1001126502216, to_delete[time_hash][0] + 1)
+        time.sleep(300)
+
+    context.bot.delete_message(to_delete[time_hash][1], to_delete[time_hash][0])
+    context.bot.delete_message(to_delete[time_hash][1], to_delete[time_hash][0] + 1)
 
 
 # converting chords line up or down by the key. the key if from 3 to -3' in steps of 0.5.
@@ -331,14 +372,14 @@ def h1(w):
 
 def by_hash(time_hash, context, update):
     files = saved[time_hash]
-
+    print("files", files)
     build_message(files, context, update)
 
 
 def build_message(files, context, update):
     print(len(files), "results\n")
     len_files = len(files)
-    if update.message.chat_id == -1001126502216 and len_files > 0:
+    if update.message.chat_id in groups and len_files > 0:
 
         if "אקורדים" in update.message.text:
             time_hash = h1(str(time.time()).encode())
@@ -347,12 +388,12 @@ def build_message(files, context, update):
 
                 text="לחץ פה",
 
-                url="https://t.me/Tab4usBot?start={}".format(str(time_hash)))]])
+                url=f"https://t.me/Tab4usBot?start={str(time_hash)}andand{str(update.message.chat_id)}")]])
 
             data = update.message.text.replace("?", "")
             data = data.replace("לשיר ", "ל")
             data = data[data.index(" ל") + 2:]
-            to_delete[time_hash] = [int(update.message.message_id)]
+            to_delete[time_hash] = [int(update.message.message_id), int(update.message.chat_id)]
             update.message.reply_text('אקורדים ל "{}"'.format(data.replace("אקורדים ", "")), reply_markup=replay_markup)
 
             flags[time_hash] = False
@@ -360,15 +401,14 @@ def build_message(files, context, update):
         return
 
     if len_files == 0:
-        if update.message.chat_id == -1001126502216:
-            return
-        update.message.reply_text("פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!", reply_markup=ReplyKeyboardRemove())
+        if update.message.chat_id not in groups:
+            update.message.reply_text("פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!", reply_markup=ReplyKeyboardRemove())
         return
 
     if len_files > 1:
 
         keyboard = sorted(list(map(replace_to_filename, files)))
-
+        print("keyboard", keyboard)
         text = "בחר.."
         if len(files) > 179:
             keyboard = keyboard[:179]
@@ -385,7 +425,7 @@ def build_message(files, context, update):
     with open(fpath, "r") as f:
 
         data = f.read().split('\n')
-        intro = introB
+        intro = INTRO
         intro = intro.replace("song",
                               data[0].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
                                   ",", "_") + f"   \n{data[0]}")
@@ -394,7 +434,7 @@ def build_message(files, context, update):
                                   ".", "_").replace(",", "_") + f"   \n{data[1]}")
         intro = intro.replace("capo", data[3])
         data[3] = intro
-        data.append(endB)
+        data.append(ENDING)
         send_data(data[3:], update, context, True)
 
 
@@ -419,19 +459,21 @@ def send_data(data, update, context, is_song=False, keyboard=InlineKeyboardMarku
         else:
             reply_markup = ReplyKeyboardRemove()
 
-        if update.message.chat_id == -1001126502216:
+        if update.message.chat_id in groups:
             reply_markup = ReplyKeyboardRemove()
 
         update.message.reply_text(song[counter].replace(u'\xa0', u' '), reply_markup=reply_markup)
         counter += 1
 
-    update.message.reply_text(u'\u261d', reply_markup=random_keyboard,
+    update.message.reply_text(u'\u261d', reply_markup=ReplyKeyboardRemove(),
                               resize_keyboard=True, reply_to_message_id=update.message.message_id + 1)
 
 
 def message_handler(update, context):
     print("\n", str(datetime.now(timezone("Israel")))[:-13], "\n")
+
     global statistics
+
     message = update.message.text
 
     chat_id = update.message.chat_id
@@ -439,7 +481,7 @@ def message_handler(update, context):
         users.append(str(update.message.from_user.id))
         write_users()
 
-    if chat_id == -1001126502216:
+    if chat_id in groups:
         if "אקורד " in message:
             message = message.replace("אקורד ", "")
         else:
@@ -522,14 +564,13 @@ def search_songs(update, context):
     data = update.message.text
     print(data, "\n")
     print(update.message.chat_id, "\n")
-    if update.message.chat_id == -1001126502216:
+    if update.message.chat_id in groups:
         data = data.replace("?", "")
         data = data.replace("לשיר ", "ל")
         data = data[data.index(" ל") + 2:]
 
     elif update.message.chat_id != 386848836:
         try:
-            print(type(statistics))
             statistics[data] += 1
 
         except KeyError:
@@ -593,9 +634,11 @@ def start(update, context):
     if str(update.message.from_user.id) not in users:
         users.append(str(update.message.from_user.id))
         write_users()
+        bot.sendMessage(chat_id=386848836, text=len(users))
         print(users)
-
-    if len(update.message.text[7:]) != 9:
+    print(f"\n\n\n\n\nstart msg:\n{update.message.text}\n\n\n\n")
+    if len(update.message.text.replace("/start", "")) == 0:
+        print("regular start")
         update.message.reply_text(
             '''היי, ברוכים הבאים לרובוט האקורדים של 🎶‏ISRACHORD🎶.\n
 שילחו שם מלא או חלקי של שיר *או* אמן, וקבלו את האקורדים. כן, כזה פשוט.\n
@@ -606,7 +649,9 @@ def start(update, context):
             one_time_keyboard=True,
             selective=True)
         return
-    time_hash = update.message.text[7:]
+
+    time_hash, chat_id = update.message.text.replace("/start ", "").split("andand")
+    print(time_hash, chat_id)
     flags[time_hash] = True
     by_hash(time_hash, context, update)
 
@@ -653,7 +698,10 @@ def msg(message):
             bot.sendMessage(chat_id=user, text=message)
             print("sent to: ", users.index(user), " / ", len(users))
         except Exception as e:
-            print("exception", e)
+            print("exception ", e, "removing user")
+            users.remove(user)
+
+    write_users()
 
 
 def main():
@@ -670,8 +718,9 @@ def main():
 
     with open(users_path, 'r') as f:
         users = f.read().split('\n')
-    bot = telegram.Bot(token=BOT_TOKEN)
-    updater = Updater(BOT_TOKEN, use_context=True)
+
+    bot = telegram.Bot(token="999605455:AAFkVPs2jTncditDCzMdGCkatrOfodsVGxE")
+    updater = Updater("999605455:AAFkVPs2jTncditDCzMdGCkatrOfodsVGxE", use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher

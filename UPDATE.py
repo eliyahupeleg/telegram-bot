@@ -171,7 +171,7 @@ while True:
 
     # search result, page with the songs starts in number {num}
     url = f"https://www.tab4u.com/resultsSimple?tab=songs&q=0&type=song&cat=&content=&max_chords=0&n=30&sort=&s={num}"
-    request = requests.get(url, timeout=None)
+    request = requests.get(url, timeout=None, verify=False)
     soup = BeautifulSoup(request.content, "html.parser")
 
     # save the links of all the songs.
@@ -220,6 +220,6 @@ while True:
 
 browser.quit()
 
-if input("UPLOAD? (Y/N)\n") == "Y":
+if input("UPLOAD? (Y/N)\n\n\nMake sure tou are not with 'RIOM'\n\n") == "Y":
     print("uploading...")
     import UPLOAD

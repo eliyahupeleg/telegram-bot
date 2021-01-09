@@ -70,7 +70,7 @@ for fpath in files:
         counter = 0
         for i in song:
 
-            url = "https://api.telegram.org/bot999605455:AAEZ3wPt6QyAqdoDa1gtUJzcWVuOk4UfsZU/sendMessage?chat_id=-1001410527666&text=" + \
+            url = "https://api.telegram.org/bot999605455:AAFkVPs2jTncditDCzMdGCkatrOfodsVGxE/sendMessage?chat_id=-1001410527666&text=" + \
                   song[counter]
 
             if counting % 20 == 0:
@@ -79,7 +79,9 @@ for fpath in files:
             try:
 
                 r = requests.get(url.replace("#", "%23").replace('\n', '%0A'), timeout=None)
-
+                if r.status_code != 200:
+                    print("\n\nERROR\n\n", r.status_code)
+                    exit()
                 counting += 1
             except requests.Timeout as err:
                 break
