@@ -432,6 +432,13 @@ def build_message(files, context, update):
         intro = intro.replace("singer",
                               data[1].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
                                   ".", "_").replace(",", "_") + f"   \n{data[1]}")
+
+        if "המערכת" == data[2]:
+            intro = intro.replace("version", "⭐️ גרסה רשמית ⭐")
+        else:
+            intro = intro.replace("version", "")
+
+
         intro = intro.replace("capo", data[3])
         data[3] = intro
         data.append(ENDING)

@@ -24,10 +24,13 @@ with open(fname, "r") as f:
     endB = f.read()
 
 counting = 1
+
 if len(files) == 0:
     print("nothing to upload!")
 else:
     print("uploading updates..")
+
+
 username = 'elikopeleg'
 token = '242fa8569f24430b576c163b70545297a0652117'
 pythonanywhere_host = "www.pythonanywhere.com"
@@ -55,11 +58,20 @@ for fpath in files:
                               data[1].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(".",
                                                                                                                    "_").replace(
                                   ",", "") + "   \n" + data[1])
+
+        if "המערכת" == data[2]:
+            intro = intro.replace("version", "⭐️ גרסה רשמית ⭐")
+        else:
+            intro = intro.replace("version", "")
+
         intro = intro.replace("capo", data[3])
+
         song = {0: ""}
         counter = 0
         data[3] = intro
         data.append(endB)
+
+        # מחלק את ההודעה לחלקים של פחות מ4096 בתים - האורך המקסימלי להודעה בטלגרם
         for j in data[3:]:
             test = song[counter] + "%0A" + j + endB
             if len(test.replace("#", "%23").replace('\n', '%0A')) >= 4096:

@@ -208,6 +208,9 @@ while True:
 
         # saving to the right folder.
         # the name is: "singer - song.txt)
+        if song_split[2] == "המערכת":
+            song_split[0] += " (רשמי)"
+
         with open(f"{this_folder}/toUpload/{song_split[1]} - {song_split[0]}.txt", "w+") as f:
             f.write(song)
             f.close()
