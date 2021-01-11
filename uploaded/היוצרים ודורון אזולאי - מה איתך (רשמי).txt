@@ -5,7 +5,7 @@
 
 פתיחה:
 
-Bm G A F#
+#Bm G A F
 
 Bm       F#  
 منّك ولا منّي
@@ -55,7 +55,7 @@ F#                 
 
 מעבר:
 
-Bm G A F#
+#Bm G A F
 
 Bm                  
 אז מה איתך חיים שלי
@@ -176,4 +176,5 @@ Bm                  
 
 
 Bridge:G F# Bm Bm x4Ending:Bm Bm G F# x4 
+
 
