@@ -1,0 +1,108 @@
+ענבלים
+ששת
+גולש
+
+
+פתיחה:
+ 
+‏ C#m/ F# C#m Abm7 A/ B
+
+‏ C#m/ F# C#m Abm7 A/ B
+
+‏C#m/ F# C#m Abm7 A/ B
+
+‏ C#m/ F# C#m Abm7 A/ B
+
+‏C#m/ F# C#m F#m/ B F#m/ A F#m/ Ab
+
+#‏F#m F#m/ E F#m/ Eb F#m/ C
+
+‏ F#dim     F#m7    F#m
+ענבלים במרעה ושריקות  
+‏ Cm6    Am6    F#m
+ושדה בזהב עד ערב  
+[Dmaj9add13] Abm/ F# Abm
+דומיית       בארות  
+‏Adim7 A
+ירוקות 
+ 
+‏     Dmaj7
+מרחבים    
+‏A9/ Eb Eb7b5
+שלי        
+‏Abm7
+ודרך
+‏        Ab7b9    A
+העצים שעלו מן הטל 
+‏ F7    Emaj7     Ebm
+נוצצים כזכוכית ומתכת
+‏ Edim7    Bbmaj7  Ebm     Bbmaj7
+להביט לא אחדל ולנשום לא אחדל    
+‏Fdim7
+ואמות 
+‏ F#dim7
+ואוסיף
+C#add2
+ללכת 
+‏                  C#add9
+ענבלים במרעה ושריקות    
+‏  Dmaj9   A7b9 Em7
+ושדה בזהב עד ערב  
+‏    Fm7    C#maj7
+דומיית  בארות    
+‏ Ebm11
+ירוקות
+‏Ebm7 Emaj7
+מרחבים    
+Bm7add2
+שלי    
+[Eadd6add9]
+ודרך     
+[Eadd6add9] [Fadd6add9]
+העצים שעלו מן הטל  
+‏Eb7     Dmaj7       C#m7
+נוצצים כזכוכית ומתכת    
+‏ Ddim7     Abmaj7 C#m   Abmaj7
+להביט לא אחדל ולנשום לא אחדל  
+‏Ebdim7
+ואמות 
+‏ Edim7
+ואוסיף
+‏Bmaj7
+ללכת 
+סולו:
+‏Bmaj9 Emaj9 Fm7b5  Bb7b9 Ebmaj7
+
+‏Bmaj9 Emaj9 Fm7b5  Bb7b9 Ebmaj7
+
+‏Bmaj9 Emaj9 Fm7b5  Bb7b9 Ebmaj7
+
+‏ Bmaj9 Amaj9 Abaug7
+
+‏                  C#add9
+ענבלים במרעה ושריקות    
+‏ Dmaj9    A7b9  Em7
+ושדה בזהב עד ערב   
+‏   Fm7    C#maj7
+ דומיית בארות    
+‏ Ebm11
+ירוקות
+‏Ebm7 Emaj7
+מרחבים    
+Bm7add2
+שלי    
+[Eadd6add9]
+ודרך     
+[Eadd6add9] [Fadd6add9]
+העצים שעלו מן הטל  
+‏Eb7     Dmaj7       C#m7
+נוצצים כזכוכית ומתכת    
+‏ Ddim7     Abmaj7 C#m   Abmaj7
+להביט לא אחדל ולנשום לא אחדל  
+‏Ebdim7
+ואמות 
+‏ Edim7
+ואוסיף
+‏Bmaj7
+ללכת 
+
