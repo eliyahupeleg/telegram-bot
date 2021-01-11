@@ -13,6 +13,7 @@ capo = "";
 if(document.querySelector("#page_content > div.row > div > div.song_block_content_wrap > div.song_block_content > div > p")) capo = String.fromCharCode(160) + jQuery('<center>').html(document.querySelector("#page_content > div.row > div > div.song_block_content_wrap > div.song_block_content > div > p")).text();
 
 
+if (document.querySelector("#songContentTPL") == null){ return("null")}
 aligh = document.querySelector("#songContentTPL").align;
 language = "HE"
 if(aligh == "left") language = "EN";
@@ -108,9 +109,12 @@ for (let j of lst){
 	editedBy = "המערכת";
 if(document.getElementById("editByUser")) editedBy = "גולש";
 
+if (document.getElementById("eLinkZ") == null) EZTon = "0";
+else EZTon = document.getElementById("eLinkZ").href.slice(document.getElementById("eLinkZ").href.search("ton=")+4, -5);
+
 singer = name.split("  - ")[0];
 song = name.split(" - ")[1];
-newData = song + '\n' + singer + '\n' + editedBy + '\n' + capo + '\n' + newData;
+newData = song + '\n' + singer + '\n' + editedBy + '\n' + EZTon + '\n' + newData;
 newData = newData.replace(new RegExp("[?!]", 'g'), "");
 newData = newData.replace(new RegExp("מעבר:", 'g'), "\nמעבר:");
 newData = newData.replace(new RegExp("פתיחה:", 'g'), "\nפתיחה:");
@@ -200,6 +204,8 @@ while True:
             continue
 
         song = browser.execute_script(js)
+        if song == "null":
+            continue
         # print(f"{this_folder}/toUpload/{song_split[1]} - {song_split[0]}.txt")
         print(song)
 

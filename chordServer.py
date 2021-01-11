@@ -220,7 +220,6 @@ except (FileNotFoundError, EOFError) as e:
 # מכניסים את הפונקציה ואת הרשימה ל-map (בתוך main), וזה מריץ את הפונקציה (get_song) על כל אחד מהערכים ברשימה (רשימת קבצים) ומחזיר רשימה חדשה.
 # ה-map זו אחת מהפונקציות היותר חסכניות, לכן לא משתמשים בלולאה שמסירה את התווים המיותרים.
 def get_song(song):
-
     try:
         # הפורמט של שמות הקבצים הוא: "שם זמר - שם קובץ.txt"
         # כדי לחלץ את שם השיר, קוראים לפונקציה replace_to_filename (שמורידה את הנתיב ומשאירה רק את שם הקובץ), ואז חותכים ב " - " ונשארת רשימה.
@@ -438,8 +437,11 @@ def build_message(files, context, update):
         else:
             intro = intro.replace("version", "")
 
+        # כמה להמיר כדי להגיע לגרסה קלה
+        easy_key = data[3]
 
-        intro = intro.replace("capo", data[3])
+        # המידע בתחילת הקובץ לא נשלח, רק מ - data[3] ואילך.
+        # ולכן מכניסים ל- data[3] את כל הפתיח הרשמי, והוא נשלח משם.
         data[3] = intro
         data.append(ENDING)
         send_data(data[3:], update, context, True)
