@@ -486,6 +486,7 @@ def message_handler(update, context):
     message = update.message.text
 
     chat_id = update.message.chat_id
+
     if str(update.message.from_user.id) not in users:
         users.append(str(update.message.from_user.id))
         write_users()
@@ -545,13 +546,13 @@ def message_handler(update, context):
             result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
         send_data(result, update, context)
         return
+    '''
 
     if "רשימת אמנים" in message:
-        result = list(filter(lambda x: x.startswith(message.replace("רשימת אמנים ", "")), songs_list))
-        if not result:
-            result = "פאדיחה, לא מצאנו כלום.. נסה שילוב אחר!"
+        print("רשימת אמנים \n\n\n")
+        result = '\n'.join(artists_list)
         send_data(result, update, context)
-        return'''
+        return
 
     # title the message.
     chord = message.replace("_", "_ ").replace("#", "# P").title().replace("_ ", "_").replace("# P", "#").replace("/",
