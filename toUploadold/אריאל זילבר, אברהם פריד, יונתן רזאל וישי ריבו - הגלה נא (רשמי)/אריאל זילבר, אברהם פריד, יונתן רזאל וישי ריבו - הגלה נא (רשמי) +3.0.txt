@@ -1,0 +1,68 @@
+הגלה נא
+אריאל זילבר, אברהם פריד, יונתן רזאל וישי ריבו
+המערכת
+-1.5
+קאפו בשריג 6
+
+פתיחה:
+‏C#m C#m/ B C#m/ Bb A Ab Ab7
+
+‏        C#m/ B       C#m
+הגלה נא  ופרוש חביב עלי
+‏C#m Ab7  Ab      A      C#m/ Bb
+ופרוש חביב עלי  את סכת שלומך 
+‏A       C#m/ Bb C#m/ B C#m
+הגלה נא  ופרוש חביב עלי
+‏  C#m Ab7 A      Ab       F#m
+ופרוש חביב עלי  את סכת שלומך 
+‏C#m E/ Eb   E    F#m
+תאיר  ארץ  מכבודך  
+‏ Ab7 C#m/ Bb C#m/ B C#m Ab7 A    F#m
+נגילה  ונשמחה בך             
+‏ B C#m E/ Eb E   B F#m
+תאיר   ארץ    מכבודך
+‏Amaj7  Ab Ebm7b5   F#m
+נגילה    ונשמחה    בך 
+‏ C#m Ab7 F#m C#m/ Bb C#m/ B C#m
+מהר   אהוב   כי בא  מועד
+‏ E  B A     Ab F#m/ G   F#m
+וחננו   וחננו   כימי עולם
+‏ C#m Ab7 F#m Amaj7 Ab7 B Bbm7b5 F#m
+מ ה ר     א ה ו ב     כי בא מועד
+‏ C#m Ab/ C  Ab   F#m/ G           F#m
+וחננו (וחננו) וחננו  כימי   עולם 
+
+מעבר:
+‏C#m C#m/ B C#m/ Bb A Ab4 Ab
+
+‏A       C#m/ Bb C#m/ B C#m
+הגלה נא  ופרוש חביב עלי
+‏   C#m Ab7 A    F#m         A
+ופרוש חביב עלי  את סכת שלומך 
+‏A       C#m/ Bb C#m/ B C#m
+הגלה נא  ופרוש חביב עלי
+‏  C#m Ab7 A    Ab Ab4      F#m
+ופרוש חביב עלי   את סכת שלומך 
+‏C#m E/ Eb   E    F#m
+תאיר  ארץ  מכבודך  
+‏                  F#m
+נגילה (נגילה נגילה)
+‏Ab C#m/ Bb C#m/ B C#m Ab7 A
+ונשמחה  בך            
+‏ B C#m E/ Eb E        B F#m
+תאיר   תאיר ארץ     מכבודך
+‏ Amaj7  Ab Ebm7b5   F#m
+נגילה    ונשמחה    בך  
+
+מעבר:C#m A C#m C#m x2
+‏ C#m Ab7 F#m C#m/ B C#m/ Bb C#m/ B C#m
+מהר      אהוב      כי בא  מועד
+‏ E  B A     Ab F#m/ G   F#m
+וחננו   וחננו   כימי עולם
+‏ C#m Ab7 F#m Amaj7  B Bbm7b5 F#m
+מ ה ר     א ה ו ב   כי בא מועד
+‏ C#m Ab/ C  Ab   F#m/ G           F#m
+וחננו (וחננו) וחננו  כימי   עולם 
+
+מעבר:C#m A C#m C#m x2
+סיום:C#m C#m C#m A x2 

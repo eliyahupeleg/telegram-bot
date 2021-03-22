@@ -1,0 +1,96 @@
+זה קורה
+אריק לביא
+המערכת
+-1.5
+קאפו בשריג 9
+
+פתיחה:
+‏Ebm F# F#add9 Bmaj7 Bb
+
+‏Ebm F# Bmaj7 Bb Ebm B7 Ebm B7
+
+‏    Bmaj7  F#add9 Ebm
+זה קורה              
+‏  Bb Bmaj7  F#add9 F# Ebm     Bb
+שהדרך מתמשכת                   
+‏    Bmaj7  F#add9 Ebm
+זה קורה              
+‏    F# C# Abm C#4  C#    Ab7
+יש ללכת, ללכת              
+#‏F# C# C#4   C#          F
+שום דבר לא ידוע           
+#‏            Ebm C#/ D    C
+לא שנה, לא שבוע          
+‏                 Bb         Ebm   Bb
+יש לנוע, לנוע,    ולחשוב שהייתי יכול
+#‏  F#      C
+לחזור על הכל
+‏Bb Bb4            Bmaj7
+אבל בן אדם   זה קורה   
+‏   Bmaj7  F#add9 Ebm
+זה קרה              
+‏  Bb Bmaj7  F#add9  Ebm      Bb
+שהדרך התמשכה לי               
+‏   Bmaj7  F#add9 Ebm
+זה קרה              
+‏    F# C# Abm    C#          Ab
+לא ידעתי איך זה בא לי          
+#‏F# C# C#4   C#          F
+שום דבר לא ידוע           
+#‏            Ebm C#/ D    C
+לא שנה, לא שבוע          
+‏                 Bb         Ebm   Bb
+יש לנוע, לנוע,    ולחשוב שהייתי יכול
+#‏  F#      C
+לחזור על הכל
+‏Bb Bb4            Bmaj7
+אבל בן אדם   זה קורה   
+
+מעבר:
+‏C Cadd9 Cm C
+
+‏     C# Ab7 Fm
+זה יקרה      
+‏   C C# Ab7  Fm       C
+ואולי בסוף הדרך        
+‏   C#maj7 Ab7 Fm
+שנראה           
+‏    Abmaj7 Eb Bb  Eb    Bb
+כי הדרך מתמשכת          
+‏Ab   Eb      Abmaj7
+שום דבר לא ידוע    
+‏    Fm Eb/ E    Eb      Ab
+לא שנה, לא שבוע         
+Fm C Cdd9   C         
+יש לנוע לנוע          
+‏                  C
+ולחשוב  שהייתי יכול
+‏      C#maj7  Ab7      Eb
+לחזור על הכל   אבל בן אדם
+‏  D7 D C  Cadd9
+זה יקרה        
+‏Ebmaj7 Bb Gm    D
+זה קורה        
+‏  D Ebmaj7 Bb Gm      D
+שהדרך מתמשכת          
+‏     Ebmaj7 Bb Gm
+זה קורה        
+‏    Bb    F     C
+יש ללכת, ללכת    
+‏Bb    F          Bb
+שום דבר לא ידוע    
+‏Gm F/ F#    F          Bb
+לא שנה, לא שבוע         
+‏         Gm D D4   D
+יש לנוע לנוע        
+‏                  D
+ולחשוב  שהייתי יכול
+‏  Bb7     Fm
+לחזור על הכל
+‏D  D4            Ebmaj7
+אבל בן אדם   זה קורה   
+
+מעבר:Bmaj7 Bb Ebm Ebm x4
+
+סיום:
+‏Gm Bb/ F Eb D7 Ebmaj7

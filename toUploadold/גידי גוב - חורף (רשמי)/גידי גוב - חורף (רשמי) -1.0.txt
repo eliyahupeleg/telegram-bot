@@ -1,0 +1,73 @@
+חורף
+גידי גוב
+המערכת
+0
+לטון המקורי - קאפו בשריג 2
+
+פתיחה:
+‏Eb Eb Fm Bb Eb Eb Fm Bb Eb
+
+‏Eb Bb Adim  Cm   Bb  Ab    Gm   Fm Eb
+נספר פה  על הקיץ   שהולך   ונעלם
+‏C#maj7  Cm  G7  Ab    Eb7   Gm Fm/ F#  Fm Eb
+מטריות    ומגפיים    מוציאים מהמחסן
+‏Fm  C     C#maj7       Amaj7 C#maj7
+עכשיו        כבר לא      נלך לים
+‏C  C4   C#     Ab   Eb Bbm
+ונלבש כפפות  וסוודר חם
+‏      F    C    Gm      F
+כי חורף  השמש נעלמת בחורף
+‏ Dm/ C   Dm      C     Gm
+הגשם מטפטף על העורף
+‏C  C4  G  Dm/ B
+חורף     וקר
+‏   F       C           Gm      F
+חורף   צריך ללבוש  מעיל כל החורף
+‏ Dm/ C   Dm      C     Gm
+וגשם מטפטף על העורף
+‏Bb C4  G  Dm/ B
+חורף     וקר
+
+מעבר:
+‏Ab Bb Eb Eb Fm Bb Eb Eb Fm Bb Eb
+
+‏Eb Bb4  Adim  Cm     Bb   Ab     Gm  Fm  Eb
+כל הקיץ    הסתובבנו   בין הרים ובין סלעים
+‏Eb7  Gm      Fm/ F#  Fm Eb
+וברכבת       רצנו טסנו
+‏C#maj7  Cm  G7  Ab     Eb
+הו מה טוב ומה נעים
+‏Fm C C4     C#maj7        Amaj7 C#maj7
+עכשיו        רק בוץ       ושלוליות
+‏C  C4   C#  Ab   Eb    Bbm
+אין ברירה  הקיץ עוד רחוק
+‏      F    C    Gm      F
+כי חורף  השמש נעלמת בחורף
+‏ Dm/ C   Dm      C     Gm
+הגשם מטפטף על העורף
+‏C  C4  G  Dm/ B
+חורף     וקר
+‏   F       C           Gm      F
+חורף   צריך ללבוש  מעיל כל החורף
+‏ Dm/ C   Dm      C     Gm
+וגשם מטפטף על העורף
+‏C#  C4  G  Dm/ B
+חורף     וקר
+#‏  F#   C#   Abm     F
+חורף  השמש נעלמת בחורף
+‏  Ebm/ C# Ebm     C#    Abm
+הגשם מטפטף על העורף
+‏C#  C#4  Ab Ebm/ C
+חורף      וקר
+#‏  F#      C#          Abm     F
+חורף   צריך ללבוש  מעיל כל החורף
+‏ Ebm/ C#  Ebm     C#    Abm
+וגשם מטפטף על העורף
+‏ F# C#  C#4  Ab Ebm/ C
+חורף     וקר
+
+מעבר:C#maj7 Fm Eb Eb x2
+#‏ F# C# Cdim Ebm   C#   B    Bbm   Abm F
+נספר   פה   על הקיץ    שהולך   ו נ ע ל ם
+
+סיום:Eb Eb C#maj7 Fm x2 

@@ -1,0 +1,46 @@
+רחם בחסדך
+מרדכי בן דוד
+המערכת
+0
+לטון המקורי - קאפו בשריג 1
+Am5+:  *02211
+C/ A:   *02010
+Am6:   *02212
+Ddim7:  **0101
+Am/ G:  302210
+‏C#m B/ Ab Abm
+רחם בחסדך
+‏Amaj7 Bbm7 Abm Eb7  C#m6
+על   עמך   צורנו
+‏  C#m7 C#m Ab7  Abm
+על ציון משכן כבודך
+‏ Abm Eb7   C#dim7
+זבול  בית תפארתנו
+‏Abm5+ Abm6 Abm5+    Abm
+אוי... בן דוד עבדך
+‏ C#m   Ab7       Abm
+יבוא   ו י ג א ל נ ו
+‏Abm/ F# Abm      Eb7 C#dim7
+ר ו ח       א פ י נ ו
+‏ Eb Eb4 C#m   B E F# E
+מ ש י ח    א ד ו נ י
+‏Abm5+ Abm6 Abm5+    Abm
+אוי... בן דוד עבדך
+‏ C#m   Ab7       Abm
+יבוא   ו י ג א ל נ ו
+‏Abm/ F# Abm      Eb7 C#dim7
+ר ו ח       א פ י נ ו
+‏ Abm  Eb7      C#m E
+מ ש י ח    א ד ו נ י
+
+מעבר:C#m7 Abm C#m Amaj7 x4
+‏Abm5+ Abm6 Abm5+ Abm
+נ... נ... נ... נ
+‏C#m Ab7 F#m  Abm
+נ... נ... נ... נ
+‏  E Abm Eb7 C#dim7
+נ...  נ... נ... נ
+‏     Abm Eb7 C#m
+נ... נ... נ... נ
+
+סיום:C#m Amaj7 C#m7 Abm x4 

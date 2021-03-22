@@ -1,0 +1,91 @@
+ארץ
+אילנית
+המערכת
+-1.5
+קאפו בשריג 9
+
+פתיחה:
+‏Ebm
+
+‏Ebm/ C#       Ebm
+ארץ, ארץ, ארץ
+‏Abm           B
+ארץ תכול אין עב
+‏  Bb Fm7b5 Ebm/ F# Bb/ Ab       Bb
+והשמש לה   כדבש וחלב
+‏Ebm/ C#      Ebm
+ארץ בה נולדנו
+‏Abm       B
+ארץ בה נחיה
+‏  Ebm Ebm/ F#    Bb/ Ab     Bb
+ונשב בה, יהיה  מה שיהיה
+‏Ebm   Fm7b5    Ebm/ F# Abm
+ארץ שנאהב  היא לנו אם ואב
+‏F#      B   F#       B
+ארץ של העם   ארץ לעולם
+#‏Ddim7 Ebm      Abm    F#      B/ F
+ארץ  בה נולדנו  ארץ בה נחיה
+‏       Bb Ebm Bb
+יהיה מה שיהיה
+‏Ebm/ C#      Ebm
+ארץ, ארץ, ארץ
+‏ Abm         B
+ים אל מול החוף
+‏   Bb Fm7b5 Ebm/ F#   Bb/ Ab    Bb
+ופרחים וילדים  בלי סוף
+‏ Abm      B  Ebm/ C#   Ebm
+בצפון כינרת   בדרום חולות
+‏   Ebm Ebm/ F#       Bb/ Ab  Bb
+ומזרח למערב  נושק גבולות
+‏Ebm   Fm7b5    Ebm    Abm
+ארץ שנאהב  היא לנו אם ואב
+‏F#      B   F#       B
+ארץ של העם   ארץ לעולם
+#‏Ddim7 Ebm    Fm7b5    F#      B/ F
+ארץ  בה נולדנו  ארץ בה נחיה
+‏       Ebm Bb
+יהיה מה שיהיה
+‏Ebm   Fm7b5    Ebm    Abm
+ארץ שנאהב  היא לנו אם ואב
+‏F#      B   F#       B
+ארץ של העם   ארץ לעולם
+#‏Ddim7 Ebm    Fm7b5    F#      B/ F
+ארץ  בה נולדנו  ארץ בה נחיה
+‏       Ebm Bb
+יהיה מה שיהיה
+
+מעבר:
+‏Fm7b5 Ebm/ F# Abm Abm/ Bb Bb
+
+‏ Ebm/ C#      Ebm
+ארץ, ארץ, ארץ 
+‏Abm     B
+ארץ התורה
+‏    Bb Fm7b5 Ebm/ F# Bb/ Ab       Bb
+את מקור האור ושפת האמונה
+‏Ebm/ C#      Ebm
+ארץ, ארץ, ארץ
+‏Abm    B
+ארץ יקרה
+‏     Ebm Bb/ Ab        Bb
+הן הבטחת שאין זו אגדה
+
+מעבר:Abm Bb Ebm Ebm x2
+‏Ebm   Fm7b5    Ebm    Abm
+ארץ שנאהב  היא לנו אם ואב
+‏F#      B   F#       B
+ארץ של העם   ארץ לעולם
+#‏Ddim7 Ebm    Fm7b5    F#      B/ F
+ארץ  בה נולדנו  ארץ בה נחיה
+‏       Ebm Bb
+יהיה מה שיהיה
+‏Ebm   Fm7b5    Ebm    Abm
+ארץ שנאהב  היא לנו אם ואב
+‏F#      B   F#       B
+ארץ של העם   ארץ לעולם
+#‏Ddim7 Ebm    Fm7b5    F#      B/ F
+ארץ  בה נולדנו  ארץ בה נחיה
+‏       Ebm Bb
+יהיה מה שיהיה
+
+סיום:Ebm Ebm Abm Bb x2 

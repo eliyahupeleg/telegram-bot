@@ -1,0 +1,72 @@
+אין כמוה
+רמי קלינשטיין
+המערכת
+-2
+קאפו בשריג 8
+Ab/ F#:  xx4544
+F#:     xx4322
+F#maj7: xx4666
+C#/ B:   7x666x
+B/ Eb:   xx144x
+C#/ F:   xx366x
+
+פתיחה:
+‏Bb C/ Bb Bbmaj7 C/ Bb Bb x2
+
+‏Bb   C/ Bb    Bbmaj7      C/ Bb  Bb
+אין  כמוה   מי יודע זאת כמוני    
+‏Bb   C/ Bb  Bbmaj7      C/ Bb    Bb
+אין   כמוה    זה הולך  ומתחזק    
+‏ Bb   C/ Bb     Bbmaj7   C/ Bb     Bb
+ואין  כבר כח    שיקח  אותה ממני    
+‏C/ Bb    Bbmaj7    C/ Bb      Bb
+רק  לא לשכוח    שהאושר הוא ספק 
+
+מעבר:
+‏Ebmaj7 F   Dm Dm/ A Bb
+
+‏Bb   C/ Bb     Bbmaj7       C/ Bb  Bb
+לא  לפגוע   יש חוטים דקים ביננו    
+‏Ebmaj7 C/ Bb  Bbmaj7       C/ Bb Bb
+לא לקרוע    יש סיבות להתאפק       
+‏       F/ Eb   Ebmaj7       F/ Eb
+רק  לא לשמוע   שזה עוד מעט איננו
+‏   G   G4 G       F      Ebmaj7
+לא לשמוע   את הבכי מתרחק       
+פזמון:
+‏       D7    Bb        F   Cm
+כשהבית ריק      הבית ריק     
+‏     G7   Bb           F    Eb
+לא משנה לי    אם אני צודק     
+‏       D7    Bb        F   Cm
+כשהבית ריק      הבית ריק     
+‏     Bb           F    Eb
+לא משנה לי    אם אני צודק
+
+מעבר:
+‏Bb C/ Bb Bbmaj7 C/ Bb Bb
+
+‏Bb   C/ Bb    Bbmaj7      C/ Bb  Bb
+אין  כמוה   מי יודע זאת כמוני    
+‏Ebmaj7 C/ Bb Bbmaj7      C/ Bb    Bb
+אין עוד כח     שאותנו ינתק         
+‏         F   Ebmaj7      F/ Eb
+אין כמוה   עד היום האחרון היא
+‏     G         F/ A    Eb/ G
+לא לשכוח  את עצמי אני בודק
+פזמון
+
+מעבר:
+‏Bb C/ Bb Bbmaj7 C/ Bb x2
+
+‏Gadd9   C Fm   Dm Bb Fm
+
+‏Ab Bb/ Ab Abmaj7 Bb/ Ab C
+
+מעבר:Bb Bb Bb Bb x2
+‏Bb   C/ Bb    Bbmaj7      C/ Bb  Bb
+אין  כמוה   מי יודע זאת כמוני    
+‏D          Bbmaj7      C/ Bb    Bb
+אין   כמוה    זה הולך  ומתחזק    
+
+סיום:Bb Bb Bb Bb x2 

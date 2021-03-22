@@ -1,0 +1,75 @@
+בוקר חדש
+מוש בן ארי וענת בן חמו
+המערכת
+-2
+קאפו בשריג 6
+C#mmaj7: x46554
+C#6:     x463xx
+Ammaj7:  x02110
+
+פתיחה:
+‏Dm Bb Em7b5   Dm Bb Em7b5   Dm
+
+‏Gm        Em7b5     Bb     Dm   Em7b5  Bb Dm
+וללכת  עם הרוח      ולרמוס שוב ענפים בגן
+Dm     Em7b5 Bb Dm       G6   Gm7         Gmmaj7  
+ומה נשאר בסוף רק שנינו     עד לכאן
+‏  Gm      Em7b5       Bb     Dm   Em7b5        Bb
+לאהוב אותך כמו פעם      ולנשק אותך בלי הפסקה
+Dm     G6   Gm7          Gmmaj7
+לדמיין פתאום את שנינו     משפחה
+‏Gm/ F   Gm    D    Cm/ A    Cm/ Bb Cm
+לא,        רק שלא ייגמר לעולם
+‏   Dm/ C    Dm/ C#   Dm    A       Em7b5
+בוא נרוץ בוא נברח   לים   הגדול לא גאות
+‏   Cm          C       Bb    Dm/ B
+ולא שפל יוכלו     לראות אותנו כאן
+‏   Dm    A   Em7b5    Gm/ F Gm             D
+נשברים כמו גלים לים       כמו הקצף בחול החם
+#‏C   Bb   Dm/ B     Dm/ C   Dm/ C
+נעלם  ונקום לעוד בוקר חדש
+#‏   Dm   C/ C
+עוד בוקר חדש
+
+מעבר:
+‏Dm Bb Em7b5   Dm Bb Em7b5   Dm
+
+‏Gm      Em7b5     Bb     Dm   Em7b5           Dm
+אולי ניסע לעיר אחרת      ונחיה לנו את החלום
+Dm        G6   Gm7        Gmmaj7   
+ואין איתך גבולות לאושר     או דמיון
+‏  Gm       Em7b5     Bb     Dm   Em7b5       Bb
+ונלך שוב עם הרוח       ונאסוף שוב ענפים בגן
+Dm     G6   Gm7      Gmmaj7
+ונדע שזה רק שנינו     לעולם
+‏Gm/ F   Gm    D    Cm/ A    Cm/ Bb Cm
+לא,        רק שלא ייגמר לעולם
+‏   Dm/ C    Dm/ C#   Dm    A       Em7b5
+בוא נרוץ בוא נברח   לים   הגדול לא גאות
+‏   Cm          C       Bb    Dm/ B
+ולא שפל יוכלו     לראות אותנו כאן
+‏   Dm    A   Em7b5    Gm/ F Gm             D
+נשברים כמו גלים לים       כמו הקצף בחול החם
+#‏C   Bb   Dm/ B     Dm/ C   Dm/ C
+נעלם  ונקום לעוד בוקר חדש
+#‏   Cm   C/ C
+עוד בוקר חדש
+
+מעבר:
+‏Cm   Cm/ Bb Cm/ A   D Gm   Gm/ F Em7b5   A
+
+‏Dm   Dm/ C# Dm/ C   Dm/ B Bb
+
+‏  Cm          C
+לראות אותנו כאן
+‏   Dm    A   Em7b5    Gm/ F Gm             D
+נשברים כמו גלים לים       כמו הקצף בחול החם
+#‏C   Bb     F      Dm/ C   Dm/ C
+נעלם  ונקום לעוד בוקר חדש
+#‏   Dm   C/ C
+עוד בוקר חדש
+
+מעבר:Dm Gm Dm Gm x4
+
+סיום:
+‏Dm Bb Em7b5   Dm Bb Em7b5   Dm

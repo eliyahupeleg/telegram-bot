@@ -1,0 +1,49 @@
+זה מה שיש
+הבנות נחמה
+המערכת
+0
+קאפו בשריג 6
+Aadd9/ Eb: xx1200
+
+פתיחה:
+‏C# Ebadd9 Bbm Ebadd9/ A  x2
+
+#‏ Ebadd9/ A Bbm Ebadd9 C
+זה        מה         
+#‏Ebadd9/ A Bbm Ebadd9 C
+שיש                 
+#‏ Ebadd9/ A Bbm Ebadd9 C
+זה        מה         
+#‏Ebadd9/ A Bbm Ebadd9 C
+שיש                 
+
+מעבר:
+#‏Ab Bbm Ebadd9/ A Ebm Ebm/ G F
+
+‏Bmaj7 C   C/ C# Ebadd9/ A
+
+‏Ebm/ G Ebm    Ebadd9/ A   Bbm Ab
+בינתיים    אותי  תבין        
+#‏Ebadd9/ A   C/ C# B/ C  B   F
+עד שאני אבין              
+‏Ebm/ G Ebm    Ebadd9/ A   Bbm Ab
+בינתיים    אותי  תקבל        
+#‏Ebadd9/ A   C/ C# B/ C  B   F
+עד שאני אקבל              
+‏Ebm/ G Ebm  Ebadd9/ A   Bbm Ab
+בינתיים    זה מה שיש       
+#‏Ebadd9/ A   C/ C# B/ C    B F
+בינתיים                  
+‏Ebm/ G Ebm  Ebadd9/ A   Bbm Ab
+בינתיים    זה מה שיש       
+#‏Ebadd9/ A   C/ C# B/ C    B F
+בינתיים                  
+‏Ebm/ G Ebm        Ebadd9/ A    Bbm   Ab
+בינתיים    אני    אבין ואקבל        
+#‏Ebadd9/ A   C/ C# B/ C      B F
+שזה  מה שיש               
+
+מעבר:Bbm Bbm C# Bbm x4
+
+סיום:
+‏C# Ebadd9 Bbm Ebadd9/ A  x4

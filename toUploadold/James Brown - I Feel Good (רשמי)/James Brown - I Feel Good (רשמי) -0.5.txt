@@ -1,0 +1,128 @@
+I Feel Good
+James Brown
+המערכת
+0
+לטון המקורי - קאפו בשריג 1
+           C#5    
+Whoa I feel good,
+
+ C#5                    
+I knew that I would, now
+
+      F#                    C#5        
+I feel good,   I knew that I would, now
+
+       Ab        F#          C#5 F5 Ab5 B5 Eb5
+So good,  so good,  I got you                
+
+            C#5                        
+Whoa I feel nice, like sugar and spice
+
+      F#                        C#5  
+I feel   nice,   like sugar and spice
+
+       Ab        F#          C#5 F5 Ab5 B5 Eb5
+So nice,  so nice,  I got you                
+
+
+Bridge:
+
+e|------9-7-----7-------|--|
+
+B|------------9----9----|--|
+
+G|-6------------------8-|x2|
+
+D|----------------------|--|
+
+A|----------------------|--|
+
+E|----------------------|--|
+
+      F#                    
+When I hold you   in my arms
+
+ C#                            
+I know that I can't do no wrong
+
+   F#                         
+And when I hold you in my arms
+
+  Ab                        
+My love won't do you no harm
+
+          C#5                            
+And I feel    nice,  like sugar and spice
+
+      F#                      C#5  
+I feel   nice, like sugar and spice
+
+        Ab        F#          C#5 F5 Ab5 B5 Eb5
+So nice,   so nice,  I got you                
+
+
+Bridge:
+
+e|------9-7-----7--------|--|
+
+B|------------9----9-----|--|
+
+G|-6-------------------9-|x2|
+
+D|-----------------------|--|
+
+A|-----------------------|--|
+
+E|-----------------------|--|
+
+      F#                    
+When I hold you   in my arms
+
+ C#                            
+I know that I can't do no wrong
+
+   F#                         
+And when I hold you in my arms
+
+  Ab                       
+My love can't do me no harm
+
+          C#5                          
+And I feel   nice, like sugar and spice
+
+      F#                      C#5  
+I feel   nice, like sugar and spice
+
+       Ab         F#          C#5 F5 Ab5 B5 Eb5
+So nice,  so nice,   I got you                
+
+            C#5   
+Whoa I feel good,
+
+ C#5                    
+I knew that I would, now
+
+      F#                    C#5   
+I feel good,   I knew that I would
+
+        Ab         F#        C#5 F5 Ab5 B5 Eb5
+So good,   so good, I got you                
+
+       Ab        F#          C#5 F5 Ab5 B5 Eb5
+So good,  so good,  I got you                
+
+        Ab         F#          
+ So good,   so good,   I got you
+
+
+Bridge:
+
+C#5 F5 Ab5 B5 Eb5 C#5 B5 Ab5 F#5 E5
+
+Bridge:F# Ab C#5 C#5 x2
+
+     C#9
+Hey   
+
+Ending:C#5 C#5 F# Ab x2 
+

@@ -1,0 +1,60 @@
+לאט מעט
+דודו טסה
+המערכת
+0
+לטון המקורי - קאפו בשריג 3
+C#9*:   x4454x
+E*:     024100
+C#5+*:  x47454
+F#m9:   xx4224
+F#m9/ E: xx2224
+F#m9/ D: xx0224
+F#add9  Bb5+*     Bbm
+לעבור את היום   בשלום
+Ebm7  Ebm     Bb9*    Fm
+עלייך אשמור   מבטיח לזכור
+‏  Ebdim7   Cm   C       F
+מלאך שלי  הו מלאך שלי
+F#add9 Bb5+*       Bbm 
+נעמוד מול כל מה שיכאיב
+Ebm7     Ebm      Bb9*     Fm    
+כל היום לך אשיר  את שאבד לך אחזיר
+‏  Ebdim7     Cm   C       F
+מלאך שלי  הו מלאך שלי
+‏Ebm9/ B Ebm9/ C# Ebm9
+לאט
+‏         Fm      C#dim7
+אמצא רק בשבילך    תשובה
+‏       Ebm    Abm
+ואת כל כך   תמימה
+Ebm9/ B Ebm9/ C# Ebm9 F#maj7  C#* 
+לאט,   לאט,   מאט
+‏        Fm    C#dim7
+הניחי את ליבך   אצלי
+F#maj7 C#*   Ebm Abm  
+אל תפחדי   מעט,  מעט
+‏F#add9          Bbm
+לא אשן עד שלא תרדמי
+Adim            Ebm   Bb9*     Fm 
+עיניים תעצמי  חלילה תנדדי  במחשבות
+
+מעבר:
+‏C   Cm Ebdim7
+
+מעבר:Ebdim7 F#add9 F#add9 Ebm7 x4
+‏Ebm9/ B Ebm9/ C# Ebm9
+לאט
+‏         Fm      C#dim7
+אמצא רק בשבילך    תשובה
+‏       Ebm    Abm
+ואת כל כך   תמימה
+Ebm9/ B Ebm9/ C# Ebm9 F#maj7  C#* 
+לאט,   לאט,   מאט
+‏        Fm    C#dim7
+הניחי את ליבך   אצלי
+F#maj7 C#*   Ebm Abm  
+אל תפחדי   מעט,  מעט
+C# F#maj7  C#* 
+לאט,   לאט
+
+סיום:F#add9 Ebm7 Ebdim7 F#add9 x4 

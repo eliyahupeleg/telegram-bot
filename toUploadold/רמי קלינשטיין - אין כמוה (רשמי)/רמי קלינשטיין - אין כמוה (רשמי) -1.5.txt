@@ -1,0 +1,72 @@
+אין כמוה
+רמי קלינשטיין
+המערכת
+-2
+לטון המקורי - קאפו בשריג 3
+Ab/ F#:  xx4544
+F#:     xx4322
+F#maj7: xx4666
+C#/ B:   7x666x
+B/ Eb:   xx144x
+C#/ F:   xx366x
+
+פתיחה:
+‏Eb F/ Eb Ebmaj7 F/ Eb Eb x2
+
+‏Eb   F/ Eb    Ebmaj7      F/ Eb  Eb
+אין  כמוה   מי יודע זאת כמוני    
+‏Eb   F/ Eb  Ebmaj7      F/ Eb    Eb
+אין   כמוה    זה הולך  ומתחזק    
+‏ Eb   F/ Eb     Ebmaj7   F/ Eb     Eb
+ואין  כבר כח    שיקח  אותה ממני    
+‏F/ Eb    Ebmaj7    F/ Eb      Eb
+רק  לא לשכוח    שהאושר הוא ספק 
+
+מעבר:
+‏Abmaj7 Bb Gm   Gm/ D Eb
+
+‏Eb   F/ Eb     Ebmaj7       F/ Eb  Eb
+לא  לפגוע   יש חוטים דקים ביננו    
+‏Abmaj7 F/ Eb  Ebmaj7       F/ Eb Eb
+לא לקרוע    יש סיבות להתאפק       
+‏       Bb/ Ab   Abmaj7      Bb/ Ab
+רק  לא לשמוע   שזה עוד מעט איננו
+‏   C   C4 C      Bb      Abmaj7
+לא לשמוע   את הבכי מתרחק       
+פזמון:
+‏       G7    Eb       Bb   Fm
+כשהבית ריק      הבית ריק     
+‏     C7   Eb          Bb    Ab
+לא משנה לי    אם אני צודק     
+‏       G7    Eb       Bb   Fm
+כשהבית ריק      הבית ריק     
+‏     Eb          Bb    Ab
+לא משנה לי    אם אני צודק
+
+מעבר:
+‏Eb F/ Eb Ebmaj7 F/ Eb Eb
+
+‏Eb   F/ Eb    Ebmaj7      F/ Eb  Eb
+אין  כמוה   מי יודע זאת כמוני    
+‏Abmaj7 F/ Eb Ebmaj7      F/ Eb    Eb
+אין עוד כח     שאותנו ינתק         
+‏        Bb   Abmaj7     Bb/ Ab
+אין כמוה   עד היום האחרון היא
+‏     C        Bb/ D    Ab/ C
+לא לשכוח  את עצמי אני בודק
+פזמון
+
+מעבר:
+‏Eb F/ Eb Ebmaj7 F/ Eb x2
+
+‏Cadd9   F Bbm Gm  Eb Bbm
+
+‏C# Eb/ C# C#maj7 Eb/ C# F
+
+מעבר:Eb Eb Eb Eb x2
+‏Eb   F/ Eb    Ebmaj7      F/ Eb  Eb
+אין  כמוה   מי יודע זאת כמוני    
+‏G          Ebmaj7      F/ Eb    Eb
+אין   כמוה    זה הולך  ומתחזק    
+
+סיום:Eb Eb Eb Eb x2 

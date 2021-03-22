@@ -1,0 +1,62 @@
+You are So Beautiful
+Joe Cocker
+המערכת
+0
+
+G7 =320001
+
+G6 =320000
+
+Intro x2:
+
+e||-----0-------0-------2-------1----|
+
+B||-----2-------2-------3-------3----|
+
+G||-----2-------2-------2-------2----|
+
+D||---2---2---2---2---0---0---0---0--|
+
+A||-0--------------------------------|
+
+E||---------3-------2-------1--------|
+
+
+Bridge:A7 C#m A A x4
+
+A   Amaj7  A7  D    D7   G G7 G6      A  Amaj7 A7
+You  are   so  beautiful        to me            
+
+A   Amaj7  A7  D   D7    G G7 G6       A  A7
+You  are   so  beautiful         to me      
+
+          A7    D
+Can't you see    
+
+                    C#m        F#m
+You're everything I hoped for     
+
+                    Bm    A
+You're everything I need   
+
+    Amaj7 A7  D         G7 G6         A Amaj7 A7
+You are   so  beautiful        to me            
+
+    Amaj7 A7  D         G7 G6         A Amaj7
+You are   so  beautiful        to me         
+
+          A7    D
+Can't you see    
+
+                    C#m        F#m
+You're everything I hoped for     
+
+                    B     A
+You're everything I need   
+
+    Amaj7 A7  D         G7 G6       A Amaj7 A7 D G7 G6 A
+You are   so  beautiful       to me                     
+
+
+Bridge:A7 C#m A A x4Ending:A A A7 C#m x4 
+

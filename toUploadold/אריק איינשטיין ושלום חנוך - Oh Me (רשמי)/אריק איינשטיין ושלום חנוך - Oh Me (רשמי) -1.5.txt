@@ -1,0 +1,89 @@
+Oh Me
+אריק איינשטיין ושלום חנוך
+המערכת
+0
+לטון המקורי - קאפו בשריג 3
+
+פתיחה:
+
+    B   E     G        E   
+e||-2-5-4-2---------------||
+
+B||---------5-----5-3-3~5-||
+
+G||-----------------------||
+
+D||-----------------------||
+
+A||-----------------------||
+
+E||-----------------------||
+
+A       Amaj7
+Oh me Oh me  
+
+C#m            F#  
+somthing in there
+
+                   B      B7   
+there nust be somthing in there
+
+    E           
+oh me you and me
+
+ A     Amaj7 C#m               F#
+oh my oh my conscience is clear
+
+              B      B7
+it can be only a dream 
+
+    E            
+oh my, you and me
+
+ F#m                    
+one two three four five
+
+         B     E  
+now Im feel a live
+
+F#m                     B      E  
+two three four now I feel it more
+
+ A             F 
+and I feel It fine
+
+   A 
+Oh my
+
+A       Amaj7
+oh we oh we  
+
+C#m            F#  
+make it this time
+
+                   B      B7  
+why must we brake it this time
+
+    E           
+oh me you and me
+
+
+Bridge:C#m B B A x2
+
+ F#m                    
+one two three four five
+
+         B     E  
+now Im feel a live
+
+F#m                     B      E  
+two three four now I feel it more
+
+ A             F 
+and I feel It fine
+
+   A 
+Oh my
+
+Ending:B A C#m B x2 
+

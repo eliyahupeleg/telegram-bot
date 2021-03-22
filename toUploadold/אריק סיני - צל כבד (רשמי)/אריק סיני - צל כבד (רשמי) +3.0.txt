@@ -1,0 +1,94 @@
+צל כבד
+אריק סיני
+המערכת
+1
+קאפו בשריג 6
+Eb6: xx131x
+
+פתיחה:
+‏E   Emaj7 E   Emaj7 E   Emaj7 E   Emaj7 x2
+
+‏      E7   Emaj7   E
+מה יהיה            
+‏     A6   Amaj7 A      E7
+אני מוצא ומאבד           
+‏             C#m Emaj7    E
+הולך בדרך ומועד           
+‏       F B B4  B        C#m
+בתוך תוכי   אני פוחד       
+‏      Emaj7    E
+מה יהיה        
+‏Amaj7   A                E7
+אני רואה בשמש צל כבד       
+‏F#m C#m Abm E          D       A6
+עוד מעט יבוא הגשם   ו י ר ד    
+‏E7   E        B   F#m
+וכאן לבד אני עומד    
+‏C#m Emaj7    E                 A6 Amaj7   A
+שם,           מאחורי הרים גבוהים          
+‏                  B
+והשמיים הכהים אי שם
+‏    E7   Emaj7 E          B    B4
+בטח מחכה רק בשבילי        אממממממ
+‏C#m Emaj7    E                A6 Amaj7   A
+שם,           מעל גגות בתי העיר          
+‏        B        F#m
+קשה לראות ביום סגריר
+‏E  B   F#m  C#m Abm
+אי שם   לי את מחכה
+
+מעבר:
+‏E   Emaj7 E   Emaj7
+
+‏    Amaj7    A               E7    Emaj7   E
+ריח ים          תמיד עולה ברוח הקיצית       
+‏Emaj7   E            A6
+בא אלי שכוח ומצית      
+‏F B B4   B                C#m
+בא כמו להזכיר לי שהיית       
+‏Amaj7    A           E7      Emaj7   E
+איך        בא החורף על הקיץ בחטף      
+‏F#m C#m Abm E        D        A6
+שוב אני הולך בדרך  ו נ ס ח ף    
+‏ E7   E    B     F#m
+איך בא הגשם ושטף    
+‏C#m Emaj7    E                 A6 Amaj7   A
+שם,           מאחורי הרים גבוהים          
+‏                  B
+והשמיים הכהים אי שם
+‏    E7   Emaj7 E          B    B4
+בטח מחכה רק בשבילי        אממממממ
+‏C#m Emaj7    E                A6 Amaj7   A
+שם,           מעל גגות בתי העיר          
+‏        B        F#m
+קשה לראות ביום סגריר
+‏E  B   F#m  C#m Abm
+אי שם   לי את מחכה
+מעבר וסולו:
+‏E   Emaj7 E   Emaj7
+
+‏E   Emaj7 E7   A Amaj7   A6
+
+‏E   Emaj7 C#m B B4 B F
+
+‏E   Emaj7 E7   A Amaj7   A6 D
+
+‏E Abm C#m F#m B E   E7
+
+‏C#m Emaj7    E                 A6 Amaj7   A
+שם,           מאחורי הרים גבוהים          
+‏                  B
+והשמיים הכהים אי שם
+‏    E7   Emaj7 E          B    B4
+בטח מחכה רק בשבילי        אממממממ
+‏C#m Emaj7    E                A6 Amaj7   A
+שם,           מעל גגות בתי העיר          
+‏        B        F#m
+קשה לראות ביום סגריר
+‏E  B   F#m  C#m Abm
+אי שם   לי את מחכה
+
+מעבר:A6 C#m E E7 x2
+
+סיום:
+‏E   Emaj7 E   Emaj7 E   Emaj7 E   Emaj7 E

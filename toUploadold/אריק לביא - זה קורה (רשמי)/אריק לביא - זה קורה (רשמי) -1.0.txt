@@ -1,0 +1,98 @@
+זה קורה
+אריק לביא
+המערכת
+-1.5
+לטון המקורי - קאפו בשריג 2
+
+פתיחה:
+‏Bbm C# C#add9 F#maj7 F
+
+‏Bbm C# F#maj7 F Bbm F#7 Bbm F#7
+
+‏    F#maj7 C#add9 Bbm
+זה קורה              
+‏  F F#maj7 C#add9 C# Bbm      F
+שהדרך מתמשכת                   
+‏    F#maj7 C#add9 Bbm
+זה קורה              
+‏    C# Ab Ebm Ab4  Ab    Eb7
+יש ללכת, ללכת              
+#‏C# Ab Ab4   Ab          C
+שום דבר לא ידוע           
+‏            Bbm Ab/ A    Ab
+לא שנה, לא שבוע          
+‏                  F         Bbm    F
+יש לנוע, לנוע,    ולחשוב שהייתי יכול
+‏  C#      Ab
+לחזור על הכל
+‏F  F4            F#maj7
+אבל בן אדם   זה קורה   
+‏   F#maj7 C#add9 Bbm
+זה קרה              
+‏  F F#maj7 C#add9  Bbm       F
+שהדרך התמשכה לי               
+‏   F#maj7 C#add9 Bbm
+זה קרה              
+‏    C# Ab Ebm    Ab          Eb
+לא ידעתי איך זה בא לי          
+#‏C# Ab Ab4   Ab          C
+שום דבר לא ידוע           
+‏            Bbm Ab/ A    Ab
+לא שנה, לא שבוע          
+‏                  F         Bbm    F
+יש לנוע, לנוע,    ולחשוב שהייתי יכול
+‏  C#      Ab
+לחזור על הכל
+‏F  F4            F#maj7
+אבל בן אדם   זה קורה   
+
+מעבר:
+‏G Gadd9 Gm G
+
+‏     Ab Eb7 Cm
+זה יקרה      
+‏   G Ab Eb7  Cm       G
+ואולי בסוף הדרך        
+‏   Abmaj7 Eb7 Cm
+שנראה           
+‏    Ebmaj7 Bb F   Bb     F
+כי הדרך מתמשכת          
+‏Eb   Bb      Ebmaj7
+שום דבר לא ידוע    
+‏    Cm Bb/ B    Bb      Eb
+לא שנה, לא שבוע         
+Cm G Gdd9   G         
+יש לנוע לנוע          
+‏                  G
+ולחשוב  שהייתי יכול
+‏      Abmaj7  Eb7      Bb
+לחזור על הכל   אבל בן אדם
+‏  A7 A G  Gadd9
+זה יקרה        
+‏Bbmaj7 F Dm    A
+זה קורה        
+‏  A Bbmaj7 F  Dm      A
+שהדרך מתמשכת          
+‏     Bbmaj7 F Dm
+זה קורה        
+‏    F     C     G
+יש ללכת, ללכת    
+
+מעבר:F#maj7 F Bbm Bbm x4
+‏F     C           F
+שום דבר לא ידוע    
+‏Dm C/ C#    C           F
+לא שנה, לא שבוע         
+‏         Dm A A4   A
+יש לנוע לנוע        
+‏                  A
+ולחשוב  שהייתי יכול
+‏  F7      Cm
+לחזור על הכל
+‏A  A4            Bbmaj7
+אבל בן אדם   זה קורה   
+
+מעבר:F#maj7 F Bbm Bbm x4
+
+סיום:
+‏Dm F/ C Bb A7 Bbmaj7

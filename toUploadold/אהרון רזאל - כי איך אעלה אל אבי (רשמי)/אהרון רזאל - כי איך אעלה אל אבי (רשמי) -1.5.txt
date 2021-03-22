@@ -1,0 +1,58 @@
+כי איך אעלה אל אבי
+אהרון רזאל
+המערכת
+0
+לטון המקורי - קאפו בשריג 3
+
+פתיחה:
+‏         C#m      B                    Amaj7 Ab7
+
+‏         C#m             B                   Amaj7 Ab7
+
+‏                C#m    Ebm7b5    E     F#m
+
+‏                       E/ Ab     Am     E/ B         E/ C
+
+‏       C#          F#m       Ab7            Amaj7 Ab7
+
+‏   C#m      Amaj7      B        C#m
+כי איך  איך אעלה  איך אעלה   אל אבי
+‏   C#m      Amaj7      B        C#m
+כי איך  איך אעלה  איך אעלה   אל אבי
+‏   C#m      Amaj7      B        C#m
+כי איך  איך אעלה  איך אעלה   אל אבי
+‏   C#m Ab7  Ebm7b5  A  Emaj7  B  F#m
+כי איך  איך אעלה  איך  אעלה   אל אבי
+‏   F#m   C#   E/ C  E/ B Am   E/ Ab F#m  E  Ebm7b5 C#m
+כי איך   איך אעלה  אל אבי   והנער  הנער איננו איתי
+‏  C#m   Ab7        Amaj7 Ab7
+איננו איתי   איך אעלה אל אבי
+
+מעבר:
+‏     C#m                  B                Amaj7
+
+‏                  C#m  C#m                  B
+
+‏               Amaj7         C#m
+
+‏   C#m      Amaj7      B        C#m
+כי איך  איך אעלה  איך אעלה   אל אבי
+‏   C#m Ab7  Ebm7b5  A  Emaj7  B  F#m
+כי איך  איך אעלה  איך  אעלה   אל אבי
+‏   F#m   C#   E/ C  E/ B Am   E/ Ab F#m  E  Ebm7b5 C#m
+כי איך   איך אעלה  אל אבי   והנער  הנער איננו איתי
+‏  C# C#4   Ab7        Amaj7 Ab7
+איננו איתי   איך אעלה אל אבי  
+
+מעבר:
+‏F#m F#m/ E Bm F# Bm E7 Amaj7 D Ebm7b5 Ab
+
+מעבר:C#m C#m C#m x2
+‏   F# F#m   C#   E/ C  E/ B Am   E/ Ab F#m  E  Ebm7b5 C#m
+כי איך   איך אעלה  אל אבי   והנער  הנער איננו איתי  
+‏   Bm    F#   A/ F  A/ E Dm   A/ C# Bm  Amaj7  E7    Bm
+כי איך   איך אעלה   אל אבי   והנער  הנער איננו איתי
+‏ F#m Bm/ G   Bm/ Ab A Bm     C#7          D   C# C#4
+איננו  איתי   איך אעלה  אל אבי        אל אבי   
+
+סיום:C#m C#m C#m x2 

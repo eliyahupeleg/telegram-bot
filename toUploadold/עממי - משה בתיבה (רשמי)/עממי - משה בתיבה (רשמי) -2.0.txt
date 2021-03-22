@@ -1,0 +1,33 @@
+משה בתיבה
+עממי
+המערכת
+-2.5
+לטון המקורי - קאפו בשריג 4
+
+פתיחה:
+‏F#maj7 Cm7b5 F Gm7b5 F7 Bbm
+
+‏ F  Bbm      F  Bbm
+דומם שטה  תיבה קטנה
+‏B  C# Ab Ab/ Eb F Bbm
+על היאור הזך
+‏Gm7b5  F  Cm7b5 F#maj7
+ו ב ת י ב ה  משה הקטן
+‏Bbm      F7
+ילד יפה ורך
+
+מעבר:B Gm7b5 F#maj7 F x2
+‏  F Bbm   F   Bbm
+הס, הגלים השובבים
+‏ B  C# Ab Ab/ Eb F Bbm
+משה הקטן  פה שט
+‏Gm7b5  F  Cm7b5  F#maj7
+לא     יטבע,  חיה יחיה
+‏Bbm      F
+ילד זה הקט
+‏Gm7b5  F  Cm7b5  F#maj7
+לא     יטבע,  חיה יחיה
+‏Bbm     F7
+ילד זה הקט
+
+סיום:F#maj7 F B Gm7b5 x2 

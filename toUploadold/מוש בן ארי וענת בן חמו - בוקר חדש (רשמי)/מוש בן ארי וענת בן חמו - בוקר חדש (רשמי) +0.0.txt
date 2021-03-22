@@ -1,0 +1,76 @@
+בוקר חדש
+מוש בן ארי וענת בן חמו
+המערכת
+-2
+
+C#mmaj7: x46554
+C#6:     x463xx
+Ammaj7:  x02110
+
+פתיחה:
+‏Abm E Bbm7b5 Abm E Bbm7b5 Abm
+
+‏C#m      Bbm7b5      E    Abm  Bbm7b5   E Abm
+וללכת  עם הרוח      ולרמוס שוב ענפים בגן
+Abm   Bbm7b5 E  Abm     C#6  C#m7        C#mmaj7  
+ומה נשאר בסוף רק שנינו     עד לכאן
+‏  C#m    Bbm7b5        E    Abm  Bbm7b5         E
+לאהוב אותך כמו פעם      ולנשק אותך בלי הפסקה
+Abm   C#6  C#m7         C#mmaj7
+לדמיין פתאום את שנינו     משפחה
+‏C#m/ B  C#m   Ab   F#m/ Eb  F#m/ E  F#m
+לא,        רק שלא ייגמר לעולם
+‏   Abm/ F#  Abm/ G   Abm   Eb      Bbm7b5
+בוא נרוץ בוא נברח   לים   הגדול לא גאות
+‏   F#m        F#        E   Abm/ F
+ולא שפל יוכלו     לראות אותנו כאן
+‏   Abm  Eb  Bbm7b5   C#m/ B C#m           Ab
+נשברים כמו גלים לים       כמו הקצף בחול החם
+‏F#   E  Abm/ F    Abm/ F# Abm/ G
+נעלם  ונקום לעוד בוקר חדש
+‏    Abm F#/ G
+עוד בוקר חדש
+
+מעבר:
+‏Abm E Bbm7b5 Abm E Bbm7b5 Abm
+
+‏C#m    Bbm7b5      E    Abm  Bbm7b5          Abm
+אולי ניסע לעיר אחרת      ונחיה לנו את החלום
+Abm      C#6  C#m7       C#mmaj7   
+ואין איתך גבולות לאושר     או דמיון
+‏  C#m     Bbm7b5      E    Abm  Bbm7b5        E
+ונלך שוב עם הרוח       ונאסוף שוב ענפים בגן
+Abm   C#6  C#m7     C#mmaj7
+ונדע שזה רק שנינו     לעולם
+‏C#m/ B  C#m   Ab   F#m/ Eb  F#m/ E  F#m
+לא,        רק שלא ייגמר לעולם
+‏   Abm/ F#  Abm/ G   Abm   Eb      Bbm7b5
+בוא נרוץ בוא נברח   לים   הגדול לא גאות
+‏   F#m        F#        E   Abm/ F
+ולא שפל יוכלו     לראות אותנו כאן
+‏   Abm  Eb  Bbm7b5   C#m/ B C#m           Ab
+נשברים כמו גלים לים       כמו הקצף בחול החם
+‏F#   E  Abm/ F    Abm/ F# Abm/ G
+נעלם  ונקום לעוד בוקר חדש
+‏    F#m F#/ G
+עוד בוקר חדש
+
+מעבר:
+‏F#m F#m/ E F#m/ Eb Ab C#m C#m/ B Bbm7b5 Eb
+
+‏Abm Abm/ G Abm/ F# Abm/ F E
+
+מעבר:Abm C#m Abm C#m x4
+#‏  F#m        F
+לראות אותנו כאן
+‏   Abm  Eb  Bbm7b5   C#m/ B C#m           Ab
+נשברים כמו גלים לים       כמו הקצף בחול החם
+‏F#   E     B     Abm/ F# Abm/ G
+נעלם  ונקום לעוד בוקר חדש
+‏    Abm F#/ G
+עוד בוקר חדש
+
+מעבר:Abm C#m Abm C#m x4
+
+סיום:
+‏Abm E Bbm7b5 Abm E Bbm7b5 Abm

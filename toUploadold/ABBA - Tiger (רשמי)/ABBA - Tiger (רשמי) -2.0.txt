@@ -1,0 +1,70 @@
+Tiger
+ABBA
+המערכת
+0.5
+לטון המקורי - קאפו בשריג 4
+C#m6:     xx2324
+
+Ab:       xx654x
+
+C#maj7:   xx656x
+
+C#m/ maj7: xx655x
+
+
+Intro:
+
+A   E A   E A
+
+     B                                  A      B  
+The city  is  a  jungle  you  better   take   care
+
+                                   A       E
+Never   walk   alone   after   midnight     
+
+B                
+If   you   don't 
+
+                               E                 
+Believe   it   you   better   beware   of    me. 
+
+Chorus:
+
+         A                                  Am6  
+I am    behind   you    I   always   find     you
+
+          E                                  A 
+I am    the   tiger.   People   who   fear   me
+
+Am6                                    E     
+Never   go   near   me,  I am   the   tiger. 
+
+C#m            F#7           
+Yellow   eyes   are   glowing
+
+    C#m                F#7 
+Like   the   neon   lights 
+
+C#m                F#7          
+Yellow   eyes    the   spotlight
+
+                     C#m
+Of   the   city   nights
+
+The city is a nightmare, a horrible dream.
+
+Some of us will dream it forever.
+
+Look around the corner and try not to scream it's me.
+
+
+Bridge:A B A B x4
+
+The city is a prison, you never escape,
+
+you're forever trapped in the alleys.
+
+Look into the shadows, and you'll see the shape of me.
+
+Ending:A B A B x4 
+

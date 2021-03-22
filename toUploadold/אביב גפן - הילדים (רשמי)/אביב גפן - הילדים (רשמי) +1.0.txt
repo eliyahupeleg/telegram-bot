@@ -1,0 +1,56 @@
+הילדים
+אביב גפן
+המערכת
+0
+קאפו בשריג 10
+Dadd9/ F#:  xx4232
+C#dim:     x42000
+Emadd9:    022002
+
+פתיחה:
+‏Eadd9 Ebdim Ab
+C#m C#m/ B A E/ Ab F#m F#madd9 Ebdim Ab
+‏   A   C#m/ B C#m Ab  Ebdim   Eadd9
+הילדים   ישנים  בגינה     הם רבים
+Ab Ebdim F#madd9   F#m  E/ Ab  
+ צועקים     אבל תמיד משלימים   
+‏ C#m/ B C#m Ab  Ebdim   Eadd9
+הילדים   ישנים  בגינה     
+‏      E/ Ab           A
+בלי ריבים    בלי קללות
+E C#m C#add9 C#m Ab Ebdim F#madd9 F#m     
+בלי רובים  ובלי קסדות                   
+פזמון:
+‏E  B6         A       Eadd9/ Ab       E
+ואתה ישן עכשיו    בתוך אוהל מבוהל     
+‏B6           A        Eadd9/ Ab       E
+רק רציתי שתדע      אני אהבתי רק אותך  
+‏ Ebdim     Eadd9
+הילדים   זה אני 
+‏E/ Ab        A   C#m/ B C#m  Ab
+זה  אתה     יש חיוך   יש גינה
+‏       E C#m C#add9 C#m Ab Ebdim F#m/ E  F#m
+יש גם מקום לאהבה                       
+פזמון
+סולו:
+‏Eadd9 Ebdim Ab C#m C#m/ B A E/ Ab
+
+‏F#m F#m/ E Ebdim Ab C#m C#m A B E
+פזמון
+
+מעבר:
+‏B/ C   F
+
+מעבר:A Ab Eadd9 C#m x4
+‏ F/ A        F
+ואתה ישן עכשיו
+‏     F    C        Bb
+בתוך אוהל מבוהל      
+‏F/ A        F
+רק רציתי שתדע
+‏     C4           Bb
+אני אהבתי רק אותך   
+‏    F     C
+ה י ל ד י ם
+
+סיום:Eadd9 C#m A Ab x4 

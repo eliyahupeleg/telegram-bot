@@ -1,0 +1,57 @@
+ואני תפילתי
+יונתן רזאל
+המערכת
+0
+לטון המקורי - קאפו בשריג 5
+Badd9/ A: x04422
+
+פתיחה:
+‏F#add9 E F#add9 E
+
+‏        B  F#add9/ E  F#add9
+ואני    תפילתי   לך עת רצון
+‏B A F#    C#m      Dmaj7
+האם אתה   שומע  קולי
+‏        B    F#add9/ E  F#add9
+שוב אני   עומד פה  ערום לפניך
+‏ F#    C#m     Dmaj7
+האם אתה  זוכר מי אני
+‏   B   E     Abm    E   Am    Ebm/ D   Ebm
+זה אני   הקטן   שהנחת בגן, מבקש   קורא לך
+‏  Bmaj7  C#m     Dmaj7     F#    Bm    Fm    F#m
+שתבוא  שתבוא  אליי האדם   כי אני זקוק לך   בעולם
+‏             B           E      F#add9
+אז אם תשמע   קול עמוק   עמוק מתוך תוכך
+‏B A  F#     C#m    Dmaj7
+תבין שלא עזבתי אותך
+‏           B          A    F#add9
+אם תשמע   קול שקט   שקט מתוך תוכך
+‏F#    C#m      Dmaj7
+תבין שלא  עזבתי אותך
+‏   B   E    Abm    E      Am    Ebm/ D   Ebm
+זה אני  אלוהים  שיצרתי אותך   מבקש  קורא לך
+‏  Bmaj7  C#m     Dmaj7    F#     Bm    Fm    F#m
+שתבוא  שתבוא  אליי אלוהים כי אני  זקוק לך  בעולם
+‏      Bmaj7  C#m      D        Bmaj7   C#m      D
+כי העולם זקוק לך  בן אדם    כי אתה זקוק לך  בעולם
+
+מעבר:
+‏Ebm Bm F# F#/ F  Ebm Bm
+
+‏Dm Dm/ C A C B A C G
+
+‏A C D C A A D F  A A/ Ab F#m F  Cm G Bm Gm D
+
+‏Am Abm Dm A F  Em Dmaj7
+
+מעבר:B B F#add9 B x2
+‏        B  F#add9/ E  F#add9
+ואני    תפילתי   לך עת רצון
+‏B A F#    C#m      Dmaj7
+האם אתה   שומע  קולי
+‏        B    F#add9/ E  F#add9
+שוב אני   עומד פה  ערום לפניך
+‏ F# E/ F#  A A/ B A/ D
+האם  א ת ה    איתי
+
+סיום:F#add9 B B B x2 

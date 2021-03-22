@@ -1,0 +1,68 @@
+כלוב של זהב
+מירי מסיקה וקובי אוז
+המערכת
+0
+קאפו בשריג 11
+
+פתיחה:
+‏C#m Ebdim F#m C#m x2
+
+‏ Ebdim      F#m                C#m
+כלוב של זהב ציפור בכלוב של זהב    
+‏                    C#m
+לא רוצה לעוף היא מתרגלת
+‏ Ebdim       F#m                C#m
+כלוב של זהב ציפור בכלוב של זהב     
+‏      C#m E C#m Eb          C#m
+שרה מכאב היא מסתגלת           
+‏C#m E C#m Eb C#m C#m  Ab          F#m
+לפעמים חולמת על      שמיים          
+‏ C#m E C#m Eb C#m   C#m  Ab F#m
+לפעמים נרדמת       מכאב       
+‏    C#m     Ab     F#m
+לפעמים היא שרה   לחופש
+‏   C#m    Ab   F#m
+לפעמים שותקת  מהלב
+‏     Ab F#m C#m
+והיא שרה      
+‏      Ab F#m C#m
+כל-כך שרה      
+‏     A   Ab      Ebdim  F#m
+והיא שרה      לכל העולם    
+‏ Cdim        Ebm                Bbm
+כלוב של זהב ציפור בכלוב של זהב     
+‏             Bbm
+בודדה יפה ומזמרת
+‏ Cdim        Ebm                Bbm
+כלוב של זהב ציפור בכלוב של זהב     
+‏             Bbm C# Bbm C          Bbm
+היא רואה יש דרור על הצמרת          
+‏  Bbm C# Bbm C  Bbm      F    Ebm
+לפעמים חולמת על שמיים         
+‏  Bbm C# Bbm C Bbm       F    Ebm
+לפעמים נרדמת   מכאב           
+‏    Bbm     F     Ebm
+לפעמים היא שרה  לחופש
+‏  Bbm     F    Ebm
+לפעמים שותקת  מהלב
+‏    F Ebm Bbm
+והיא שרה     
+‏    F Ebm Bbm
+כל-כך שרה     
+‏      F       Cdim Ebm
+והיא שרה     לכל העולם
+‏   F Ebm Bbm
+אני שרה     
+‏     F Ebm Bbm
+כל-כך שרה     
+‏     F       Cdim Ebm
+אני שרה     לכל העולם
+
+מעבר:
+‏Bbm Cdim Ebm Bbm
+
+מעבר:C#m Ebdim C#m Ebdim x4
+‏  Ebm                      Bbm
+כלוב של זהב ציפור בכלוב של זהב
+
+סיום:C#m Ebdim C#m Ebdim x4 

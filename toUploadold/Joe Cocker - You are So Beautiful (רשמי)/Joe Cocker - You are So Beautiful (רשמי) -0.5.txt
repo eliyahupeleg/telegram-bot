@@ -1,0 +1,61 @@
+You are So Beautiful
+Joe Cocker
+המערכת
+0
+לטון המקורי - קאפו בשריג 1
+G7 =320001
+
+G6 =320000
+
+Intro x2:
+
+e||---------------------1-------0----|
+
+B||-----4-------4-------2-------2----|
+
+G||-----5-------5-------1-------1----|
+
+D||---1-6-1---1-6-1------------------|
+
+A||-------------------4---4---4---4--|
+
+E||-4-------2-------1-------0--------|
+
+
+Bridge:Ab7 Cm Ab Ab x4
+
+Ab Abmaj7 Ab7 C#   C#7  F# F#7 F#6    Ab Abmaj7 Ab7
+You  are   so  beautiful        to me            
+
+Ab Abmaj7 Ab7 C#  C#7   F# F#7 F#6     Ab Ab7
+You  are   so  beautiful         to me      
+
+         Ab7   C#
+Can't you see    
+
+                     Cm         Fm
+You're everything I hoped for     
+
+                   Bbm   Ab
+You're everything I need   
+
+   Abmaj7 Ab7 C#       F#7 F#6       Ab Abmaj7 Ab7
+You are   so  beautiful        to me            
+
+   Abmaj7 Ab7 C#       F#7 F#6       Ab Abmaj7
+You are   so  beautiful        to me         
+
+         Ab7   C#
+Can't you see    
+
+                     Cm         Fm
+You're everything I hoped for     
+
+                   Bb    Ab
+You're everything I need   
+
+   Abmaj7 Ab7 C#       F#7 F#6     Ab Abmaj7 Ab7 C# F#7 F#6 Ab
+You are   so  beautiful       to me                     
+
+Ending:Ab Ab Ab7 Cm x4 
+

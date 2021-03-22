@@ -1,0 +1,277 @@
+J'aime
+Riff Cohen
+המערכת
+-1
+
+      C#m
+J'aime
+
+Bridge and in the Verses:
+
+e|----------------------------------------------|
+
+B|----------------------------------------------|
+
+G|----------------------------------------------|
+
+D|----------------------------------------------|
+
+A|-4-4---4-4---4-4-4-4----4-4-4-4-4-4-4-4-4---2-|
+
+E|-----4-----4----------4-------------------4---|
+
+       C#m            
+J'aime Dieu qui existe
+
+       C#m                  
+J'aime Dieu qui n'existe pas
+
+       Abm  C#m         
+J'aime les importunistes
+
+            C#m            Abm
+Ceux qui n'importunent pas    
+
+       B   C#m               
+J'aime les gens de ma planète
+
+     C#m               
+Ceux qui ne le sont pas
+
+     Abm C#m                       
+Ceux qui mangent avec des baguettes
+
+        C#m                      F#m
+Ceux qui mangent avec les doigts    
+
+After each 'j'aime':
+
+e|-2--0---------2-|
+
+B|-------3--2-----|
+
+G|----------------|
+
+D|----------------|
+
+A|----------------|
+
+E|----------------|
+
+F#m                   E
+J'aime les violettes   
+
+E                     D
+J'aime les côtelettes  
+
+                 C#m      F#m
+Les castagnettes j'aime      
+
+F#m                   E
+J'aime les couronnes   
+
+E                     D
+Mon chat qui ronronne  
+
+                     C#m      F#m
+Mes potes y déconnent j'aime     
+
+F#m              E                   D
+La la   la la la    la la   la la la  
+
+D                   C#m    F#m
+La la   la la la    J'aime    
+
+F#m              E                   D
+La la   la la la    la la   la la la  
+
+D                   C#m   
+La la   la la la    J'aime
+
+          C#m              
+J'aime le Gange qui dérange
+
+                     C#m   
+Le Gange qui ne dérange pas
+
+     Abm  C#m               
+Ceux qui  sourient aux anges
+
+       C#m                      Abm
+J'aime ceux qui ne sourient pas    
+
+  B      C#m          
+Ceux qui parlent latin
+
+         C#m                  
+Ceux qui parent avec les mains
+
+     Abm  C#m                          
+Ceux qui  dansent en bougeant les reins
+
+     C#m                           F#m
+Ceux qui dansent avec les dauphins    
+
+F#m             E                  D
+J'aime Eurofoot   J'aime Bollywood  
+
+D              C#m    F#m
+Jouer du root  J'aime    
+
+F#m          E               D
+Jean qui rit   les confetti   
+
+D                C#m    F#m
+Les guiliguilis  J'aime    
+
+F#m              E                   D
+La la   la la la    la la   la la la  
+
+D                   C#m    F#m
+La la   la la la    J'aime    
+
+F#m              E                   D
+La la   la la la    la la   la la la  
+
+D                   C#m   
+La la   la la la    J'aime
+
+            C#m       
+J'aime Dieu qui existe
+
+       C#m                  
+J'aime Dieu qui n'existe pas
+
+Abm        C#m          
+J'aime les importunistes
+
+                           Abm
+Ceux qui n'importunent pas    
+
+   B       C#m               
+J'aime les gens de ma planète
+
+     C#m               
+Ceux qui ne le sont pas
+
+     Abm  C#m                       
+Ceux qui  mangent avec des baguettes
+
+         C#m                     F#m
+Ceux qui mangent avec les doigts    
+
+F#m                 E
+J'aime les fantômes  
+
+E                      D
+J'aime les chewing-gum  
+
+D                         C#m    F#m
+Les p'tits verres de rhum j'aime    
+
+F#m                  E                 D
+J'aime les dantelles   les coccinelles  
+
+D                 C#m    F#m
+Les gens fidèles  J'aime    
+
+F#m              E                   D
+La la   la la la    la la   la la la  
+
+D                   C#m    F#m
+La la   la la la    J'aime    
+
+F#m              E                   D
+La la   la la la    la la   la la la  
+
+D                   C#m   
+La la   la la la    J'aime
+
+
+Bridge:
+
+e|-------------------------------------------|--|
+
+B|-------------------------------------------|--|
+
+G|6-6-6-7-6-4-6-4-6-7\---6-6-6-7-6-4-7-6-4---|--|
+
+D|-----------------------------------------6\|x2|
+
+A|-------------------------------------------|--|
+
+E|-------------------------------------------|--|
+
+e|------------------------------------------|
+
+B|------------------------------------------|
+
+G|------------------------------------------|
+
+D|-----------------------------3-3-3-3-3-3--|
+
+A|-4-4-4-4-4-4-4-5-5-5-5-5-5-5--------------|
+
+E|------------------------------------------|
+
+e|-----------------------------------------------|
+
+B|-----------------------------------------------|
+
+G|-----------------------------------------------|
+
+D|-3-3-3-4-4-4-4-4-4-4-4-4-4-4-4-4-4-------------|
+
+A|-----------------------------------4-4s12------|
+
+E|-----------------------------------------------|
+
+e|----------------------------------------------|
+
+B|----------------------------------------------|
+
+G|----------------------------------------------|
+
+D|----------------------------------------------|
+
+A|-12-12-12-11-11-9-9-9-9-9-9-9-9s2-2-2-2-2-2-2-|
+
+E|----------------------------------------------|
+
+e|--------------------------------------------|
+
+B|--------------------------------------------|
+
+G|--------------------------------------------|
+
+D|--------------------------------------------|
+
+A|-4-4-4-4-4-4-4-4-5-5-5-5-5s9-8-8-8-8-8-4-9\-|
+
+E|--------------------------------------------|
+
+F#m              E                   D
+La la   la la la    la la   la la la  
+
+D                   C#m    F#m
+La la   la la la    J'aime    
+
+F#m              E                   D
+La la   la la la    la la   la la la  
+
+D                   C#m   
+La la   la la la    J'aime
+
+J'aime na ni na na na
+
+J'aime na ni na na pas
+
+J'aime quand tu m'aimes
+
+J'aimes quand tu   tu m'aimes
+
+
+Bridge:C#m Abm C#m C#m x2
+
+Ending:C#m C#m C#m Abm x2 
+

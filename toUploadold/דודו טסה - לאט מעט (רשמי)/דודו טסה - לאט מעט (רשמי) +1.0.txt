@@ -1,0 +1,60 @@
+לאט מעט
+דודו טסה
+המערכת
+0
+קאפו בשריג 10
+C#9*:   x4454x
+E*:     024100
+C#5+*:  x47454
+F#m9:   xx4224
+F#m9/ E: xx2224
+F#m9/ D: xx0224
+Badd9   Eb5+*     Ebm
+לעבור את היום   בשלום
+Abm7  Abm     Eb9*   Bbm
+עלייך אשמור   מבטיח לזכור
+‏  Abdim7   Fm   F      Bb
+מלאך שלי  הו מלאך שלי
+Badd9  Eb5+*       Ebm 
+נעמוד מול כל מה שיכאיב
+Abm7     Abm      Eb9*    Bbm    
+כל היום לך אשיר  את שאבד לך אחזיר
+‏  Abdim7     Fm   F      Bb
+מלאך שלי  הו מלאך שלי
+‏Abm9/ E Abm9/ F# Abm9
+לאט
+‏         Bbm     F#dim7
+אמצא רק בשבילך    תשובה
+‏       Abm    C#m
+ואת כל כך   תמימה
+Abm9/ E Abm9/ F# Abm9  Bmaj7  F#* 
+לאט,   לאט,   מאט
+‏        Bbm   F#dim7
+הניחי את ליבך   אצלי
+Bmaj7  F#*   Abm C#m  
+אל תפחדי   מעט,  מעט
+‏Badd9           Ebm
+לא אשן עד שלא תרדמי
+Ddim            Abm   Eb9*    Bbm 
+עיניים תעצמי  חלילה תנדדי  במחשבות
+
+מעבר:
+‏F   Fm Abdim7
+
+מעבר:Abdim7 Badd9 Badd9 Abm7 x4
+‏Abm9/ E Abm9/ F# Abm9
+לאט
+‏         Bbm     F#dim7
+אמצא רק בשבילך    תשובה
+‏       Abm    C#m
+ואת כל כך   תמימה
+Abm9/ E Abm9/ F# Abm9  Bmaj7  F#* 
+לאט,   לאט,   מאט
+‏        Bbm   F#dim7
+הניחי את ליבך   אצלי
+Bmaj7  F#*   Abm C#m  
+אל תפחדי   מעט,  מעט
+F#  Bmaj7  F#* 
+לאט,   לאט
+
+סיום:Badd9 Abm7 Abdim7 Badd9 x4 

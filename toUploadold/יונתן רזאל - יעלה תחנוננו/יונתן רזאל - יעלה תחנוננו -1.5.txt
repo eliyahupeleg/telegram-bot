@@ -1,0 +1,66 @@
+יעלה תחנוננו
+יונתן רזאל
+גולש
+-1
+לטון המקורי - קאפו בשריג 3
+
+פתיחה:
+‏Ebm C# B x4
+
+‏ B    C#      Ebm
+יעלה תחנוננו מערב
+‏ B    C#      Ebm
+ויבוא שועתנו מבקר
+‏Ebm B Ebm  B Fdim   Abm   Ebm
+ויראה רנוננו עד ערב          
+‏ C# B    Bbm Abm
+יעלה קולנו מערב
+‏  C# B     Bbm Abm
+ויבוא צדקתנו מבקר
+‏ B     Ebm     Bbm Abm
+ויראה פדיוננו עד ערב  
+#‏F# Abm Bbm B Ebm    C#   F
+יעלה ענוינו מערב         
+#‏ F# Abm Bbm B Ebm    C#    F
+ויבוא סליחתנו מבקר         
+#‏ Ebm C# Ebm     E C# F
+ויראה נאקתנו עד ערב  
+‏ C# B     Bbm Abm
+יעלה מנוסנו מערב
+‏  C# B   Bbm  Abm
+ויבוא למענו מבקר
+‏ B     Ebm    Bbm Abm
+ויראה כפורנו עד ערב  
+
+מעבר:
+‏Ebm C# B x2
+
+‏ B    C#      Ebm
+יעלה תחנוננו מערב
+‏ B    C#      Ebm
+ויבוא שועתנו מבקר
+‏Ebm B Ebm   B Fdim  Abm   Ebm
+ויראה רנוננו עד ערב          
+‏ C# B    Bbm Abm
+יעלה קולנו מערב
+‏  C# B     Bbm Abm
+ויבוא צדקתנו מבקר
+‏ B     Ebm     Bbm Abm
+ויראה פדיוננו עד ערב  
+#‏F# Abm Bbm B Ebm    C#   F
+יעלה ענוינו מערב         
+#‏ F# Abm Bbm B Ebm    C#    F
+ויבוא סליחתנו מבקר         
+#‏ Ebm C# Ebm     E C# F
+ויראה נאקתנו עד ערב  
+‏x2
+
+מעבר:B Ebm Ebm B x4
+‏ C# B     Bbm Abm
+יעלה אנקתנו מערב
+‏  C# B   Bbm Abm
+ויבוא אליך מבקר
+‏ Ebm B     Ebm   Bbm Abm
+ויראה אלינו עד ערב      
+
+סיום:Ebm B B Ebm x4 

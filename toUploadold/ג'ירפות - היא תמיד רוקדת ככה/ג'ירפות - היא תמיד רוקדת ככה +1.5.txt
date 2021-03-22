@@ -1,0 +1,59 @@
+היא תמיד רוקדת ככה
+ג'ירפות
+גולש
+-1.5
+קאפו בשריג 9
+
+פתיחה:
+‏C# Ebm Ab F#maj7 Fm Bbm
+
+#‏Ab    Ebm         C
+היא תמיד רוקדת ככה
+‏Bbm Fm       F#maj7
+אין זמן לבזבז
+#‏Ab    Ebm         C
+היא תמיד רוקדת ככה
+‏Bbm Fm       F#maj7
+חייה תלויים בזה 
+
+מעבר:
+‏C# Ebm Ab Ab
+
+#‏Ab    Ab    Ebm         C
+עוד שנייה אחרי השנייה
+#‏Ab    Ebm         C
+היא תמיד רוקדת ככה
+‏Bbm       Fm   F#maj7
+כל  הרחבה  מתפנה   
+#‏ Ab      Ebm        C
+לפעמים   חושבת דווקא
+‏ Fm   F#maj7
+לשבת על קצב 
+‏  C#       Bbm
+זה טוב לי לעצב
+‏F#    Fm Ebm
+לשבת על האחד
+#‏    Ab    Ab    Ebm         C
+עוד שנייה אחרי השנייה  x2
+‏F#maj7     F#maj7
+עוד שנייה
+‏Bbm         Fm    Ebm
+איך השרירים נתפסו מזה
+
+מעבר:
+‏Bbm/ A Bbm/ Ab Bbm/ G Ebm Fm
+
+‏Bbm Bbm/ A Bbm/ Ab Bbm/ G
+
+‏  Fm    Ebm
+לשבת על קצב
+‏  C#       Bbm
+זה טוב לי לעצב
+‏F#    Fm Ebm
+לשבת על האחד
+
+מעבר:Bbm Ab C# Ab x2
+#‏    Ab    Ab    Ebm         C
+עוד שנייה אחרי השנייה  x4
+
+סיום:C# Ab Bbm Ab x2 

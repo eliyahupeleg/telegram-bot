@@ -1,0 +1,61 @@
+שמש שמש
+אריאל זילבר
+המערכת
+0
+קאפו בשריג 8
+G*: 343353
+
+פתיחה:
+‏C#maj7 Cm C#maj7 Cm C#maj7 Cm C#maj7 Cm Ebm
+Ab Ab Ab/ F# Ab/ F Ab/ Eb C#maj7 C#maj7/ C B* Ebm F# Ab Ab Ebm Ab
+‏Cm              C#maj7    Cm          C#maj7
+שמש, שמש באה בימים    יש חלום אחד שלא חולמים
+‏  Ab                     Ebm
+יש מקום אליו גם  לא הולכים
+#‏          C#/ C C#maj7 Ab/ Eb Ab/ F Ab/ F
+לבד   אחד   א ח ד.
+        Ebm                    B*
+יש רוחות רעות על פני הים, ובהרים
+#‏  Ab    Ebm              Ab               F
+עוד רבה הדרך, והאנשים    הו הו הו   קשים.
+‏Cm           C#maj7   Cm           C#maj7
+בוא ונעבור על השנים    בוא ונדלג על הימים
+‏  Ab           Ebm
+בוא ונכנס למערות
+‏ C#/ C C#maj7 Ab/ Eb Ab/ F Ab/ F#          Ab
+קרות   שלא    לראות
+          Ebm                   B*
+בוא נביט בשמש, היא יודעת  מה קורה
+#‏ Ab     Ebm           Ab                 F
+איך אפשר לזרוח כשהים   מלא,   ים   חולה.
+
+מעבר:
+‏C#maj7 Cm C#maj7 Cm Ebm
+Ab Ab Ab/ F# Ab/ F Ab/ Eb C#maj7 C#maj7/ C B* Ebm F# Ab Ab5+
+            Ebm               B*
+נעצום עיניים רק ליום   שלא נראה
+#‏ Ab     Ebm                Ab                    F
+איך גואים המים  איך חכם   טועה  הו הו הו   טועה
+‏Cm           C#maj7   Cm          C#maj7
+בוא ונחפש את האבות     בוא ונתעטף באהבות
+‏    Ab              Ebm
+בוא ונצטרף לשמש העולה
+#‏      C#/ C C#maj7 Ab/ Eb Ab/ F Ab/ F
+כל כך גדולה
+            Ebm               B*
+נעצום עיניים רק ליום   שלא נראה
+#‏Ab5+     Ab                    F
+איך גואים המים  איך חכם   טועה
+              Ebm            B*
+נצטרף לשמש העולה   כל כך גדולה
+#‏ Ab     Ebm               Ab                       F
+יש  עוד יש  שמיים   יש שלי  שלה   הו הו הו   כולה
+
+מעבר:Cm Ab C#maj7 Ab x4
+
+סיום:
+‏C#maj7 Cm C#maj7 Cm Ebm
+Ab Ab Ab/ F# Ab/ F Ab/ Eb C#maj7 C#maj7/ C B* Ebm F# Ab Ebm Ab
+‏x3
+
+#‏C

@@ -1,0 +1,97 @@
+אהבתיה
+שלמה ארצי
+המערכת
+0
+קאפו בשריג 6
+Cadd9: x32033
+Em7:   022033
+D6:    x57777
+
+פתיחה:
+‏     C# Ab/ C Bbm7 Fm F#add9 Fm Ebm Ab6 Ab
+
+#‏       Bbm7      Ab/ C        C
+היא בליבי עכשיו,      בתוך ליבי,
+‏           Ebm7 F#add9      Fm    Ebm
+כמו הרבה צללים   כמו הרבה שבילים     
+‏    Ab6
+כמו עשן
+‏    Bbm7     Ab/ C        C#  Ab
+היא רק שלי עכשיו,     היא בחובי
+‏          F#add9     F7   Ebm/ C
+כנוף הרבה עלים   כמי נהר כחולים
+‏          F# Ab
+עכשיו היא כאן  
+פזמון:
+‏Ab Ab6  Ebm7 Ebm       Bbm7 F7
+אהבתיה   אני יודע זאת פתאום,   
+‏ Ab6      Ebm7 Ebm          Bbm7 F7
+אהבתיה   פתאום עכשיו,    פתאום היום.
+‏   Bbm7    Ab/ C        C#   Ab
+כן היא שלי עכשיו      כמו השיר,
+‏          Ab F#add9   F7    Ebm/ C
+עולה היא מתוכי,  עולה בכל כוחי   
+#‏      C
+כמו השיר.
+
+מעבר:
+‏C# Ab/ C Bbm7 Fm F#add9 Fm Ebm7 Ab6 Ab x2
+
+#‏      Bbm7    Ab/ C        C
+אני קורא בקול,      בני האדם
+‏          Ebm7 F#add9     F7   Ebm
+ומרחבי אי שם   וכל רוחות הים      
+‏   Ab6
+והגלים
+‏   Bbm7    Ab/ C       C# Ab
+אם תשמעי אותי      ואת שירי
+‏       F#add9   F7    Ebm/ C
+המתפרץ כים,   צועק אל העולם
+‏      F# Ab
+רק תשמעי   
+פזמון
+‏   Bbm7    Ab/ C        C#   Ab
+כן היא שלי עכשיו      כמו השיר,
+‏          Ab F#add9    F7    Ebm/ C
+עולה היא מתוכי,  עולה בכל כוחי    
+#‏      C
+כמו השיר.
+
+מעבר: x2
+גיטרה 2:
+‏    C#   Ab/ C Bbm7      Fm F#add9
+
+‏        F#add9   Fm Ebm7     Ab6 Ab
+
+‏      Eb   Bb/ D   Cm       Gm Ab
+
+‏                Gm  Fm       Bb6  Bb
+
+‏      Cm       Bb        Eb
+את בליבי עכשיו,   בתוך ליבי,
+‏            Ab          G7    Fm
+כמו הרבה צללים   כמו הרבה שבילים
+‏     Bb
+כמו עשן.
+‏       Cm      Bb        Eb
+את רק שלי עכשיו,   את בחובי,
+‏           Bb  Ab         G7     Fm
+כנוף הרבה עלים    כמי נהר כחולים   
+‏          Eb
+עכשיו את כאן.
+מעבר ואחרי כל משפט:
+‏      Eb   Bb/ D   Cm       Gm Ab
+
+‏                Gm  Fm       Bb6  Bb
+
+מעבר:Ebm7 Ab6 C# Bbm7 x4
+‏  Bb6 Fm Gm Ab Gm   Cm Bb/ D   Eb     Bb
+עכשיו את כאן                         
+‏  Bb6 Fm Gm Ab Gm   Cm Bb/ D   Eb     Bb
+עכשיו את כאן                         
+‏  Bb6 Fm Gm Ab Gm   Cm Bb/ D   Eb     Bb
+עכשיו את כאן                         
+‏  Bb6 Fm Gm Ab Gm   Cm Bb/ D   Eb     Bb
+עכשיו את כאן                         
+
+סיום:C# Bbm7 Ebm7 Ab6 x4 

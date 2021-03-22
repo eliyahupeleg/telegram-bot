@@ -1,0 +1,86 @@
+Because
+The Beatles
+המערכת
+-2
+
+
+Intro:
+
+   C#m                             Ebdim            
+e|-------------------------------------------------|
+
+B|-------5---------------5-------------------------|
+
+G|-----6---6-----------6---6-----------6-8-6-------|
+
+D|---6-------6---6---6-------6---6---7-------7-----|
+
+A|-4-----------7---4-----------7---6-----------7-9-|
+
+E|-------------------------------------------------|
+
+   Ab              A               C#m              
+e|-----------------------0-------------------------|
+
+B|-------4-------------2---2-------------7---------|
+
+G|-----5---5---------2-------2---2-----6---6-------|
+
+D|---6-------6---6-------------2-----6-------6---6-|
+
+A|-6---------------0---------------4-----------4---|
+
+E|-------------4-----------------------------------|
+
+   A7              A6       
+e|-------3---------------2-|
+
+B|-----2---2-----------2---|
+
+G|---0-------0---0---0-----|
+
+D|-------------2-----------|
+
+A|-0---------------0-------|
+
+E|-------------------------|
+
+D         Dm
+Aaaaaahhhhhh
+
+  C#m                                  Ebdim  Ab
+Because the world is round it turns me on       
+
+  A           C#m      A7     A6   D         Dm
+Because   the world is round       aaaaaahhhhhh
+
+  C#m                                Ebdim  Ab
+Because the wind is high it blows my mind     
+
+  A           C#m      A7   A6    D         Dm
+Because   the wind is high        aaaaaahhhhhh
+
+                     F# 
+Love is old, love is new
+
+                     Ab7
+Love is all, love is you
+
+
+Bridge:A7 D C#m Ab x4
+
+  C#m                                Ebdim  Ab
+Because the sky is blue, it makes me cry      
+
+  A           C#m       A7   A6    D        Dm
+Because   the sky   is blue        aaaaaaahhhh
+
+      C#m             Ebdim        Ab   A  C#m
+Aaaaahhhhhhhhhh       aaaaahhhhhhhhhh         
+
+A7              A6    D        Dm    
+Aaaaahhhhhhhhhh       aaaaahhhhhhhhhh
+
+
+Bridge:A7 D C#m Ab x4Ending:C#m Ab A7 D x4 
+

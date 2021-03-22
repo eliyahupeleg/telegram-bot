@@ -1,0 +1,79 @@
+מטבע הדברים
+ישי ריבו
+גולש
+-2
+קאפו בשריג 8
+
+פתיחה: 
+‏C#maj7 Abmaj7 C#maj7 Abmaj7
+
+‏        C#maj7
+מטבע הדברים,  
+‏            Abmaj7
+אין דברים מעל הטבע
+‏         Abmaj7           C#maj7
+מספיק רגע בחיים, שיציל חיים ברגע
+‏  Cm   C#maj7  A      Ab
+למעשה,למעשינו, יש השלכות
+‏ Abmaj7    C#m   C#maj7
+לטוב או לרע,נקווה לטוב 
+‏          Abmaj7             C#maj7
+ולמה הזמן טס,ממה פוחד ממה הוא נס   
+‏        Abmaj7        C#maj7
+ומדוע אננו חס,עלינו קצת,הזמן
+‏       A        Ab
+יעשה את שלו,או שלא
+‏   Cm    C#maj7 Cm   C#maj7
+אבל מה שכן,כשהנר עוד דולק  
+‏   Abmaj7
+אפשר לתקן
+‏       Abmaj7 Eb C# Cm
+אם אין א-נ-י,לי מי לי 
+‏            Eb
+לי מי לי מי לי
+‏ Eb         Abmaj7 Eb C# Cm
+כ-ש-א-נ-י   לעצמי מה אני  
+‏Abmaj7       Bbm Cm  Am Abmaj7
+ואם- לא- עכ-שיו,אז אימתי   
+‏             C#maj7
+טובים השנים מן האחד
+‏               Abmaj7
+אך עדיף ציפור אחת ביד
+‏            C#maj7
+מוטב ללכת על בטוח 
+‏             Abmaj7
+במקום לרוץ אחר הרוח
+‏          A               Ab
+אולי מתוך שלא לשמי,יבוא לשמה
+‏Cm C#maj7 Cm C#maj7
+טודודו...          
+‏     Abmaj7
+יבוא לשמה..
+‏       Abmaj7 Eb C#      Cm
+אם    אין   א-נ-י,לי מי לי 
+‏            Eb
+לי מי לי מי לי
+‏  Eb      Abmaj7 Eb C# Cm
+כ-ש-א-ני לעצמי מה אני   
+‏ Abmaj7  Bbm Cm    Am    Abmaj7
+ואם     לא    עכשיו,אז אימתי 
+
+מעבר:
+‏Fmaj7   Cmaj7
+
+‏       Fmaj7 Cmaj7
+
+‏     Abmaj7 Abm Eb
+
+מעבר:Abmaj7 Abmaj7 C#maj7 C#maj7 x2
+‏      Abmaj7 Eb   C#     Cm
+אם   אין   א-נ-י,לי מי לי  
+‏            Eb
+לי מי לי מי לי
+‏ Eb       Abmaj7 Eb C# Cm
+כ-ש-א-נ-י לעצמי מה אני  
+‏Abmaj7   Bbm Cm  Am Abmaj7
+ואם לא עכ-שיו,אז אימתי 
+
+מעבר:Abmaj7 Abmaj7 C#maj7 C#maj7 x2
+סיום:C#maj7 C#maj7 Abmaj7 Abmaj7 x2 

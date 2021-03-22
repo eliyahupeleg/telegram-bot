@@ -1,0 +1,65 @@
+איך זה שכוכב
+מתי כספי
+המערכת
+-1.5
+קאפו בשריג 6
+
+פתיחה:
+‏F# F#maj7 F# F#maj7 x2
+
+#‏C#m F#maj7 F# F#maj7 F# F#maj7 F
+איך  זה   שכוכב  אחד לבד מעז
+‏         F#maj7 F# F#maj7 F#          Bm
+איך הוא מעז,   למען השם.
+‏  Amaj7   A   Amaj7    A             D
+כוכב אחד לבד   אני לא הייתי מעז
+‏  F#maj7 F# F#maj7 F#      C# Abm7   D
+ואני      בעצם  לא לבד
+‏ Abm7 F#m    Cm7b5    Bm7    B7
+איך זה שכוכב אחד לבד  מעז
+‏ Ebm        D F#     Abm7
+איך הוא מעז,    למען השם.
+#‏     F#maj7 F# F#maj7 F
+למען השם
+‏         Bb  F#               Bm           C#m
+טה נה נה נה   טה נה נה נה   טה דה דה די דייייי
+‏Bbm Ebmaj7 Eb Ebmaj7 Eb Ebmaj7 Eb
+איך  זה   שכוכב  אחד לבד מעז
+‏         Ebmaj7 Eb Ebmaj7 Eb        Abm
+איך הוא מעז,   למען השם
+‏  F#maj7 F# F#maj7   F#             B
+כוכב אחד לבד   אני לא הייתי מעז
+‏  Eb7 Ebmaj7 Eb Ebmaj7 Eb      Bb  Fm7  B
+ואני     בעצם  לא לבד
+‏ Fm7 Ebm     Am7b5   Abm7   Ab7
+איך זה שכוכב אחד לבד  מעז
+‏ Cm         B  Eb      Fm7
+איך הוא מעז,    למען השם.
+‏     Ebmaj7 Eb Ebmaj7 Eb
+למען השם
+‏         Ebmaj7 Eb Ebmaj7 Eb             Abm           Bbm
+טה נה נה נה   טה נה נה נה   טה דה דה די דייייי
+‏Bbm                                 Eb
+טה דה   דה  די די  די דה  די דה  די די
+‏           Eb              Abm
+טה דה דה דיי  טה דה דה די דייי
+
+מעבר:F#maj7 Amaj7 F# C#m x4
+‏  F#maj7 F# F#maj7   F#             B
+כוכב אחד לבד   אני לא הייתי מעז
+‏  Eb7 Ebmaj7 Eb Ebmaj7 Eb      Bb  Fm7  B
+ואני     בעצם  לא לבד
+‏Fm7 Ebm     Am7b5   Abm7   Ab7
+איך זה שכוכב אחד לבד  מעז
+‏Cm         B  Eb      Fm7
+איך הוא מעז,    למען השם
+‏     Ebmaj7 Eb Ebmaj7 Eb
+למען השם
+‏             Eb              Abm           Bbm
+טה נה נה נה   טה נה נה נה   טה דה דה די דייייי
+‏ Bbm                       Ebmaj7
+דה  די דה  די דיי  די דה   די דיי
+‏           Ebmaj7        E               Abm
+טה דה די דה    טו דו דו די דייייייי יייייייי
+
+סיום:F# C#m F#maj7 Amaj7 x4 

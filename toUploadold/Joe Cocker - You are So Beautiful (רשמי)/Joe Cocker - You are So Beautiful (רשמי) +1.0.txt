@@ -1,0 +1,61 @@
+You are So Beautiful
+Joe Cocker
+המערכת
+0
+קאפו בשריג 10
+G7 =320001
+
+G6 =320000
+
+Intro x2:
+
+e||-----2-------2-------4-------3----|
+
+B||-----4-------4-------5-------5----|
+
+G||-----4-------4-------4-------4----|
+
+D||---4---4---4---4---2---2---2---2--|
+
+A||-2--------------------------------|
+
+E||---------5-------4-------3--------|
+
+
+Bridge:B7 Ebm B B x4
+
+B   Bmaj7  B7  E    E7   A A7 A6      B  Bmaj7 B7
+You  are   so  beautiful        to me            
+
+B   Bmaj7  B7  E   E7    A A7 A6       B  B7
+You  are   so  beautiful         to me      
+
+          B7    E
+Can't you see    
+
+                    Ebm        Abm
+You're everything I hoped for     
+
+                   C#m    B
+You're everything I need   
+
+    Bmaj7 B7  E         A7 A6         B Bmaj7 B7
+You are   so  beautiful        to me            
+
+    Bmaj7 B7  E         A7 A6         B Bmaj7
+You are   so  beautiful        to me         
+
+          B7    E
+Can't you see    
+
+                    Ebm        Abm
+You're everything I hoped for     
+
+                   C#     B
+You're everything I need   
+
+    Bmaj7 B7  E         A7 A6       B Bmaj7 B7 E A7 A6 B
+You are   so  beautiful       to me                     
+
+Ending:B B B7 Ebm x4 
+

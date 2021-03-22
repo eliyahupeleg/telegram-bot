@@ -1,0 +1,83 @@
+מקום לדאגה
+מתי כספי וריקי גל
+המערכת
+0
+לטון המקורי - קאפו בשריג 1
+D6/ Eb:    xx1202
+Edim7/ 9:  xx2332
+Dmaj7/ C#: x40222
+F#aug9:   xx4334
+פתיחה וב 2 השורות הראשונות:
+‏                Bb              Bbaug
+
+‏            Bb6                Bbaug
+
+‏                  Ebm             Ab7
+
+‏         Bbm              Faug9
+
+‏  Bbaug Bb6   Bbaug   Bb
+בקצה השמיים  ובסוף המדבר
+‏    Faug9  Bbm     Ab7        Ebm
+יש מקום רחוק  מלא פרחי בר        
+‏ Bbaug      Bb6 Bbaug  Bb
+מקום  קטן,    עלוב ומשוגע
+‏ Bb B Bbm    Ab7        Ebm
+מקום רחוק, מקום לדאגה     
+‏        Bmaj7    Ebm
+אומרים   שם מה שיקרה
+‏   Ebm/ C#    Bmaj7/ C
+וחושבים על כל מה שקרה
+‏     Ebm7     C#6/ D
+אלוהים שם יושב ורואה
+‏    Bbm    Ebdim7/ 9
+ושומר על כל מה שברא
+#‏   C#maj7/ C         C
+אסור לקטוף את פרחי הגן
+‏    Bbm              B
+אסור לקטוף את פרחי הגן
+‏    Bb        B6   B
+ודואג,    ודואג נורא
+
+מעבר:
+‏               Bb              Bbaug
+
+‏        Bb6              Bbaug
+השיר חוזר על עצמו
+סולו:
+‏     Bb            Bbaug  Bb6       Bbaug
+
+‏      Ebm          Ab7                Bbm
+
+‏        Faug9      Bb            Bbaug
+
+‏               Bb6          Bbaug     Ebm
+
+‏           Ab7                    Bbm
+
+‏       B Bb      Ebm
+
+‏        Bmaj7    Ebm
+אומרים   שם מה שיקרה
+‏   Ebm/ C#    Bmaj7/ C
+וחושבים על כל מה שקרה.
+‏     Ebm7     C#6/ D
+אלוהים שם יושב ורואה
+‏    Bbm     Ebdim7/ 9
+ושומר על כל מה שברא
+#‏   C#maj7/ C         C
+אסור לקטוף את פרחי הגן
+‏    Bbm              B
+אסור לקטוף את פרחי הגן
+‏    Bb        B6   B
+ודואג,    ודואג נורא
+
+סיום:
+‏                Bb              Bbaug
+
+‏              Bb6              Bbaug
+
+‏               Bb              Bbaug
+
+מעבר:Ebm Bbm Bb Bb6 x4
+‏   Bb6              Bbaug        Bbmaj7

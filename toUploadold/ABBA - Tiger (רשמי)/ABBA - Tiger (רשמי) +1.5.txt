@@ -1,0 +1,70 @@
+Tiger
+ABBA
+המערכת
+0.5
+קאפו בשריג 9
+C#m6:     xx2324
+
+Ab:       xx654x
+
+C#maj7:   xx656x
+
+C#m/ maj7: xx655x
+
+
+Intro:
+
+E   B E   B E
+
+    F#                                  E     F#  
+The city  is  a  jungle  you  better   take   care
+
+                                   E       B
+Never   walk   alone   after   midnight     
+
+F#               
+If   you   don't 
+
+                               B                 
+Believe   it   you   better   beware   of    me. 
+
+Chorus:
+
+         E                                  Em6  
+I am    behind   you    I   always   find     you
+
+          B                                  E 
+I am    the   tiger.   People   who   fear   me
+
+Em6                                    B     
+Never   go   near   me,  I am   the   tiger. 
+
+Abm            C#7           
+Yellow   eyes   are   glowing
+
+    Abm                C#7 
+Like   the   neon   lights 
+
+Abm                C#7          
+Yellow   eyes    the   spotlight
+
+                     Abm
+Of   the   city   nights
+
+The city is a nightmare, a horrible dream.
+
+Some of us will dream it forever.
+
+Look around the corner and try not to scream it's me.
+
+
+Bridge:E F# E F# x4
+
+The city is a prison, you never escape,
+
+you're forever trapped in the alleys.
+
+Look into the shadows, and you'll see the shape of me.
+
+Ending:E F# E F# x4 
+

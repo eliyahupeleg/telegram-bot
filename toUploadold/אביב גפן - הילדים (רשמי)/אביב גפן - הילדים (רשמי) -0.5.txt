@@ -1,0 +1,56 @@
+הילדים
+אביב גפן
+המערכת
+0
+לטון המקורי - קאפו בשריג 1
+Dadd9/ F#:  xx4232
+C#dim:     x42000
+Emadd9:    022002
+
+פתיחה:
+‏C#add9 Cdim   F
+Bbm Bbm/ Ab F# C#/ F Ebm Ebmadd9 Cdim   F
+‏  F#   Bbm/ Ab Bbm F    Cdim  C#add9
+הילדים   ישנים  בגינה     הם רבים
+F   Cdim Ebmadd9   Ebm C#/ F   
+צועקים     אבל תמיד משלימים   
+‏ Bbm/ Ab Bbm F    Cdim  C#add9
+הילדים   ישנים  בגינה     
+#‏      C#/ F           F
+בלי ריבים    בלי קללות
+C# Bbm Bbadd9 Bbm F   Cdim Ebmadd9 Ebm     
+בלי רובים  ובלי קסדות                   
+פזמון:
+#‏C# Ab6       F#      C#add9/ F       C
+ואתה ישן עכשיו    בתוך אוהל מבוהל     
+#‏Ab6         F#       C#add9/ F       C
+רק רציתי שתדע      אני אהבתי רק אותך  
+‏ Cdim     C#add9
+הילדים   זה אני 
+‏C#/ F        F#   Bbm/ Ab Bbm   F
+זה  אתה     יש חיוך   יש גינה
+‏       C# Bbm Bbadd9 Bbm F   Cdim Ebm/ C# Ebm
+יש גם מקום לאהבה                       
+פזמון
+סולו:
+‏C#add9 Cdim   F Bbm Bbm/ Ab F# C#/ F
+
+#‏Ebm Ebm/ C# Cdim   F Bbm Bbm F# Ab C
+פזמון
+
+מעבר:
+‏Ab/ A   D
+
+מעבר:F# F C#add9 Bbm x4
+‏ D/ F#       D
+ואתה ישן עכשיו
+‏     D    A         G
+בתוך אוהל מבוהל      
+‏D/ F#       D
+רק רציתי שתדע
+‏     A4            G
+אני אהבתי רק אותך   
+‏    D     A
+ה י ל ד י ם
+
+סיום:C#add9 Bbm F# F x4 
