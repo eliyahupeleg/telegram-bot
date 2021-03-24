@@ -5,30 +5,40 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 
 js = r'''
-//I השם הוא "שם הזמר-שם השיר"
+
+// השם הוא "שם הזמר-שם השיר"
 var name = jQuery('<div>').html(document.querySelector("#page_content > div.row > div > div.song_block_top > div.ArtistAndSongName")).text().slice(1, -1);
 
+//אם השיר נערך על ידי המערכת (לא מצויין שנערך על ידי משתמש) השיר יסומן כגרסה רשמית.
 editedBy = "המערכת";
 if(document.getElementById("editByUser")) editedBy = "גולש";
 
+//אי אפשר לשמור "\" בשם של קובץ, אז מחלפים אותו ל"_"
 name = name.replace("/", "_");
+
+//מחלק את השם לזמר ולשיר
 singer = name.split("  - ")[0];
 song = name.split(" - ")[1];
 
+//אם לא כתוב איפה לשים את הקאפו, שומרים "0" כסימן ל"בלי קאפו".
 capo = "0";
+//הכתובית בסגנון "שים קאפו בשריג 8". שומרים רק את המספר (נח יותר להעלאה ועריכה).
 if (document.querySelector("#capoAnn") != null) capo = document.querySelector("#capoAnn").textContent[document.querySelector("#capoAnn").textContent.length-1];
 
+//יש שירים שהעמוד באתר ריק (אין מילים ואין אקורדים). מדלגים על השירים האלו. אם הסקריפט ימשיך לרוץ, הוא יקרוס עם שגיאה.
 if (document.querySelector("#songContentTPL") == null){ return("null")}
 
+//אם הדף מוצמד לימין, השפה של השיר היא עברית. אם לשמאל, אנגלית. שומר את השפה בשביל ההצמדה לימין ושמאל של האקורדים.
 aligh = document.querySelector("#songContentTPL").align;
 language = "HE";
 if(aligh == "left") language = "EN";
 if(aligh == "right") language = "HE";
 
-//יש בדרך כלל שורות של מעבר בלתי נראות שצריך למחוק.
+//יש בדרך כלל שורות של "מעבר" בלתי נראות שצריך למחוק. לולאת פור מוחקת רק את האיבר הראשון.
 var brs = document.getElementsByClassName("br");
-for(var i of brs){
-    i.parentNode.removeChild(i);
+var cnt = 0;
+while(brs.length){
+    brs[cnt].parentNode.removeChild(brs[cnt])
 }
 
 //מנקה את האלמנטים שנועדו להציג את צורת האקורד. משאיר באלמנט של שורת אקורדים רק את האקורדים ואת הרווחים בניהם.
@@ -37,95 +47,145 @@ for(var i of divs){
     i.parentNode.removeChild(i);
 }
 
+//משתנה שיישמר לקובץ הטקסט, יכיל את כל השיר והאקורדים.
 var textToFile = "";
 
+//הדף בנוי כטבלה של פסקאות. שומרים את הפסקאות למערך מסודר.
+//שומרים לפי פסקאות כדי לסדר נכון את הרווחים בין השורות (0 אחרי שורה בעברית, 1 אחרי שורה באנגלית, 2 בסיום פסקה).
 data = document.getElementById("songContentTPL").getElementsByTagName("table");
 var tableArr = Array.prototype.slice.call(data)
 
-
-
+//כל פסקה...
 for (var paragraph of tableArr){
 
-    //חלוקה לפי פסקאות, ובכל פסקה עוברים שורה שורה.
+    //מחלק את הפסקה לפי שורות,ועובר שורה שורה.
     lines = paragraph.getElementsByTagName("td");
-
     var linesArr = Array.prototype.slice.call(lines);
 
-    // יש עכשיו בתוך data טבלה, עם כל השיר באלמנטים. צריך להוסיף לקובץ טקסט אחד אחד, ולסדר - שורת שיר נכנסת שלמה, שורת אקורדים נכנסת עם קוד לרווח, קוד לתחילת אקורד וקוד לסיום אקורד.
+    //מוסיפים לטקסט שורה שורה, ומסדרים - שורת שיר נכנסת שלמה, שורת אקורדים נכנסת עם [] סביב כל אקורד.
     for (var line of linesArr){
 
 
-        //לפני כל פסקה של טאבים מוסיף 2 שורות רווח.
+        //לפני כל פסקה של טאבים מוסיף 2 שורות רווח, כדי שהשורות לא יתבלבלו.
         if (line.className == "tabs" && line.textContent[1] == "e") {
             textToFile += "\n\n"
         }
 
-        //שורת אקורדים. מוסיף תו בקרה לפני ואחרי כל אקורד.
-        //כל שורה צריכה להתחיל עם MARK RTL כדי לזוז לצד ימין ולהתאים למילים.
-        //צריך להוסיף בסוף שורת אקורדים את התו "חיריק" כדי שהרווחים יסתדרו ויעברו לתחילת השורה ולא לסוף.
-        //צריך לשנות את ההגדרה של אקורד ל "לא רווח ולא שורה חדשה" , כי לא תמיד הם עם class מתאים (לדוגמא אם אין את תמונת האקורד במערכת , הוא יוזן כטקסט ב HTML
-
+        //בודק אם מדובר בשורת אקורדים (דורש למרקר כל אקורד)
         if (line.className =="chords" || line.className =="chords_en") {
 
-            var nodes = line.childNodes;
-            for (const node of nodes){
+            //רוב השורות אקורדים מסודרות עם אלמנטים מיוחדים לכל אקורד, ורווחים בלי אלמנט.
+            //יש שורות אקורדים בלי אלמנטים, פשוט אקורדים ורווח בצורה טקסטואלית. בשורות כאלו מספר ה"ילדים" של השורה יהיה 0.
+            if (line.childElementCount == 0){
 
-
-                //החוליה הראשונה מכילה "NL - אנטר" ואז את הרווחים. מוחקים את ה ENTER כי הוא נוסף ידנית אחרי זה (רווח שורות שונה בהתאם לשפת וכד')
-                if(language == "HE" && node == nodes[0]){
-                    textToFile += "\u200F" + "\u202d" + node.textContent.slice(1, node.textContent.length-1); console.log("UD");
-                    continue;
+                //בתחילת כל שורת אקורדים בקובץ שמוצמד לימין, מוסיפים 2 תווים מיוחדים. אחד מצמיד לימין את השורה, והבא אחריו מסדר את הטקסט משמאל לימין בכח. התוצאה היא ששורת האקורדים עוברת לצד ימין בצורה מדוייקת. בסוף השורה מוסיפים תו של חיריק, כדי למנוע ממנה להתהפך חזרה.  
+                if(language == "HE"){
+                    textToFile += "\u200F" + "\u202d";
                 }
 
+                //יש שני סוגי רווחים. אחד רגיל, ואחד nbsp . כדי להימנע מטעויות זיהוי, הופכים את כולם לרווח רגיל.
+                chords = line.textContent.replaceAll(String.fromCharCode(160), " ").split(" ");
 
-                chords_value = node.textContent.replaceAll(String.fromCharCode(10), "").split(String.fromCharCode(160));
+                //מסיר כפילויות של אקורדים ותאים ריקים - אנחנו רוצים לבצע "החלף" לכל אקורד, ולשים במקומו [אקורד]. אם יש תא ריק, ייכנסו המון סוגריים סתם, ואם יש כפילות, הוא יהפוך את האקורד ל [[אקורד]].
+                chords = [...new Set(chords)];
+                chords = chords.filter(item => item);
+                
+                //יש שני סוגי רווחים. אחד רגיל, ואחד nbsp . כדי להימנע מטעויות זיהוי, הופכים את כולם לרווח רגיל.
+                chordsLine = line.textContent.replaceAll(String.fromCharCode(160), " ");
 
-                //אם מורידים את הרווחים והשורות החדשות מהטקסט והוא לא ריק, יש שם אקורד שהמערכת לא זיהתה, ומיתגה כטקסט.
-                if(node.textContent.replaceAll(String.fromCharCode(160), "").replaceAll(String.fromCharCode(10), "").replaceAll(" ", "") != ""){
-                    console.log("[]")
-                    //בתוך chords_value יש את כל השורה חתוכה לפי "רווח", מה שיוצר תאי רווח (תאים ריקים כמספר הרווחים) ותאי אקורד (תאים שמכילים אקורד שלם).
-                    //הלולאה שמה את הסוגריים על האקורד ומכניסה אותו לטקסט.
-                    for (var cell of chords_value){
-                        if (cell == "") {
-                            cell = String.fromCharCode(160);
-                        }else{
-                            cell = "[" + cell + "]"
-                        }
-                        textToFile += cell;
-                    }
-
+                //עובר אקורד אקורד, בודק אם יש כזה בדיוק, ואם כן מוסיף לו [].
+                for (var chord of chords){
+                
+                    //אם יש אקורד מ2 סוגים (לדוג' G וגם G7) האות תקבל שני סוגריים - אחת גם מהאקורד המקורי, ולכן צריך שיהיה רווח לפני או אחרי - מה שמתקיים רק באקורד המדוייק. 
+                    // !!!
+                    // לפעמים אקורד כמו A#m9 יהפוך להיות [A#m]9 - אבל בסופו של עניין זה לא משנה כלום להמרה - המספר אחרי לא אמור להשתנות גם ככה.
+                    // !!!
+                    chordsLine = chordsLine.replaceAll(chord + " ", "[" + chord + "] ").replaceAll(" " + chord, " [" + chord + "]")
                 }
 
-                //אם מדובר במקטע של רווח, מכניסים אותו כמו שהוא לטקסט. מורידים שורות חדשות כדי להוסיף ידנית בצורה נוחה יותר.
-                else{
-                    textToFile += node.textContent.replace("\n","");
+                //מוסיפים את השורה המסודרת לטקסט של השיר.
+                textToFile += chordsLine
 
-                    //מסדר את הימין שמאל - מוסיף חיריק בסוף השורה
-                    if(node == nodes[nodes.length-1] && language == "HE") textToFile = textToFile.slice(0, textToFile.length-1) + String.fromCharCode(160, 1460) + textToFile[textToFile.length-1];
-                }
+                //כדי לסדר את הימין שמאל - מוסיף חיריק בסוף השורה. הוא מונע מהאקורדים להתהפך (m#F במקום F#m)
+                if(language == "HE") textToFile += String.fromCharCode(1460);
 
             }
+
+            //אם יש לשורה "ילדים", אפשר לסדר אותה יותר בנוחות, כי לכל אקורד יש אלמנט.
+            else{
+
+                //מחלק את השורה לחוליות. חוליה יכולה להיות רווחים (לפעמים עם שורה חדשה) או אקורד.
+                var nodes = line.childNodes;
+                
+                //עובר על כל החלקים של השורה.
+                for (const node of nodes){
+    
+    
+                    //לפני החוליה הראשונה, אם צריך להצמיד לימין, מוסיף את שני התווים - אחד מצמיד לימין והשני מכריח את הטקסט להסדר בצורה הנכונה משמאל לימין.
+                    if(language == "HE" && node == nodes[0]){
+                        textToFile += "\u200F" + "\u202d";
+                    }
+    
+    
+                    //שומרים את הערך של החוליה אחרי שמוחקים ממנה את כל הרווחים והשורות החדשות, וחותכים בכל מקום שיש רווח. נוצר מערך של תאים עם אקורד שלם, ותאים ריקים כמספר הרווחים.
+                    chords_value = node.textContent.replaceAll(String.fromCharCode(10), "").split(String.fromCharCode(160));
+    
+                    //אם מורידים את הרווחים והשורות החדשות מהחוליה והיא לא ריקה, יש שם אקורד שהמערכת לא זיהתה, ומיתגה כטקסט. יש אקורדים שמסומנים כ "SPIN", אבל אלו רק האקורדים שלמערכת יש את התמונה שלהם. השאר סתם קיימים בטקסט בלי תגית.
+                    if(node.textContent.replaceAll(String.fromCharCode(160), "").replaceAll(String.fromCharCode(10), "").replaceAll(" ", "") != ""){
+                    
+                        //בתוך chords_value יש את כל השורה חתוכה לפי "רווח", מה שיוצר תאי רווח (תאים ריקים כמספר הרווחים) ותאי אקורד (תאים שמכילים אקורד שלם).
+                        //הלולאה שמה את הסוגריים על האקורד ומכניסה אותו לטקסט.
+                        for (var cell of chords_value){
+                            
+                            //תא ריק מבטא רווח. מחליפים אותו לערך המקורי.
+                            //תא מלא מכיל אקורד. מוסיפים לו [].
+                            if (cell == "") {
+                                cell = String.fromCharCode(160);
+                            }else{
+                                cell = "[" + cell + "]"
+                            }
+                            
+                            //מוסיפים לטקסט את החלק החדש כל פעם.
+                            textToFile += cell;
+                        }
+    
+                    }
+    
+                    //אם מדובר במקטע של רווח, מכניסים אותו כמו שהוא לטקסט. מורידים שורות חדשות ומוסיפים ידנית בצורה נוחה יותר.
+                    else{
+                        textToFile += node.textContent.replace("\n","");
+    
+                        //מסדר את הימין שמאל - מוסיף חיריק בסוף השורת אקורדים.
+                        if(node == nodes[nodes.length-1] && language == "HE") textToFile += String.fromCharCode(1460);
+                    }
+    
+                }
+            }
+            //השורות החדשות המובנות נמחקו, ובונים אותן מחדש לפי הפורמט.
             textToFile += "\n";
 
         }
 
-        //זו שורה בלי אקורדים. שומר אותה כמו שהיא.
+        //זו שורה בלי אקורדים. שומר אותה כמו שהיא, רק בלי השורה החדשה, כדי להוסיף ידנית ולפי הפורמט.
         else {
         textToFile += line.textContent.replace("\n", "");
         textToFile += "\n";
 
-        //אם השיר באנגלית, מוסיפים gus שורה ריקה אחרי כל שורה כדי שיהיה מסודר ונעים לעין.
+        //אם השיר באנגלית, מוסיפים עוד שורה ריקה אחרי כל שורה כדי שיהיה מסודר ונעים לעין.
         //if (language == "EN") textToFile += "\n";
         }
     }
+    
+    //בסוף כל פסקה יש 2 שורות רווח
     textToFile += "\n\n";
 }
 
+//אם יש גרסה קלה, מוסיף אותה. אם לא, כותב "0".
 if (document.querySelector("#page_content > div.row > div > div.song_block_content_wrap > div.bArae4 > a") == null) EZTon = "0";
 else EZTon = document.querySelector("#page_content > div.row > div > div.song_block_content_wrap > div.bArae4 > a").href.slice(document.querySelector("#page_content > div.row > div > div.song_block_content_wrap > div.bArae4 > a").href.search("ton=")+4);
 
+//שומר את כל הנתונים מסודר, ומחזיר לפונקציית אם.
 newData = song + '\n' + singer + '\n' + editedBy + '\n' + EZTon + '\n' + capo + '\n' + language + '\n' + textToFile;
-
 return (newData)
 '''
 
