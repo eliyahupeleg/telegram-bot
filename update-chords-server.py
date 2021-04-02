@@ -19,7 +19,7 @@ update_resp = requests.post(
     headers={"Authorization": "Token {api_token}".format(api_token=token)}
 )
 run_resp = requests.post(
-    f"{api_base}/consoles/17279020/send_input/",
+    f"{api_base}/consoles/19561760/send_input/",
     data={"input": str(chr(3)) + "\npython3 chordServer.py \n"},
     headers={"Authorization": "Token {api_token}".format(api_token=token)}
 )

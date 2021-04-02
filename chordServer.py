@@ -62,6 +62,11 @@ chords_library = ["A", "A5", "A6", "A7", "A9", "A_Ab", "A_B", "A_Bb", "A_C#", "A
 levels = [["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"],
           ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"]]
 
+# רשימה מיוחדת. כל האקורדים הבסיסיים, אבל קודם אלו עם # או b.
+# נועד להמרות. אם הופכים את כל ה F להיות G ורק אז מחפשים F#, יהיה במקום F# G#.
+# ברשימה הזו קודם F# מוחלף בA# ורק אז מחפשים F.
+chords = ["A#", "Ab", "A", "Bb", "B", "C#", "C", "Db", "D#", "D", "Eb", "E", "F#", "F", "Gb", "G#", "G"]
+
 # כל האקורדים האפשריים. עוזר לזיהוי איזו שורה היא אקורדים וצריכה המרה כשמשנים סולם, ואיזו שורה היא טקסט ולא צריך להמיר.
 chars_to_remove = ["A#6add9", "Ab6add9", "A#add9", "A#dim7", "A#m7b5", "A#maj7", "A#maj9", "A#sus2", "A#sus4", "A6add9",
                    "Abadd9", "Abdim7", "Abm7b5", "Abmaj7", "Abmaj9", "Absus2", "Absus4", "A#7#5", "A#7b5", "A#7b9",
@@ -166,7 +171,7 @@ with open(fname, "r") as f:
 # אורך הנתיב נשמר מטעמי אופטימזציה. מחושב רק פה במקום שוב ושוב. משמש כדי לחתוך נתיב לקובץ אקורדים ולקבל רק את השם של הקובץ.
 len_uploaded_path = len(uploaded_path)
 
-# רשימת שמות הקבצים (השירים) שקיימים. נשמר פעם אחת מטעמי אופטימזציה. אחרי עדכון, הבוט מורץ מחדש ע"י סקריפט העדכון וכך מעשכן את רשימת הקבצים.
+# רשימת שמות הקבצים (השירים) שקיימים. נשמר פעם אחת מטעמי אופטימזציה. אחרי עדכון, הבוט מורץ מחדש ע"י סקריפט העדכון וכך מעדכן את רשימת הקבצים.
 uploaded_list = glob.glob(f"{uploaded_path}/*")
 
 # רשימות ששומרות את שמות כל האמנים ושמות כל השירים שישנם. שימש כדי לקבל רשימת שירים. בוטל מטעמי חשש להעתקת הבוט.
@@ -175,23 +180,6 @@ artists_list = []
 
 # "מקלדת" עם אופציה אחת - שלח לי שיר אקראי.
 random_keyboard = ReplyKeyboardMarkup([["שיר אקראי"]])
-
-# מקלדת המרות האקורדים. מאפשרת להעלות או להוריד סולם.
-default_keyboard = [[InlineKeyboardButton("+", callback_data="+"), InlineKeyboardButton("-", callback_data="-")]]
-
-# מקלדת שנשלחת לאחר לחיצה על "-" במקלדת הקודמת. מראה את אופציות השינוי.
-keyboard_minus = [[InlineKeyboardButton("-1", callback_data='-1'),
-                   InlineKeyboardButton("-2", callback_data='-2'),
-                   InlineKeyboardButton("-3", callback_data='-3')]]
-
-# מקלדת שנשלחת לאחר לחיצה על "+" במקלדת הקודמת. מראה את אופציות השינוי.
-keyboard_plus = [[InlineKeyboardButton("+1", callback_data='+1'),
-                  InlineKeyboardButton("+2", callback_data='+2'),
-                  InlineKeyboardButton("+3", callback_data='+3')]]
-
-# אחרי לחיצה על + או - של מספר שלם (1, 2 או 3) ניתנת האופציה להזיז בחצי טון כדי להגיע לסולם המדוייק.
-keyboard_half = [[InlineKeyboardButton("+0.5", callback_data='+0.5'),
-                  InlineKeyboardButton("-0.5", callback_data='-0.5')]]
 
 # נתיב הקובץ ששומר את הסטטיסטיקה. זהו קובץ ששומר "מילון". המילון מבטא: כמה פעמים חיפשו,על פי מה חיפשו.
 statistics_path = f'{this_folder}/statistics.pkl'
@@ -230,6 +218,39 @@ def get_song(song):
     except IndexError:
         print("index error", song)
     return
+
+
+# מקלדת שנשלחת לאחר לחיצה על "+" במקלדת הקודמת. מראה את אופציות השינוי.
+# השימוש בפונקציה נועד כדי להכניס את האינדקס של השיר (איפה הוא ממוקם בתוך uploaded_list - ובהמרה יהיה אפשר לשלוף אותו בקלות.
+def keyboard_plus(index):
+    return InlineKeyboardMarkup([[InlineKeyboardButton("+1", callback_data=f'+1|{index}'),
+                                  InlineKeyboardButton("+2", callback_data=f'+2|{index}'),
+                                  InlineKeyboardButton("+3", callback_data=f'+3|{index}')],
+                                 [InlineKeyboardButton("+0.5", callback_data=f'+0.5|{index}'),
+                                  InlineKeyboardButton("+1.5", callback_data=f'+1.5|{index}'),
+                                  InlineKeyboardButton("+2.5", callback_data=f'+2.5|{index}'),
+                                  InlineKeyboardButton("+3.5", callback_data=f'+3.5|{index}')]
+                                 ])
+
+
+# מקלדת שנשלחת לאחר לחיצה על "-" במקלדת הקודמת. מראה את אופציות השינוי.
+# השימוש בפונקציה נועד כדי להכניס את האינדקס של השיר (איפה הוא ממוקם בתוך uploaded_list - ובהמרה יהיה אפשר לשלוף אותו בקלות.
+def keyboard_minus(index):
+    return InlineKeyboardMarkup([[InlineKeyboardButton("-1", callback_data=f'-1|{index}'),
+                                  InlineKeyboardButton("-2", callback_data=f'-2|{index}'),
+                                  InlineKeyboardButton("-3", callback_data=f'-3|{index}')],
+                                 [InlineKeyboardButton("-0.5", callback_data=f'-0.5|{index}'),
+                                  InlineKeyboardButton("-1.5", callback_data=f'-1.5|{index}'),
+                                  InlineKeyboardButton("-2.5", callback_data=f'-2.5|{index}'),
+                                  InlineKeyboardButton("-3.5", callback_data=f'-3.5|{index}')]
+                                 ])
+
+
+# מקלדת המרות האקורדים. מאפשרת להעלות או להוריד סולם.
+def default_keyboard(index, easy_key):
+    return InlineKeyboardMarkup([[InlineKeyboardButton("+", callback_data=f"+|{index}"),
+                                  InlineKeyboardButton("-", callback_data=f"-|{index}")], [
+                                     InlineKeyboardButton("גרסה קלה", callback_data=f"{easy_key}|{index}")]])
 
 
 # הפונקציה משמשת כדי להגדיר בעזרתה את רשימת האמנים.
@@ -276,93 +297,87 @@ def delete(context, time_hash):
     context.bot.delete_message(to_delete[time_hash][1], to_delete[time_hash][0] + 1)
 
 
-# converting chords line up or down by the key. the key if from 3 to -3' in steps of 0.5.
-def convert_line(line, key):
-    key = int(float(key) * 2)
-    new_line = ""
-    len_line = len(line)
-    # the real start of the line
-    first_index = -1
-    # למצוא את האות הראשונה. לבדוק אם זו שאחריה היא מול או דיאז. אם כן לחבר את שניהם. רק אז לחפש ברשימה ולהחליף.
-    # connecting "#" and "b" to the chord, and then replacing.
-    for i in range(0, len_line):
-        line_i = line[i]
+# ממיר את השיר לסולם חדש
+def new_key(index, key):
+    # אם ממירים ב1.5, זה בעצם 3 חצאים ללמעלה.
+    # ההמרה לפי חצאים כי יותר קל להשתמש ב2 מ0.5
+    half_key = int(float(key) * 2)
 
-        if line_i in levels[0]:
-            if first_index == -1:
-                first_index = i
+    """
+    לשלוף את ההודעה המקורית מהקובץ
+    להשתמש ב RE.SUB כדי להחליף את האקורדים המתאימים
+    לשנות אחד מהאקורדים, הראשון או האחרון לסימן אחר- כדי שלא ישנה אותו בהמרה, או להוסיף סימן "הומר" שיימחק מייד אחרי.
+    לשלוח את ההודעה עם המרה ביחס למקור, לא להודעה.
+    """
 
-            try:
+    with open(uploaded_list[index], "r") as f:
 
-                if line[i + 1] == "#":
-                    current_level = levels[0]
-                    temp = line[i:i + 2]
+        data = f.read()
 
-                elif line[i + 1] == "b":
-                    current_level = levels[1]
-                    temp = line[i:i + 2]
+        # אחד דיאזים אחד במולים
+        for chord in chords:
 
-                else:
-                    temp = line_i
-                    current_level = levels[0]
-
-            # if this is the last char in the line, there is no "b" or "#"
-            except IndexError:
-                current_level = levels[0]
-                temp = line_i
-
-            # back to the start if got the end of the chords (Ab or G#)
-            if current_level.index(temp) + key > 11:
-                new_line += current_level[(current_level.index(temp) + key) % 12]
+            if chord in levels[0]:
+                chord_index = levels[0].index(chord)
+                level = levels[0]
             else:
-                new_line += current_level[current_level.index(temp) + key]
-            continue
+                chord_index = levels[1].index(chord)
+                level = levels[1]
 
-        # the "#" and the "b" chars already used with their chords.
-        elif line[i] != "#" and line[i] != "b":
-            new_line += line_i
+            new_chord_index = half_key + chord_index
+            len_level = len(level)
 
-    # moving the dies to the start of the line in hebrew. the # jumping to the other side because of RLM and LRM
-    # checking every "if" only once, fastest.
-    if HEBREW:
+            if new_chord_index >= len_level:
+                new_chord_index -= len_level
 
-        # more than one chord in the line.
-        if len(list(filter(None, new_line.split(' ')))) != 1:
-            # in hebrew, if the dies in the end of the line, should move it to the start.
-            if new_line[- 1] == "#":
+            if new_chord_index < 0:
+                new_chord_index += len_level
 
-                # if in the last convert the "#" already moved, needs only to delete the "#" in the end.
-                # impossible to have "#" in the start of the chord line.
-                if new_line[first_index] == "#":
-                    new_line = new_line[:-1]
-                else:
-                    # put the "#" in the start of the line, right after the spaces.
-                    new_line = f"{new_line[:first_index]}#{new_line[first_index:-1]}"
-            elif new_line[first_index] == "#":
+            # מחליפים לאקורד הבא. מוסיפים | כדי לא להמיר את אותו אחד פעמיים.
+            # //אם יש אקורד מ2 סוגים (לדוג' #G וגם G) האות תקבל שתי המרות - אחת גם מהאקורד המקורי, ולכן צריך רשימה מיוחדת - שבה האקורדים המיוחדים מופיעים לפני הרגילים, וכך F# מוחלפים לפני שהגענו ל F.
+            data = re.sub("\[" + chord, '[|' + str(level[new_chord_index]), data)
 
-                new_line = new_line[:-1]
+        if data.split("\n")[5] == "HE":
+            data = data.replace("#]", "#ᶥ")
 
-    return new_line
+        data = data.replace("[|", "").replace("[", "").replace("]", "")
+        data = data.split('\n')
 
+        intro = INTRO
+        intro = intro.replace("song",
+                              data[0].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
+                                  ",", "_") + f"   \n{data[0]}")
+        intro = intro.replace("singer",
+                              data[1].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
+                                  ".", "_").replace(",", "_") + f"   \n{data[1]}")
 
-def new_key(data, key):
-    new_data = []
-    global HEBREW
-    pattern = re.compile("|".join(to_remove.keys()))
-    HEBREW = is_hebrew(data[5])
-    for i in data:
-
-        if i == "":
-            new_data.append(i)
-            continue
-
-        j = pattern.sub(to_remove_lambda, i)
-
-        if j:
-            new_data.append(i)
+        if "המערכת" == data[2]:
+            intro = intro.replace("version", "⭐️ גרסה רשמית ⭐")
         else:
-            new_data.append(convert_line(i, key))
-    return new_data
+            intro = intro.replace("version", "")
+
+        # כמה צריך להזיז כדי להגיע לגרסה קלה
+        easy_key = data[3]
+
+        # איפה לשים קאפו
+        capo = int(data[4]) + half_key
+        if capo >= 12:
+            capo -= 12
+        if capo < 0:
+            capo += 12
+
+        if 0 == int(data[4]) + half_key:
+            intro = intro.replace("capo", "")
+        else:
+            intro = intro.replace("capo", f"קאפו בשריג {capo}")
+
+        # המידע בתחילת הקובץ לא נשלח, רק מ - data[3] ואילך.
+        # ולכן מכניסים ל- data[3] את כל הפתיח הרשמי, והוא נשלח משם.
+        data[5] = intro
+        data.append(ENDING)
+
+    # מנקים את סימני הבקרה
+    return data[5:], easy_key
 
 
 def h1(w):
@@ -378,6 +393,7 @@ def by_hash(time_hash, context, update):
 def build_message(files, context, update):
     print(len(files), "results\n")
     len_files = len(files)
+
     if update.message.chat_id in groups and len_files > 0:
 
         if "אקורדים" in update.message.text:
@@ -423,7 +439,14 @@ def build_message(files, context, update):
     fpath = files[0]
     with open(fpath, "r") as f:
 
-        data = f.read().split('\n')
+        data = f.read()
+
+        if data.split("\n")[5] == "HE":
+            data = data.replace("#]", "#ᶥ")
+
+        data = data.replace("[", "").replace("]", "").replace("]", "")
+        data = data.split('\n')
+
         intro = INTRO
         intro = intro.replace("song",
                               data[0].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
@@ -437,20 +460,32 @@ def build_message(files, context, update):
         else:
             intro = intro.replace("version", "")
 
-        # כמה להמיר כדי להגיע לגרסה קלה
+        # כמה צריך להזיז כדי להגיע לגרסה קלה
         easy_key = data[3]
+
+        # איפה לשים קאפו
+        if "0" == data[4]:
+            intro = intro.replace("capo", "")
+        else:
+            intro = intro.replace("capo", f"קאפו בשריג {data[4]}")
 
         # המידע בתחילת הקובץ לא נשלח, רק מ - data[3] ואילך.
         # ולכן מכניסים ל- data[3] את כל הפתיח הרשמי, והוא נשלח משם.
-        data[3] = intro
+        data[5] = intro
         data.append(ENDING)
-        send_data(data[3:], update, context, True)
+
+        send_data(data[5:], update, context, True, False, None, easy_key, uploaded_list.index(fpath))
 
 
-def send_data(data, update, context, is_song=False, keyboard=InlineKeyboardMarkup(default_keyboard)):
+def send_data(data, update, context, is_song=False, is_converted=False, keyboard=None, easy_key=None, file_index=None):
     song = {0: ""}
     counter = 0
 
+    # יוצר את המקלדת כל פעם מחדש בשביל הערך של גרסה קלה
+    if keyboard is None:
+        keyboard = default_keyboard(file_index, easy_key)
+
+    # חותך את השיר לפי 4096 בתים - אורך הודעה מקסימלי.
     for j in data:
         test = f"{song[counter]}%0A{j}{data[-1]}"
         if len(test) >= 4096:
@@ -474,8 +509,9 @@ def send_data(data, update, context, is_song=False, keyboard=InlineKeyboardMarku
         update.message.reply_text(song[counter].replace(u'\xa0', u' '), reply_markup=reply_markup)
         counter += 1
 
+    # סמיילי יד מצביע על ההודעה כדי לדפדף אליה מהר. אם מדובר בהמרה, צריך לרדת עוד הודעה אחת למטה (ההודעה שהומרה, הודעת האצבע שלה, ואז ההודעה שלנו).
     update.message.reply_text(u'\u261d', reply_markup=ReplyKeyboardRemove(),
-                              resize_keyboard=True, reply_to_message_id=update.message.message_id + 1)
+                              resize_keyboard=True, reply_to_message_id=update.message.message_id + 1 + int(is_converted))
 
 
 def message_handler(update, context):
@@ -511,10 +547,11 @@ def message_handler(update, context):
             # file= because the "print" printing well, but the "send" adding \n between str(s.getvalue())str(s.getvalue())n the chars.
             strStream = io.StringIO()
             print(statistics.items(), file=strStream)
+
             send_data(
                 strStream.getvalue().replace("OrderedDict([", "").replace("])", "").replace("), (", "\n (").replace(
                     "',", " - ").replace("('", ""),
-                update, context, False)
+                update, context)
 
             return
 
@@ -676,29 +713,29 @@ def button(update, context):
     clicked = query.data
     print(clicked)
 
-    if clicked == "+":
-        print("+")
-        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
-                                              message_id=update.callback_query.message.message_id,
-                                              reply_markup=InlineKeyboardMarkup(keyboard_plus))
-        return
-    elif clicked == "-":
-        print("-")
-        context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
-                                              message_id=update.callback_query.message.message_id,
-                                              reply_markup=InlineKeyboardMarkup(keyboard_minus))
-        return
+    # מחלץ את האינדקס של השיר - איפה הוא ממוקם ב uploaded_list. משמש להמרות עצמן - שולפים את השיר מהקובץ המקורי, יותר נח להתעסק איתו.
+    index = clicked.split("|")[1]
 
-    data = new_key(query.message.text.split('\n'), clicked)
+    # כפתור + או - בלי מספר
+    if clicked[1] == "|":
+        if clicked[0] == "+":
+            print("+")
+            context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
+                                                  message_id=update.callback_query.message.message_id,
+                                                  reply_markup=keyboard_plus(index))
+            return
+        elif clicked[0] == "-":
+            print("-")
+            context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
+                                                  message_id=update.callback_query.message.message_id,
+                                                  reply_markup=keyboard_minus(index))
+            return
 
-    if clicked[1:] != "0.5":
-        reply_keyboard = InlineKeyboardMarkup(keyboard_half)
-        send_data(data, query, context, True, reply_keyboard)
-        context.bot.delete_message(query.message.chat.id, query.message.message_id)
-        return
+    data, easy_key = new_key(int(index), clicked.split("|")[0])
 
-    send_data(data, query, context, True)
-    context.bot.delete_message(query.message.chat.id, query.message.message_id)
+    send_data(data, query, context, True, True, None, easy_key, index)
+    # context.bot.delete_message(query.message.chat.id, query.message.message_id)
+    bot.answer_callback_query(update.callback_query.id)
 
 
 def msg(message):
@@ -715,6 +752,7 @@ def msg(message):
 
 
 def main():
+
     global songs_list
     global artists_list
     global users

@@ -1,9 +1,0 @@
-Malaguena
-Arr.h.wallaco
-המערכת
-0
-קאפו בשריג 8
-
-Bridge:
-
-x2

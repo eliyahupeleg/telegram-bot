@@ -1,10 +1,9 @@
 import glob
 import os
 import time
-import requests
-import convert_right_left
 from urllib.parse import urljoin
 
+import requests
 
 files = []
 counter = 0
@@ -30,13 +29,13 @@ if len(files) == 0:
 else:
     print("uploading updates..")
 
-
 username = 'elikopeleg'
 token = '242fa8569f24430b576c163b70545297a0652117'
 pythonanywhere_host = "www.pythonanywhere.com"
 api_base = f"https://{pythonanywhere_host}/api/v0/user/{username}/"
 
 for fpath in files:
+    print(fpath)
     with open(fpath, "r") as f:
         data = f.read()
         os.replace(fpath, f"{this_folder}/uploaded/" + fpath[folder_len:])
@@ -48,31 +47,45 @@ for fpath in files:
         )
 
         print(fpath)
+
+        if data.split("\n")[5] == "HE":
+            data = data.replace("#]", "#ᶥ")
+
+        data = data.replace("[", "").replace("]", "").replace("]", "")
         data = data.split('\n')
+
         intro = introB
         intro = intro.replace("song",
-                              data[0].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(",",
-                                                                                                                   "").replace(
-                                  ".", "_") + "   \n" + data[0])
+                              data[0].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
+                                  ",", "_") + f"   \n{data[0]}")
         intro = intro.replace("singer",
-                              data[1].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(".",
-                                                                                                                   "_").replace(
-                                  ",", "") + "   \n" + data[1])
+                              data[1].replace(" ", "_").replace('/', "").replace('&', "").replace("'", "").replace(
+                                  ".", "_").replace(",", "_") + f"   \n{data[1]}")
 
         if "המערכת" == data[2]:
             intro = intro.replace("version", "⭐️ גרסה רשמית ⭐")
         else:
             intro = intro.replace("version", "")
 
-        intro = intro.replace("capo", data[3])
+        # כמה צריך להזיז כדי להגיע לגרסה קלה
+        easy_key = data[3]
+
+        # איפה לשים קאפו
+        if "0" == data[4]:
+            intro = intro.replace("capo", "")
+        else:
+            intro = intro.replace("capo", f"קאפו בשריג {data[4]}")
+
+        # המידע בתחילת הקובץ לא נשלח, רק מ - data[3] ואילך.
+        # ולכן מכניסים ל- data[3] את כל הפתיח הרשמי, והוא נשלח משם.
+        data[5] = intro
+        data.append(endB)
 
         song = {0: ""}
         counter = 0
-        data[3] = intro
-        data.append(endB)
 
         # מחלק את ההודעה לחלקים של פחות מ4096 בתים - האורך המקסימלי להודעה בטלגרם
-        for j in data[3:]:
+        for j in data[5:]:
             test = song[counter] + "%0A" + j + endB
             if len(test.replace("#", "%23").replace('\n', '%0A')) >= 4096:
                 counter += 1

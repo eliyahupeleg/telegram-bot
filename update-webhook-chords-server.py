@@ -10,7 +10,7 @@ api_base = "https://{pythonanywhere_host}/api/v0/user/{username}/".format(
     username=username,
 )
 
-fpath = "/home/la/Desktop/bots/chords-bot/webhook-chordServer.py"
+fpath = "/home/la/Desktop/bots/chords-bot/chord_server_webhook.py"
 with open(fpath, "r") as f:
     data = f.read()
     

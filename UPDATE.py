@@ -1,5 +1,4 @@
 import os
-import numpy
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -78,7 +77,7 @@ for (var paragraph of tableArr){
             //יש שורות אקורדים בלי אלמנטים, פשוט אקורדים ורווח בצורה טקסטואלית. בשורות כאלו מספר ה"ילדים" של השורה יהיה 0.
             if (line.childElementCount == 0){
 
-                //בתחילת כל שורת אקורדים בקובץ שמוצמד לימין, מוסיפים 2 תווים מיוחדים. אחד מצמיד לימין את השורה, והבא אחריו מסדר את הטקסט משמאל לימין בכח. התוצאה היא ששורת האקורדים עוברת לצד ימין בצורה מדוייקת. בסוף השורה מוסיפים תו של חיריק, כדי למנוע ממנה להתהפך חזרה.  
+                //בתחילת כל שורת אקורדים בקובץ שמוצמד לימין, מוסיפים 2 תווים מיוחדים. אחד מצמיד לימין את השורה, והבא אחריו מסדר את הטקסט משמאל לימין בכח. התוצאה היא ששורת האקורדים עוברת לצד ימין בצורה מדוייקת. 
                 if(language == "HE"){
                     textToFile += "\u200F" + "\u202d";
                 }
@@ -91,23 +90,19 @@ for (var paragraph of tableArr){
                 chords = chords.filter(item => item);
                 
                 //יש שני סוגי רווחים. אחד רגיל, ואחד nbsp . כדי להימנע מטעויות זיהוי, הופכים את כולם לרווח רגיל.
-                chordsLine = line.textContent.replaceAll(String.fromCharCode(160), " ");
+                //מוסיפים רווח בהתחלה ובסוף כדי לוודא שכל אקורד יהיה מוקף רווחים וקל לזיהוי. הרווחים יממחקו אחר כך.
+                chordsLine = " " + line.textContent.replaceAll(String.fromCharCode(160), " ") + " ";
 
                 //עובר אקורד אקורד, בודק אם יש כזה בדיוק, ואם כן מוסיף לו [].
                 for (var chord of chords){
                 
-                    //אם יש אקורד מ2 סוגים (לדוג' G וגם G7) האות תקבל שני סוגריים - אחת גם מהאקורד המקורי, ולכן צריך שיהיה רווח לפני או אחרי - מה שמתקיים רק באקורד המדוייק. 
-                    // !!!
-                    // לפעמים אקורד כמו A#m9 יהפוך להיות [A#m]9 - אבל בסופו של עניין זה לא משנה כלום להמרה - המספר אחרי לא אמור להשתנות גם ככה.
-                    // !!!
-                    chordsLine = chordsLine.replaceAll(chord + " ", "[" + chord + "] ").replaceAll(" " + chord, " [" + chord + "]")
+                    //אם יש אקורד מ2 סוגים (לדוג' G וגם G7) האות תקבל שני סוגריים - אחת גם מהאקורד המקורי, ולכן צריך שיהיה רווח לפני וגם אחרי - מה שמתקיים רק באקורד המדוייק.
+                    chordsLine = chordsLine.replaceAll(" " + chord + " ", " [" + chord + "] ");
                 }
 
-                //מוסיפים את השורה המסודרת לטקסט של השיר.
-                textToFile += chordsLine
+                //מוסיפים את השורה המסודרת לטקסט של השיר אחרי שמוחקים את רווחי הביטחון.
+                textToFile += chordsLine.slice(1, -1)
 
-                //כדי לסדר את הימין שמאל - מוסיף חיריק בסוף השורה. הוא מונע מהאקורדים להתהפך (m#F במקום F#m)
-                if(language == "HE") textToFile += String.fromCharCode(1460);
 
             }
 
@@ -155,8 +150,6 @@ for (var paragraph of tableArr){
                     else{
                         textToFile += node.textContent.replace("\n","");
     
-                        //מסדר את הימין שמאל - מוסיף חיריק בסוף השורת אקורדים.
-                        if(node == nodes[nodes.length-1] && language == "HE") textToFile += String.fromCharCode(1460);
                     }
     
                 }
