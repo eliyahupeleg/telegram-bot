@@ -157,7 +157,7 @@ uploaded_path = this_folder + "/uploaded/"
 # נתיב לקובץ טקסט ששומר את ה-ID של כל הצ'אטים עם המשתמשים. משמש כדי לשלוח להם הודעה (לדעת מי משתמש) וכדי לספור כמה משתמשים יש.
 users_path = f'{this_folder}/users.txt'
 
-# השירים נשמרים בלי הפתיחה והסיום (שורות מיוחדות עם אמוג'ים וקישור לערוץ או לרובוט). 
+# השירים נשמרים בלי הפתיחה והסיום (שורות מיוחדות עם אמוג'ים וקישור לערוץ או לרובוט).
 # כדי לחסוך פתיחה מחדש של הקובץ ששומר את נתוני הפתיחה והסיום (הם קבועים), הפתיחה והסיום של ההודעות נשמרים בקבועים.
 fname = f"{this_folder}/message-intro.txt"
 with open(fname, "r") as f:
@@ -302,13 +302,6 @@ def new_key(index, key):
     # אם ממירים ב1.5, זה בעצם 3 חצאים ללמעלה.
     # ההמרה לפי חצאים כי יותר קל להשתמש ב2 מ0.5
     half_key = int(float(key) * 2)
-
-    """
-    לשלוף את ההודעה המקורית מהקובץ
-    להשתמש ב RE.SUB כדי להחליף את האקורדים המתאימים
-    לשנות אחד מהאקורדים, הראשון או האחרון לסימן אחר- כדי שלא ישנה אותו בהמרה, או להוסיף סימן "הומר" שיימחק מייד אחרי.
-    לשלוח את ההודעה עם המרה ביחס למקור, לא להודעה.
-    """
 
     with open(uploaded_list[index], "r") as f:
 
@@ -541,16 +534,17 @@ def message_handler(update, context):
     if chat_id == 386848836:
 
         if message.title() == "St":
-            # Ordered Dicd cause the sorted returns a list and not a dict.
+
+
+
+            # ממיין מחדש את statistics לקראת שליחה.
             statistics = collections.OrderedDict(sorted(statistics.items(), key=lambda kv: kv[1]))
 
-            # file= because the "print" printing well, but the "send" adding \n between str(s.getvalue())str(s.getvalue())n the chars.
-            strStream = io.StringIO()
-            print(statistics.items(), file=strStream)
+            # שומר לתוך str את הנתונים בפורמט נח לקריאה, ורק את הערכים שחופשו יותר מפעם אחת (יש יותר מידי כאלו שחופשו פעם אחת).
+            statistics_to_send = [f"{k} : {v}\n" for k, v in statistics.items() if v > 1]
 
             send_data(
-                strStream.getvalue().replace("OrderedDict([", "").replace("])", "").replace("), (", "\n (").replace(
-                    "',", " - ").replace("('", ""),
+                statistics_to_send,
                 update, context)
 
             return
@@ -752,7 +746,6 @@ def msg(message):
 
 
 def main():
-
     global songs_list
     global artists_list
     global users
