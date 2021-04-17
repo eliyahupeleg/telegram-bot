@@ -15,13 +15,11 @@ api_base = "https://{pythonanywhere_host}/api/v0/user/{username}/".format(
 fpath = "/home/la/Desktop/bots/chords-bot/chord_server_webhook.py"
 with open(fpath, "r") as f:
     data = f.read()
-time.sleep(1)
 update_resp = requests.post(
     urljoin(api_base, f"files/path/home/{username}/webhook_telegram_bot/chords_server_webhook.py"),
     files={"content": data},
     headers={"Authorization": "Token {api_token}".format(api_token=token)}
 )
-time.sleep(2)
 domain_name = "elikopeleg.pythonanywhere.com"
 reload = requests.post(
     urljoin(api_base, f"/api/v0/user/{username}/webapps/{domain_name}/reload/"),

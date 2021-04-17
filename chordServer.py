@@ -352,19 +352,25 @@ def new_key(index, key):
         # כמה צריך להזיז כדי להגיע לגרסה קלה
         easy_key = data[3]
 
-        # איפה לשים קאפו
-        capo = int(data[4]) + half_key
+        # מתאים את הקאפו לסולם החדש.
+        # על כל עליה בטון צריך להוריד את הקאפו בטון.
+        capo = int(data[4]) - half_key
+
+        # אין קאפו בשריג מעל 12 - הוא חוזר לאפס.
         if capo >= 12:
             capo -= 12
         if capo < 0:
             capo += 12
 
-        if 0 == int(data[4]) + half_key:
+        # בשורה החמישית בשיר כתוב איפה לשים קאפו. אם הקאפו בשריג 0..
+        if "0" == capo:
+            # מסירים את הסימון של הקאפו. לא צריך לרשום 0.
             intro = intro.replace("capo", "")
+        # אם הקאפו בשריג אחר..
         else:
+            # רושמים במיקום המתאים איפה לשים את הקאפו.
             intro = intro.replace("capo", f"קאפו בשריג {capo}")
 
-        # המידע בתחילת הקובץ לא נשלח, רק מ - data[3] ואילך.
         # ולכן מכניסים ל- data[3] את כל הפתיח הרשמי, והוא נשלח משם.
         data[5] = intro
         data.append(ENDING)
@@ -379,12 +385,10 @@ def h1(w):
 
 def by_hash(time_hash, context, update):
     files = saved[time_hash]
-    print("files", files)
     build_message(files, context, update)
 
 
 def build_message(files, context, update):
-    print(len(files), "results\n")
     len_files = len(files)
 
     if update.message.chat_id in groups and len_files > 0:
@@ -416,7 +420,6 @@ def build_message(files, context, update):
     if len_files > 1:
 
         keyboard = sorted(list(map(replace_to_filename, files)))
-        print("keyboard", keyboard)
         text = "בחר.."
         if len(files) > 179:
             keyboard = keyboard[:179]
@@ -428,7 +431,6 @@ def build_message(files, context, update):
                                   selective=True)
         return
 
-    print("sending song..\n", files)
     fpath = files[0]
     with open(fpath, "r") as f:
 
@@ -504,7 +506,8 @@ def send_data(data, update, context, is_song=False, is_converted=False, keyboard
 
     # סמיילי יד מצביע על ההודעה כדי לדפדף אליה מהר. אם מדובר בהמרה, צריך לרדת עוד הודעה אחת למטה (ההודעה שהומרה, הודעת האצבע שלה, ואז ההודעה שלנו).
     update.message.reply_text(u'\u261d', reply_markup=ReplyKeyboardRemove(),
-                              resize_keyboard=True, reply_to_message_id=update.message.message_id + 1 + int(is_converted))
+                              resize_keyboard=True,
+                              reply_to_message_id=update.message.message_id + 1 + int(is_converted))
 
 
 def message_handler(update, context):
@@ -534,9 +537,6 @@ def message_handler(update, context):
     if chat_id == 386848836:
 
         if message.title() == "St":
-
-
-
             # ממיין מחדש את statistics לקראת שליחה.
             statistics = collections.OrderedDict(sorted(statistics.items(), key=lambda kv: kv[1]))
 
@@ -580,7 +580,6 @@ def message_handler(update, context):
     '''
 
     if "רשימת אמנים" in message:
-        print("רשימת אמנים \n\n\n")
         result = '\n'.join(artists_list)
         send_data(result, update, context)
         return
@@ -622,7 +621,6 @@ def search_songs(update, context):
                 pickle.dump(statistics, fp)
 
     if data == "חזור":
-        print("חזור")
         update.message.reply_text("חוזר..",
                                   reply_markup=random_keyboard, resize_keyboard=True,
                                   one_time_keyboard=True,
@@ -665,7 +663,6 @@ def search_songs(update, context):
         if data in fpath:
             files.append(fpath)
 
-    print("done search")
     build_message(files, context, update)
 
 
@@ -676,10 +673,7 @@ def start(update, context):
         users.append(str(update.message.from_user.id))
         write_users()
         bot.sendMessage(chat_id=386848836, text=len(users))
-        print(users)
-    print(f"\n\n\n\n\nstart msg:\n{update.message.text}\n\n\n\n")
     if len(update.message.text.replace("/start", "")) == 0:
-        print("regular start")
         update.message.reply_text(
             '''היי, ברוכים הבאים לרובוט האקורדים של 🎶‏ISRACHORD🎶.\n
 שילחו שם מלא או חלקי של שיר *או* אמן, וקבלו את האקורדים. כן, כזה פשוט.\n
@@ -713,16 +707,16 @@ def button(update, context):
     # כפתור + או - בלי מספר
     if clicked[1] == "|":
         if clicked[0] == "+":
-            print("+")
             context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
                                                   message_id=update.callback_query.message.message_id,
                                                   reply_markup=keyboard_plus(index))
+            bot.answer_callback_query(update.callback_query.id)
             return
         elif clicked[0] == "-":
-            print("-")
             context.bot.edit_message_reply_markup(chat_id=update.callback_query.message.chat_id,
                                                   message_id=update.callback_query.message.message_id,
                                                   reply_markup=keyboard_minus(index))
+            bot.answer_callback_query(update.callback_query.id)
             return
 
     data, easy_key = new_key(int(index), clicked.split("|")[0])
@@ -760,8 +754,8 @@ def main():
     with open(users_path, 'r') as f:
         users = f.read().split('\n')
 
-    bot = telegram.Bot(token="999605455:AAFkVPs2jTncditDCzMdGCkatrOfodsVGxE")
-    updater = Updater("999605455:AAFkVPs2jTncditDCzMdGCkatrOfodsVGxE", use_context=True)
+    bot = telegram.Bot(token="999605455:AAHmiyW6jIBywdyKgh1Q6r8SRv3J9siOheQ")
+    updater = Updater("999605455:AAHmiyW6jIBywdyKgh1Q6r8SRv3J9siOheQ", use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher

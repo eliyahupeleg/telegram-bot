@@ -5,23 +5,25 @@ import pickle
 import re
 import threading
 import time
+from datetime import datetime
 from random import randrange
 
 import telepot
 import urllib3
 from flask import Flask, request
+from pytz import timezone
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telepot.namedtuple import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardMarkup, \
     InlineKeyboardButton
 
 # טוקן זיהוי ייחודי לבוט. משמש גם כדי לאבטח את הנתוני כניסה (כמו סיסמא).
-BOT_TOKEN = "999605455:AAFkVPs2jTncditDCzMdGCkatrOfodsVGxE"
+BOT_TOKEN = "923788458:AAEU7AkkMCCfemmRRn4uxIjgxhdTn7FIUuM"
 
 # תקייית השורש של הפרוייקט, עם הקבצים הבסיסיים.
 ROOT_PATH = "/home/elikopeleg/"
 
 # נתיב לקובץ טקסט ששומר את ה-ID של כל הצ'אטים עם המשתמשים. משמש כדי לשלוח להם הודעה (לדעת מי משתמש) וכדי לספור כמה משתמשים יש.
-USERS_PATH = f'{ROOT_PATH}/users.txt'
+USERS_PATH = f'{ROOT_PATH}/users-1.txt'
 
 # נתיב לקבצי האקורדים שהועלו כבר לערוץ (בעיקרון כולם חוץ מאלו שעודכנו למחשב המקומי של המנהל ועוד לא הועלו לערוץ).
 UPLOADED_PATH = ROOT_PATH + "/uploaded/"
@@ -85,7 +87,7 @@ with open(USERS_PATH, 'r') as f:
     USERS = f.read().split('\n')
 
 # נתיב הקובץ ששומר את הסטטיסטיקה. זהו קובץ ששומר "מילון". המילון מבטא: כמה פעמים חיפשו,על פי מה חיפשו.
-STATISTICS_PATH = f'{ROOT_PATH}/statistics.pkl'
+STATISTICS_PATH = f'{ROOT_PATH}/statistics-1.pkl'
 
 # קורא את הסטטיסטיקה לתוך המילון. אם הקובץ לא קיים או ריק, יוצר אותו.
 try:
@@ -142,7 +144,8 @@ bot.setWebhook(f"https://elikopeleg.pythonanywhere.com/{BOT_TOKEN}")
 app = Flask(__name__)
 
 # "מקלדת" עם אופציה אחת - שלח לי שיר אקראי.
-random_keyboard = ReplyKeyboardMarkup(keyboard=[['שיר אקראי']], resize_keyboard=True, one_time_keyboard=True)
+random_keyboard = ReplyKeyboardMarkup(keyboard=[['שיר אקראי']], resize_keyboard=True, one_time_keyboard=True,
+                                      hide_keyboard=True)
 
 
 # מקלדת שנשלחת לאחר לחיצה על "+" במקלדת הקודמת. מראה את אופציות השינוי.
@@ -174,10 +177,19 @@ def keyboard_minus(index):
 # מקלדת המרות האקורדים. מאפשרת להעלות או להוריד סולם.
 # השימוש בפונקציה נועד כדי להכניס את האינדקס של השיר (איפה הוא ממוקם בתוך uploaded_list) - ובהמרה יהיה אפשר לשלוף אותו בקלות.
 def default_keyboard(index, easy_key):
+    # אם אין גרסה קלה..
+    if not easy_key:
+        # מחזיר מקלדת רק עם "+" "-".
+        return InlineKeyboardMarkup(
+            inline_keyboard=[[InlineKeyboardButton(text="+", callback_data=f"+|{index}"),
+                              InlineKeyboardButton(text="-", callback_data=f"-|{index}")]
+                             ])
+
     # אם הסולם הקל לא שלילי, צריך להוסיף לפניו סימן של "+" כדי להתאים לפורמט.
     if float(easy_key) >= 0:
         easy_key = f"+{easy_key}"
 
+    # מחזיר מקלדת עם "+" "-" "גרסה קלה"
     return InlineKeyboardMarkup(
         inline_keyboard=[[InlineKeyboardButton(text="+", callback_data=f"+|{index}"),
                           InlineKeyboardButton(text="-", callback_data=f"-|{index}")],
@@ -216,14 +228,24 @@ ARTISTS_LIST = list(dict.fromkeys(list(map(get_artist, UPLOADED_LIST))))
 # פונקציות לקיצור דרך, וסידור טקסט.
 # מנסה לשלוף נתונים דרך message, אם לא מצליח מנסה דרך callback_query (מאפשר שימוש באותה פונקציה בשני המקרים).
 def get_message_chat_id(update):
-    return update['message']['chat']['id']
+    try:
+        return update['message']['chat']['id']
+    except KeyError:
+        return update['callback_query']['message']['chat_id']
 
 
 def get_message_id(update):
     try:
         return update['message']['message_id']
     except KeyError:
-        return update['callback_query']['id']
+        return update['callback_query']['message']['message_id']
+
+
+def get_message(update):
+    try:
+        return update['message']
+    except KeyError:
+        return update['callback_query']['message']
 
 
 def get_message_from_id(update):
@@ -238,6 +260,10 @@ def get_message_text(update):
         return update['message']['text']
     except KeyError:
         return update['callback_query']['data']
+
+
+def get_query_id(update):
+    return update["callback_query"]['id']
 
 
 # הפונקציה רצה ברקע, ובודקת מתי הלינק שנשלח בקבוצה נלחץ.
@@ -316,6 +342,10 @@ def new_key(index, key):
         # אחד דיאזים אחד במולים
         for chord in CHORDS:
 
+            # אם צריך להמיר ב0 טונים, אפשר לדלג על ההמרה.
+            if key == 0:
+                break
+
             if chord in LEVELS[0]:
                 chord_index = LEVELS[0].index(chord)
                 level = LEVELS[0]
@@ -371,14 +401,24 @@ def new_key(index, key):
         # לא מכניסים את זה לפתיחה כי למשתמש זה לא יעיל, אלא מעבירים לפונקציה והיא מכניסה את זה לנתונים של כפתור "גרסה קלה".
         easy_key = data[3]
 
+        # מתאים את הקאפו לסולם החדש.
+        # על כל עליה בטון צריך להוריד את הקאפו בטון.
+        capo = int(data[4]) - half_key
+
+        # אין קאפו בשריג מעל 12 - הוא חוזר לאפס.
+        if capo >= 12:
+            capo -= 12
+        if capo < 0:
+            capo += 12
+
         # בשורה החמישית בשיר כתוב איפה לשים קאפו. אם הקאפו בשריג 0..
-        if "0" == data[4]:
+        if 0 == capo:
             # מסירים את הסימון של הקאפו. לא צריך לרשום 0.
             intro = intro.replace("capo", "")
         # אם הקאפו בשריג אחר..
         else:
             # רושמים במיקום המתאים איפה לשים את הקאפו.
-            intro = intro.replace("capo", f"קאפו בשריג {data[4]}")
+            intro = intro.replace("capo", f"קאפו בשריג {capo}")
 
         # המידע בתחילת השיר (שמות, קאפו, גרסה קלה וכד') לא נשלח, רק מ - data[5] ואילך.
         # ולכן מוסיפים ל- data[5] את כל הפתיח הרשמי, והשיר נשלח משם ואילך.
@@ -524,10 +564,10 @@ def build_message(files, update):
         # מוסיפים לתוצאות כפתור "חזור".
         keyboard_values.append("חזור")
 
+        # יוצר מקלדת עם התוצאות המתאימות.
         keyboard = ReplyKeyboardMarkup(keyboard=[[i] for i in keyboard_values], resize_keyboard=True,
                                        one_time_keyboard=True)
 
-        print(type(keyboard))
         # שולחים למשתמש את ההודעה עם מקלדת התוצאות.
         bot.sendMessage(chat_id=chat_id, text=text, reply_markup=keyboard)
         return
@@ -653,7 +693,7 @@ def send_data(data, update, is_song=False, is_converted=False, keyboard=None, ea
 
     # סמיילי יד מצביע על ההודעה הראשונה כדי לדפדף אליה בקלות.
     # אם מדובר בהמרה, צריך לרדת עוד הודעה אחת למטה (ההודעה שהומרה, הודעת האצבע שלה, ואז ההודעה שנשלחה עכשיו).
-    bot.sendMessage(chat_id=get_message_chat_id(update), text=u'\u261d', reply_markup=ReplyKeyboardRemove(),
+    bot.sendMessage(chat_id=get_message_chat_id(update), text=u'\u261d',
                     reply_to_message_id=get_message_id(update) + 1 + int(is_converted))
 
 
@@ -707,7 +747,7 @@ def search_songs(update):
     if data == "חזור":
         # אם המשתמש לחץ "חזור" הבוט שולח לו הודעה "חוזר" ומשנה את המקלדת.
         bot.sendMessage(text="חוזר..", chat_id=chat_id, reply_markup=random_keyboard)
-        return "OK"
+        return
 
     # רשימה שלתוכה יישמרו תוצאות החיפוש.
     files = []
@@ -717,35 +757,46 @@ def search_songs(update):
     # אם השם לא מורכב רק מאותיות גדולות, הוא עובר title כדי לחזור לאיות הנכון.
     data = " - ".join(list(map(is_upper, data.split(' - '))))
 
-    folder = f'{ROOT_PATH}/uploaded/*'
-
     try:
+        # אם יש בהודעה סימן של ' לפני שם כלשהו, title יהפוך את האות אחרי לגדולה - למרות שהיא לא צריכה להיות כזו.
+        # מחפש אם יש ' בהודעה, ואם יש הופך את התו אחרי להיות קטן.
         data = data.replace(data[data.index("'"):data.index("'") + 2],
                             data[data.index("'"):data.index("'") + 2].lower())
+    # אם אין ' לא עושה כלום.
     except ValueError:
         pass
 
-    glb = UPLOADED_LIST
+    # מנסה להרכיב נתיב לקובץ עם ההודעה הנוכחית בתור שם הקובץ.
+    full_name = f"{UPLOADED_PATH}{data}.txt"
 
-    full_name = f"{folder[:-1]}{data}.txt"
+    # אם הנתיב קיים ויש קובץ כזה (מישהו שלח שם מדוייק לקובץ)..
+    if full_name in UPLOADED_LIST:
+        # מכניס לתוך files את הנתיב לקובץ.
+        files = [full_name]
 
-    if full_name in glb:
-        files = [glb[glb.index(full_name)]]
+        # בונה את ההודעה רק עם הקובץ הזה, כתוצאת חיפוש יחידה.
         build_message(files, update)
         return
 
-    for fpath in glb:
+    # אם ההודעה היא לא שם מלא לקובץ, צריך לחפש לאיזה קבצים היא מתאימה חלקית.
+    for fpath in UPLOADED_LIST:
 
-        # some songs names have "and" or "the" in there names, what goes bad with "search.title()" (returns "And" or "The").
-        # so if the song is not in the songs list, it'll be when the file name will be titled.
+        # לפעמים ה title מחזיר תוצאות לא מדוייקות (And במקום and וכד'), ולכן אם יש קובץ ברשימה שאחרי title מתאים בדיוק לשם, שולחים אותו.
         if fpath.title() == full_name.title():
+            # מכניס לתוך files את הנתיב לקובץ.
             files = [fpath]
+
+            # בונה את ההודעה רק עם הקובץ הזה, כתוצאת חיפוש יחידה.
             build_message(files, update)
             return
+
+        # אם השם של השיר מכיל את הטקסט של ההודעה, מוסיפים את השיר כתוצאת חיפוש.
         if data in fpath:
             files.append(fpath)
 
+    # אחרי חיפוש בכל בשירים, בונים הודעה מהתוצאות.
     build_message(files, update)
+    return
 
 
 # הפונקציה מטפלת בלחיצות כפתור של inline (המרת סולם).
@@ -762,18 +813,34 @@ def inline_button_handler(update):
         # אם נלחץ כפתור "+"..
         if clicked[0] == "+":
 
-            # עורכים את המקלדת של ההודעה המתאימה - למקלדת המרה עם כפתורי ה"+".
-            bot.editMessageReplyMarkup(chat_id=get_message_from_id(update), message_id=get_message_id(update),
-                                       reply_markup=keyboard_plus(index))
-            return
+            try:
+                # עורכים את המקלדת של ההודעה המתאימה - למקלדת המרה עם כפתורי ה"+".
+                bot.editMessageReplyMarkup(telepot.message_identifier(get_message(update)),
+                                           reply_markup=keyboard_plus(index))
+            except Exception as e:
+                print(e)
+
+            finally:
+                # מדווח לטלגרם שהבקשה טופלה בהצלחה.
+                bot.answerCallbackQuery(get_query_id(update))
+                return
 
         # אם נלחץ כפתור "+"..
         elif clicked[0] == "-":
 
-            # עורכים את המקלדת של ההודעה המתאימה - למקלדת המרה עם כפתורי ה"+".
-            bot.editMessageReplyMarkup(chat_id=get_message_from_id(update), message_id=get_message_id(update),
-                                       reply_markup=keyboard_minus(index))
-            return
+            try:
+                # עורכים את המקלדת של ההודעה המתאימה - למקלדת המרה עם כפתורי ה"+".
+                bot.editMessageReplyMarkup(
+                    telepot.message_identifier(get_message(update)),
+                    reply_markup=keyboard_minus(index))
+
+            except Exception as e:
+                print(e)
+
+            finally:
+                # מדווח לטלגרם שהבקשה טופלה בהצלחה.
+                bot.answerCallbackQuery(get_query_id(update))
+                return
 
     # אם הכפתור הוא בקשה להמרה, ממיר את השיר. שומר שוב את easy_key כי צריך אותו ל send_data כדי ליצור את המקלדת הרגילה.
     data, easy_key = new_key(int(index), clicked.split("|")[0])
@@ -782,7 +849,8 @@ def inline_button_handler(update):
     send_data(data, update["callback_query"], True, True, None, easy_key, index)
 
     # מדווח לטלגרם שהבקשה טופלה בהצלחה.
-    bot.answerCallbackQuery(get_message_id(update))
+    bot.answerCallbackQuery(get_query_id(update))
+    return
 
 
 # הפונקציה שמטפלת בהודעות טקסט, ומגיבה להן.
@@ -833,43 +901,43 @@ def message_handler(update):
         # שולח את רשימת הסטטיסטיקה, לערכים שחופשו החל מפעמיים (יותר מידי ערכים חופשו פעם אחת)
         if message.title() == "St":
             # ממיין מחדש את statistics לקראת שליחה.
-            statistics = collections.OrderedDict(sorted(statistics.items(), key=lambda kv: kv[1]))
+            statistics = collections.OrderedDict(sorted(statistics.items(), key=lambda kv: kv[20]))
 
             # שומר לתוך str את הנתונים בפורמט נח לקריאה, ורק את הערכים שחופשו יותר מפעם אחת (יש יותר מידי כאלו שחופשו רק פעם אחת).
-            statistics_to_send = [f"{k} : {v}\n" for k, v in statistics.items() if v > 1]
+            statistics_to_send = [f"{k} : {v}\n" for k, v in statistics.items() if v > 10]
 
             # שולח את הנתונים למתכנת.
             send_data(statistics_to_send, update)
 
-            return "OK"
+            return
 
         # שולח את מספר המשתמשים העדכני.
         if message.title() == "Cu":
             # שולח למתכנת את מספר המשתמשים.
             bot.sendMessage(text=str(len(USERS)), chat_id=chat_id)
 
-            return "OK"
+            return
 
         # מאפשר למתכנת לשלוח הודעה לכלל המשתמשים.
         if "Msg" == message[:3].title():
             # מריץ את הפונקציה ששולחת, עם הטקסט לשליחה (הכל חוץ מ "Msg ").
             msg(message[4:])
 
-            return "OK"
+            return
 
         # שולח למתכנת את רשימת היוזרים (ID'S)
         if message.title() == "Usr":
             # שולח דרך הפונקציה, כי לפעמים ההודעה ארוכה מידי וצריך לחתוך אותה וכו'.
             send_data("\n".join(USERS), update)
 
-            return "OK"
+            return
 
     # שולח שיר אקראי למשתמש.
     if message == "שיר אקראי":
         # מפעיל פונקציה ששולחת שיר אקראי למשתמש.
         send_random(update)
 
-        return "OK"
+        return
 
     # אם מישהו רוצה את רשימת הזמרים, הוא שולח "רשימת אמנים" ומקבל את הרשימה.
     if "רשימת אמנים" in message:
@@ -879,7 +947,7 @@ def message_handler(update):
         # שולח דרך הפונקציה כי לפעמים ההודעה ארוכה מידי.
         send_data(result, update)
 
-        return "OK"
+        return
 
     # מבצע טייטל להודעה - קודם כל מזיז את התווים שיכולים להפריע הצידה ( "_" לפני תחילת מילה או "#"), מבצע title (שמות השירים בקובץ הם בטייטל - אות ראשונה גדולה) ומחזיר את הסימנים המקוריים.
     # לפעמים מבקשים אקורד ורוצים תמונה שלו, אבל יש אקורדים עם שני שמות - ולכן מחליפים את האקורד לשם הקביל עם התמונה (לדוגמא יש תמונה רק ל"Eb", ולכן מחליפים את "D#" להיות "Eb" - אותו אקורד בשמות שונים).
@@ -896,14 +964,14 @@ def message_handler(update):
                       chat_id=chat_id,
                       photo=open(f'{ROOT_PATH}/chords/{chord}.png', 'rb'))
 
-        return "OK"
+        return
 
     # אם הטקסט הוא לא אקורד, הוא שיר וצריך לחפש אותו.
     else:
 
         # מריץ את הפונקציה שמחפשת שירים.
         search_songs(update)
-    return "OK"
+    return
 
 
 # מגדירים למה המשימה תענה: פניות מסוג POST לכתובת הספציפית הזו.
@@ -912,21 +980,26 @@ def main_handler():
     # משנה את הקידוד. העדכון מתקבל בקידוד JSON. מחליף את הקידוד להיות dict של python
     update = request.get_json()
 
-    if 'message' in update:
-        print("message")
+    # מדפיס את השעה לפי שעון ישראל ואת ההודעה כל פעם שמתקבלת הודעה.
+    print("\n", str(datetime.now(timezone("Israel")))[:-13], "\n")
+
+    # אם מדובר בלחיצה על כפתור, הפורמט שיתקבל יהיה שונה. שולחים את המידע לפונקציה היעודית.
     if 'callback_query' in update:
-        print("callback_query")
-        print(update['callback_query']['data'])
         inline_button_handler(update)
         return "OK"
 
+    # שומרים את chat_id פעם אחת כדי לחסוך משאבים.
     chat_id = get_message_chat_id(update)
 
+    # בודקים אם יש טקסט בהודעה:
     try:
+        # מנסים להכניס את הטקסט מההודעה לתוך message.
         message = get_message_text(update)
+
+    # אם מתקבל KeyError אין טקסט בהודעה.
     except KeyError:
-        # אם אין טקסט בהודעה, מתעלמים ממנה. חסרת משמעות עבור הבוט.
-        bot.sendMessage(text="no message", chat_id=chat_id)
+        # אם אין טקסט בהודעה, מתעלמים ממנה. היא חסרת משמעות עבור הבוט.
+        bot.sendMessage(text="הבוט מטפל רק בהודעות טקסט. \n שלח הודעה עם שם של שיר *או* של זמר.", chat_id=chat_id)
         return "OK"
 
     # אם זו הודעת "/start" היא לא דורשת תגובה עניינית לטקסט, אלא תחילת עבודה.
@@ -935,12 +1008,11 @@ def main_handler():
         start_handler(update)
         return "OK"
 
+    # אם ההודעה היא /start אבל יש בה עוד טקסט, מדובר ב /start עם HASH.
     elif "/start" in message:
-        # אם ההודעה היא /start אבל יש בה עוד טקסט, מדובר ב /start עם HASH.
-        if "/start" in get_message_text(update):
-            # מריץ את הפונקציה עם ה HASH כדי לטפל בהודעה.
-            start_hash_handler(update)
-            return "OK"
+        # מריץ את הפונקציה עם ה HASH כדי לטפל בהודעה.
+        start_hash_handler(update)
+        return "OK"
 
     # אם יש טקסט והוא לא START , צריך לחפש את השיר המתאים וכד' - שולח את הנתונים (update) לפונקציה שמטפלת בהודעות.
     message_handler(update)
