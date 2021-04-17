@@ -1,17 +1,17 @@
 import collections
 import glob
 import hashlib
-import io
 import os
 import pickle
 import re
 import threading
 import time
-import telegram
-
-from pytz import timezone
-from random import randrange
 from datetime import datetime
+from random import randrange
+import tokens
+
+import telegram
+from pytz import timezone
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler)
 
@@ -21,6 +21,7 @@ from telegram.ext import (Updater, MessageHandler, Filters, CommandHandler, Call
 # לארח מכן הבוט מוחק את ההודעות מהקבוצה כדי שהיא תישאר נקייה מספאם.
 # הרובוט מזהה צ'אט קבוצתי ע"פ הID של הצ'אט.
 # לא עשיתי שיזהה לפי ההתחלה במינוס כדי שלא יצרפו אותו לקבוצות בלי ידיעה ואישור (הם לא יכולים להשאיר אותו בלי שאני משנה לו מוד, זה מספים אותם)
+
 groups = [-1001126502216, -1001061709539, -1001199754819]
 
 # אובייקט של בוט, נועד לשליחת הודעות פרטיות למשתמש.
@@ -754,8 +755,8 @@ def main():
     with open(users_path, 'r') as f:
         users = f.read().split('\n')
 
-    bot = telegram.Bot(token="999605455:AAHmiyW6jIBywdyKgh1Q6r8SRv3J9siOheQ")
-    updater = Updater("999605455:AAHmiyW6jIBywdyKgh1Q6r8SRv3J9siOheQ", use_context=True)
+    bot = telegram.Bot(token=tokens.telegram_chords)
+    updater = Updater(tokens.telegram_chords, use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher

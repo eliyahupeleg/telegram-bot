@@ -5,6 +5,8 @@ from urllib.parse import urljoin
 
 import requests
 
+import tokens
+
 files = []
 counter = 0
 this_folder = "/".join(os.path.realpath(__file__).split("/")[:-1])
@@ -30,7 +32,7 @@ else:
     print("uploading updates..")
 
 username = 'elikopeleg'
-token = '242fa8569f24430b576c163b70545297a0652117'
+token = tokens.pythonanywhere
 pythonanywhere_host = "www.pythonanywhere.com"
 api_base = f"https://{pythonanywhere_host}/api/v0/user/{username}/"
 

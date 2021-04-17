@@ -5,6 +5,7 @@ import pickle
 import re
 import threading
 import time
+import tokens
 from datetime import datetime
 from random import randrange
 
@@ -17,7 +18,7 @@ from telepot.namedtuple import ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineK
     InlineKeyboardButton
 
 # טוקן זיהוי ייחודי לבוט. משמש גם כדי לאבטח את הנתוני כניסה (כמו סיסמא).
-BOT_TOKEN = "923788458:AAEU7AkkMCCfemmRRn4uxIjgxhdTn7FIUuM"
+BOT_TOKEN = tokens.telegram_chords
 
 # תקייית השורש של הפרוייקט, עם הקבצים הבסיסיים.
 ROOT_PATH = "/home/elikopeleg/"
